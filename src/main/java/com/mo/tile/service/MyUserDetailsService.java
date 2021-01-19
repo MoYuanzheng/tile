@@ -28,7 +28,6 @@ public class MyUserDetailsService implements UserDetailsService {
         String role = user.getUser_role();
 
         return new User(user_id, password, AuthorityUtils.commaSeparatedStringToAuthorityList(role));
-
     }
 }
 

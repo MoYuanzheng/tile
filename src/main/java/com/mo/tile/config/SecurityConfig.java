@@ -19,22 +19,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
 
-//    @Bean
-//    public BCryptPasswordEncoder bCryptPasswordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
+    /*
+    * 密 码 加 密
+    * 数 据 库 对 应 加 密 存 储
+    *
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+    */
+
 
     /*
      * 密 码 取 消 加 密
+     * 数 据 库 明 文
      * */
     @Bean
     public PasswordEncoder bCryptPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
-
-    /*
-     * 认 证 规 则
-     * */
 
     /**
      * 授 权 规 则
@@ -47,7 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/reg").permitAll()
                 .antMatchers("/data").hasRole("admin")
-                .antMatchers("/get").hasRole("user");
+                .antMatchers("/get").hasRole("user")
+                .antMatchers("/profile").authenticated()
+                .antMatchers("/getToken").authenticated()
+                .antMatchers("/setToken").authenticated();
+
         /*
          * 没 有 权 限 返 回 登 录 页
          * */
@@ -68,25 +75,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutSuccessUrl("/");
 
         /*
-         * 开 启  Remember Me
+         * 开 启 Remember Me
          * */
         http.rememberMe().rememberMeParameter("remember");
     }
 
+    /*
+     * 认 证 规 则
+     * */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(myUserDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
-    /*
-     * 从 内 存 读 取 账 号 密 码 方 式
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("8888")
-                .password(bCryptPasswordEncoder().encode("8888"))
-                .authorities("admin");
-    }
-    * */
 }
