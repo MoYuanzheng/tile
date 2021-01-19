@@ -46,7 +46,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     /*
-     * 分页插件
+     * 分页插件 1
      * */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
@@ -55,6 +55,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return interceptor;
     }
 
+    /*
+     * 分页插件 2
+     * */
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {
         return configuration -> configuration.setUseDeprecatedExecutor(false);

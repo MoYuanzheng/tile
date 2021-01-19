@@ -16,7 +16,7 @@ public class LoginController {
             "9999",
             "大马猴",
             "9999",
-            1,
+            "user",
             "18888888888",
             "815687789@qq.com",
             "Test Insert");
@@ -61,5 +61,4 @@ public class LoginController {
     public Boolean reg() {
         return usersServiceImpl.register(user);
     }
-
 }

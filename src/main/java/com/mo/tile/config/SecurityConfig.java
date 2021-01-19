@@ -1,16 +1,40 @@
 package com.mo.tile.config;
 
 
+import com.mo.tile.service.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
+
+//    @Bean
+//    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
+
+    /*
+     * 密 码 取 消 加 密
+     * */
+    @Bean
+    public PasswordEncoder bCryptPasswordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    /*
+     * 认 证 规 则
+     * */
 
     /**
      * 授 权 规 则
@@ -22,17 +46,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/toLogin").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/reg").permitAll()
-                .antMatchers("/get").hasRole("1")
-                .antMatchers("/data").hasRole("2");
-
+                .antMatchers("/data").hasRole("admin")
+                .antMatchers("/get").hasRole("user");
         /*
          * 没 有 权 限 返 回 登 录 页
          * */
         http.formLogin()
                 .loginPage("/tologin")
-                .loginProcessingUrl("/login");
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/");
 
-//        http.cors().disable();
+        /*
+         * Cross—Site Request Forgery
+         * 关 闭 跨 站 点 请 求 伪 造
+         * */
         http.csrf().disable();
 
         /*
@@ -46,14 +73,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.rememberMe().rememberMeParameter("remember");
     }
 
-    /**
-     * 认 证 规 则
-     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("admin").password(new BCryptPasswordEncoder().encode("123456")).roles("1", "2")
-                .and()
-                .withUser("user").password(new BCryptPasswordEncoder().encode("123456")).roles("2");
+        auth.userDetailsService(myUserDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
+
+    /*
+     * 从 内 存 读 取 账 号 密 码 方 式
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("8888")
+                .password(bCryptPasswordEncoder().encode("8888"))
+                .authorities("admin");
+    }
+    * */
 }
