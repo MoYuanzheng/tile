@@ -1,7 +1,6 @@
 package com.mo.tile.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mo.tile.bean.Token;
 import com.mo.tile.bean.Users;
 import com.mo.tile.mapper.UsersMapper;
 import com.mo.tile.service.UsersService;
@@ -41,12 +40,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
 
         if (user != null) {
             String id = user.getUser_id();
-            Token token = new Token(id);
-            if (usersMapper.selectById(id) == null) {
-                usersMapper.insert(user);
-                tokenService.save(token);
-                return true;
-            } else return false;
+            return usersMapper.selectById(id) == null && tokenService.setRegToken(id) && usersMapper.insert(user) == 1;
         } else return false;
     }
 

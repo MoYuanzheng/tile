@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/tologin")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/profile");
 
         /*
          * Cross—Site Request Forgery

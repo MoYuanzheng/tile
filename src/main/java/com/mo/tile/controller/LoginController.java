@@ -7,6 +7,8 @@ import com.mo.tile.service.impl.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -14,15 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController {
 
 
-    //模 拟 注 册 数 据
-    Users user = new Users(
-            "root",
-            "小马猴",
-            "root",
-            "ROLE_admin",
-            "18888888888",
-            "88888888@gmail.com",
-            "Test root");
     @Autowired
     private UsersServiceImpl usersService;
     @Autowired
@@ -31,6 +24,7 @@ public class LoginController {
     /*
      * 重 定 向 至 前 端 登 录 页 面
      * */
+
     @GetMapping(value = {"/tologin"})
     public String toLogin() {
         return "redirect:http://localhost:63343/1/index.html";
@@ -55,9 +49,36 @@ public class LoginController {
      * 注 册
      * Register
      * */
+    //模 拟 注 册 数 据
+//    Users user = new Users(
+//            "root",
+//            "小马猴",
+//            "root",
+//            "ROLE_admin",
+//            "18888888888",
+//            "88888888@gmail.com",
+//            "Test root");
+
     @ResponseBody
-    @GetMapping("/reg")
-    public Boolean reg() {
+    @PostMapping("/reg")
+    public Boolean reg(@RequestParam("user_id") String user_id,
+                       @RequestParam("user_name") String user_name,
+                       @RequestParam("user_password") String user_password,
+                       @RequestParam("user_role") String user_role,
+                       @RequestParam("user_phone") String user_phone,
+                       @RequestParam("user_email") String user_email,
+                       @RequestParam("user_remarks") String user_remarks
+    ) {
+        Users user = new Users(
+                user_id,
+                user_name,
+                user_password,
+                user_role,
+                user_phone,
+                user_email,
+                user_remarks
+        );
+
         return usersService.register(user);
     }
 
@@ -67,6 +88,12 @@ public class LoginController {
         return tokenService.setNewToken();
     }
 
+    /* ============================================
+     *
+     * ============================================
+     * @Name: getToken
+     * @return: String
+     * ===========================================*/
     @GetMapping("/getToken")
     @ResponseBody
     public String getToken() {

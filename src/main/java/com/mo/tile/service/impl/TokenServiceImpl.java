@@ -60,9 +60,30 @@ public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements
         }
     }
 
-    /*
-     * 得 到 Token
-     * */
+    /* ============================================
+     *
+     * ============================================
+     * @Name:
+     * @Param: null ->
+     * @Return: null
+     * ===========================================*/
+    public Boolean setRegToken(String id) {
+        if (id != null) {
+            String newToken = String.valueOf(UUID.randomUUID());
+            Long time = new Date().getTime() / 1000 + (30 + 60);
+            Token token = new Token(id, newToken, time);
+            return tokenService.saveOrUpdate(token);
+        }
+        return false;
+    }
+
+    /* ============================================
+     * 获 取 Token
+     * ============================================
+     * @Name: getToken
+     * @Param: null ->
+     * @Return: String
+     * ===========================================*/
     public String getToken() {
         if (usersService.getUserInfo() != null) {
             String id = usersService.getUserInfo().getUser_id();
