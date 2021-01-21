@@ -24,7 +24,6 @@ public class LoginController {
     /*
      * 重 定 向 至 前 端 登 录 页 面
      * */
-
     @GetMapping(value = {"/tologin"})
     public String toLogin() {
         return "redirect:http://localhost:63343/1/index.html";
@@ -49,16 +48,6 @@ public class LoginController {
      * 注 册
      * Register
      * */
-    //模 拟 注 册 数 据
-//    Users user = new Users(
-//            "root",
-//            "小马猴",
-//            "root",
-//            "ROLE_admin",
-//            "18888888888",
-//            "88888888@gmail.com",
-//            "Test root");
-
     @ResponseBody
     @PostMapping("/reg")
     public Boolean reg(@RequestParam("user_id") String user_id,
@@ -89,7 +78,7 @@ public class LoginController {
     }
 
     /* ============================================
-     *
+     * 拿 到 Token
      * ============================================
      * @Name: getToken
      * @return: String
