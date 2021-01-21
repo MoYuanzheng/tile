@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class LoginController {
 
-
     @Autowired
     private UsersServiceImpl usersService;
     @Autowired
@@ -24,7 +23,7 @@ public class LoginController {
     /*
      * 重 定 向 至 前 端 登 录 页 面
      * */
-    @GetMapping(value = {"/tologin"})
+    @GetMapping(value = {"tologin"})
     public String toLogin() {
         return "redirect:http://localhost:63343/1/index.html";
     }
@@ -39,7 +38,7 @@ public class LoginController {
      * 跳 转 至 个 人 信 息
      * */
     @ResponseBody
-    @GetMapping(value = {"/profile"})
+    @GetMapping(value = {"profile"})
     public Users login() {
         return usersService.getUserInfo();
     }
@@ -49,7 +48,7 @@ public class LoginController {
      * Register
      * */
     @ResponseBody
-    @PostMapping("/reg")
+    @PostMapping("reg")
     public Boolean reg(@RequestParam("user_id") String user_id,
                        @RequestParam("user_name") String user_name,
                        @RequestParam("user_password") String user_password,
@@ -71,19 +70,21 @@ public class LoginController {
         return usersService.register(user);
     }
 
-    @GetMapping("/setToken")
+    @GetMapping("setToken")
     @ResponseBody
     public String setToken() {
         return tokenService.setNewToken();
     }
 
-    /* ============================================
+    /**
      * 拿 到 Token
      * ============================================
+     *
      * @Name: getToken
-     * @return: String
-     * ===========================================*/
-    @GetMapping("/getToken")
+     * @Return: String
+     * ===========================================
+     */
+    @GetMapping("getToken")
     @ResponseBody
     public String getToken() {
         return tokenService.getToken();

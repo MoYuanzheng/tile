@@ -5,34 +5,33 @@ import com.mo.tile.bean.Products;
 import com.mo.tile.service.impl.ProductsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("product")
 public class ProductsController {
 
     @Autowired
-    ProductsServiceImpl productsServiceImpl;
+    ProductsServiceImpl productsService;
 
     /*
      * 拿 到 所 有 数 据
      * */
     @ResponseBody
-    @GetMapping("/data")
+    @GetMapping("data")
     public List<Products> getAll() {
-        return productsServiceImpl.list();
+        return productsService.list();
     }
 
     /*
      * 返 回 一 条 记 录
      * */
     @ResponseBody
-    @GetMapping("/get")
+    @GetMapping("selectOne")
     public Products getById(@RequestParam("id") Integer id) {
-        return productsServiceImpl.getById(id);
+        return productsService.getById(id);
     }
 
 
@@ -40,9 +39,9 @@ public class ProductsController {
      * 删 除
      * */
     @ResponseBody
-    @GetMapping("/del")
+    @DeleteMapping("delOne")
     public Boolean delById(@RequestParam("id") Integer id) {
-        return productsServiceImpl.removeById(id);
+        return productsService.removeById(id);
     }
 
 
@@ -50,8 +49,8 @@ public class ProductsController {
      * 分 页 查 询
      * */
     @ResponseBody
-    @GetMapping("/table")
+    @GetMapping("table")
     public Page<Products> page(@RequestParam("pages") Integer pages) {
-        return productsServiceImpl.selectPage(pages);
+        return productsService.selectPage(pages);
     }
 }

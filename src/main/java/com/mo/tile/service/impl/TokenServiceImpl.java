@@ -1,5 +1,6 @@
 package com.mo.tile.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.bean.Token;
 import com.mo.tile.mapper.TokenMapper;
@@ -10,14 +11,33 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.UUID;
 
-@Service
+/**
+ * (Token)表服务实现类
+ *
+ * @author mo
+ * @since 2021-01-22 00:20:09
+ */
+@Service("tokenService")
 public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements TokenService {
+    /* *
+     * 分页查询
+     */
+    @Autowired
+    private TokenMapper tokenMapper;
 
     @Autowired
     private UsersServiceImpl usersService;
 
     @Autowired
     private TokenServiceImpl tokenService;
+
+    public Page<Token> selectPage(Integer pages) {
+        System.out.println("PageServiceImpl");
+        Page<Token> page = new Page<>(pages, 10);
+        tokenMapper.selectPage(page, null);
+        page.getRecords().forEach(System.out::println);
+        return page;
+    }
 
     /*
      * 判 断 token 是 否 合 法
