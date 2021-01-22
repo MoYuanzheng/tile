@@ -1,4 +1,4 @@
-package com.mo.tile.bean;
+package com.mo.tile.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;

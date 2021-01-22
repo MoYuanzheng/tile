@@ -1,9 +1,8 @@
 package com.mo.tile.service;
 
 
-import com.mo.tile.bean.Users;
+import com.mo.tile.entity.Users;
 import com.mo.tile.mapper.UsersMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,11 +11,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
+/**
+ * @author Naruto
+ * @ImplName: MyUserDetailsServiceImpl
+ */
 @Service
 @Component
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
+    @Resource
     private UsersMapper usersMapper;
 
     @Override

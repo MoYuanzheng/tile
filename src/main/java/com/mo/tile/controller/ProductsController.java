@@ -1,22 +1,25 @@
 package com.mo.tile.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mo.tile.bean.Products;
+import com.mo.tile.entity.Products;
 import com.mo.tile.service.impl.ProductsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author Naruto
+ */
 @Controller
 @RequestMapping("product")
 public class ProductsController {
 
-    @Autowired
+    @Resource
     ProductsServiceImpl productsService;
 
-    /*
+    /**
      * 拿 到 所 有 数 据
      * */
     @ResponseBody
@@ -25,7 +28,7 @@ public class ProductsController {
         return productsService.list();
     }
 
-    /*
+    /**
      * 返 回 一 条 记 录
      * */
     @ResponseBody
@@ -35,7 +38,7 @@ public class ProductsController {
     }
 
 
-    /*
+    /**
      * 删 除
      * */
     @ResponseBody
@@ -45,7 +48,7 @@ public class ProductsController {
     }
 
 
-    /*
+    /**
      * 分 页 查 询
      * */
     @ResponseBody

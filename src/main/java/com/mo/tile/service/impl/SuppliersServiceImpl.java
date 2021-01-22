@@ -2,11 +2,12 @@ package com.mo.tile.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mo.tile.bean.Suppliers;
+import com.mo.tile.entity.Suppliers;
 import com.mo.tile.mapper.SuppliersMapper;
 import com.mo.tile.service.SuppliersService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * (Suppliers)表服务实现类
@@ -16,10 +17,10 @@ import org.springframework.stereotype.Service;
  */
 @Service("suppliersService")
 public class SuppliersServiceImpl extends ServiceImpl<SuppliersMapper, Suppliers> implements SuppliersService {
-    /*
+    /**
      * 分页查询
      * */
-    @Autowired
+    @Resource
     private SuppliersMapper suppliersMapper;
 
     public Page<Suppliers> selectPage(Integer pages) {

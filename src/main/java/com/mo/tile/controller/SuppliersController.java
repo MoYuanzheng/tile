@@ -1,10 +1,11 @@
 package com.mo.tile.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mo.tile.bean.Suppliers;
+import com.mo.tile.entity.Suppliers;
 import com.mo.tile.service.impl.SuppliersServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * (Suppliers)表控制层
@@ -18,7 +19,7 @@ public class SuppliersController {
     /**
      * 服务对象
      */
-    @Autowired
+    @Resource
     private SuppliersServiceImpl suppliersService;
 
     /**
@@ -32,7 +33,7 @@ public class SuppliersController {
         return suppliersService.getById(id);
     }
 
-    /* *
+    /**
      * 分 页 查 询
      */
     @ResponseBody

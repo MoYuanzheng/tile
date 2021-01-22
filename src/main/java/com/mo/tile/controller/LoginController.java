@@ -1,29 +1,34 @@
 package com.mo.tile.controller;
 
 
-import com.mo.tile.bean.Users;
+import com.mo.tile.entity.Users;
 import com.mo.tile.service.impl.TokenServiceImpl;
 import com.mo.tile.service.impl.UsersServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 
+
+/**
+ * @author Naruto
+ */
 @Controller
 public class LoginController {
 
-    @Autowired
+    @Resource
     private UsersServiceImpl usersService;
-    @Autowired
+
+    @Resource
     private TokenServiceImpl tokenService;
 
-    /*
+    /**
      * 重 定 向 至 前 端 登 录 页 面
-     * */
-    @GetMapping(value = {"tologin"})
+     */
+    @GetMapping(value = {"toLogin"})
     public String toLogin() {
         return "redirect:http://localhost:63343/1/index.html";
     }
@@ -34,7 +39,7 @@ public class LoginController {
         return "欢迎来到追溯系统";
     }
 
-    /*
+    /**
      * 跳 转 至 个 人 信 息
      * */
     @ResponseBody
@@ -43,7 +48,7 @@ public class LoginController {
         return usersService.getUserInfo();
     }
 
-    /*
+    /**
      * 注 册
      * Register
      * */
@@ -80,8 +85,8 @@ public class LoginController {
      * 拿 到 Token
      * ============================================
      *
-     * @Name: getToken
-     * @Return: String
+     * @className: getToken
+     * @return: String
      * ===========================================
      */
     @GetMapping("getToken")

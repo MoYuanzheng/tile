@@ -1,7 +1,7 @@
 package com.mo.tile.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mo.tile.bean.Batch;
+import com.mo.tile.entity.Batch;
 import com.mo.tile.service.impl.BatchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

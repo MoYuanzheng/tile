@@ -13,11 +13,14 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
+/**
+ * @author Naruto
+ */
 @Configuration
 @EnableWebSecurity
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    /*
+    /**
      * 跨域问题处理
      * */
     @Override
@@ -33,9 +36,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .maxAge(3600);
     }
 
-    /*
+    /**
      * 拦截器设置
-     * */
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new IndexInterceptor())
@@ -45,7 +48,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/", "/login", "/css/**", "/fonts/**", "/images/**", "/js/**");
     }
 
-    /*
+    /**
      * 分页插件 1
      * */
     @Bean
@@ -55,7 +58,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return interceptor;
     }
 
-    /*
+    /**
      * 分页插件 2
      * */
     @Bean

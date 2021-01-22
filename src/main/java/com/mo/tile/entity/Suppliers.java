@@ -1,4 +1,4 @@
-package com.mo.tile.bean;
+package com.mo.tile.entity;
 
 import lombok.Data;
 

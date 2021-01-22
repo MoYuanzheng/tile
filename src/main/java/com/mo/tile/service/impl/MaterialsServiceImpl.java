@@ -2,11 +2,12 @@ package com.mo.tile.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mo.tile.bean.Materials;
+import com.mo.tile.entity.Materials;
 import com.mo.tile.mapper.MaterialsMapper;
 import com.mo.tile.service.MaterialsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * (Materials)表服务实现类
@@ -16,10 +17,10 @@ import org.springframework.stereotype.Service;
  */
 @Service("materialsService")
 public class MaterialsServiceImpl extends ServiceImpl<MaterialsMapper, Materials> implements MaterialsService {
-    /*
+    /**
      * 分页查询
      * */
-    @Autowired
+    @Resource
     private MaterialsMapper materialsMapper;
 
     public Page<Materials> selectPage(Integer pages) {
