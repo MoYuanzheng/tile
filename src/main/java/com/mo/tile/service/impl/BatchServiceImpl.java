@@ -12,14 +12,14 @@ import javax.annotation.Resource;
 /**
  * (Batch)表服务实现类
  *
- * @author mo
- * @since 2021-01-22 00:23:37
+ * @author MoYz
+ * @since 2021-01-23 15:21:10
  */
 @Service("batchService")
 public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements BatchService {
     /**
      * 分页查询
-     * */
+     */
     @Resource
     private BatchMapper batchMapper;
 

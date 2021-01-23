@@ -21,5 +21,4 @@ spring:
 mybatis-plus:
   configuration:
     # 是否开启自动驼峰命名规则（camel case）映射
-    map-underscore-to-camel-case: false
-
+    map-underscore-to-camel-case: true

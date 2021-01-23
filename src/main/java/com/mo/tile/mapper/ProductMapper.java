@@ -1,7 +1,7 @@
 package com.mo.tile.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mo.tile.entity.Products;
+import com.mo.tile.entity.Product;
 
 /**
  * (Products)表数据库访问层
@@ -9,6 +9,6 @@ import com.mo.tile.entity.Products;
  * @author mo
  * @since 2021-01-23 01:33:19
  */
-public interface ProductsMapper extends BaseMapper<Products> {
+public interface ProductMapper extends BaseMapper<Product> {
 
 }

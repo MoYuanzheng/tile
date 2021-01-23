@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 密 码 取 消 加 密
      * 数 据 库 明 文
-     * */
+     */
     @Bean
     public PasswordEncoder bCryptPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
@@ -53,11 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/toLogin").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/reg").permitAll()
-                .antMatchers("/data").hasRole("admin")
-                .antMatchers("/get").hasRole("user")
-                .antMatchers("/profile").authenticated()
-                .antMatchers("/getToken").authenticated()
-                .antMatchers("/setToken").authenticated();
+                .antMatchers("/token/**").hasRole("admin")
+                .antMatchers("/product/**").hasRole("user,admin")
+                .antMatchers("/profile").authenticated();
+
 
         /**
          * 没 有 权 限 返 回 登 录 页
@@ -86,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 认 证 规 则
-     * */
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(myUserDetailsService).passwordEncoder(bCryptPasswordEncoder());

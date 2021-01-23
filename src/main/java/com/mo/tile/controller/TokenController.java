@@ -6,12 +6,11 @@ import com.mo.tile.service.impl.TokenServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-
 /**
  * (Token)表控制层
  *
  * @author mo
- * @since 2021-01-22 00:35:03
+ * @since 2021-01-23 15:22:38
  */
 @RestController
 @RequestMapping("token")
@@ -32,7 +31,7 @@ public class TokenController {
     public Token selectOne(String id) {
         return tokenService.getById(id);
     }
-
+    
     /**
      * 分 页 查 询
      */

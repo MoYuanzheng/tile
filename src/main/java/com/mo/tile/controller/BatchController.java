@@ -3,22 +3,23 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Batch;
 import com.mo.tile.service.impl.BatchServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * (Batch)表控制层
  *
  * @author mo
- * @since 2021-01-22 00:35:01
+ * @since 2021-01-23 15:22:39
  */
 @RestController
 @RequestMapping("batch")
 public class BatchController {
-    /* *
+    /**
      * 服务对象
      */
-    @Autowired
+    @Resource
     private BatchServiceImpl batchService;
 
     /**
@@ -28,11 +29,11 @@ public class BatchController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public Batch selectOne(Integer id) {
+    public Batch selectOne(String id) {
         return batchService.getById(id);
     }
 
-    /* *
+    /**
      * 分 页 查 询
      */
     @ResponseBody

@@ -25,7 +25,7 @@ public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements
     private TokenMapper tokenMapper;
 
     @Resource
-    private UsersServiceImpl usersService;
+    private UserServiceImpl usersService;
 
     @Resource
     private TokenServiceImpl tokenService;
@@ -44,12 +44,12 @@ public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements
     public Boolean isToken(String uuid) {
         //获 取 登 录 用 户 ID 并 据 此 ID 获 取 Token 与 终 止 时 间
         if (usersService.getUserInfo() != null) {
-            String id = usersService.getUserInfo().getUser_id();
+            String id = usersService.getUserInfo().getId();
             String token = tokenService.getById(id).getToken();
-            Long token_time = tokenService.getById(id).getToken_time();
-            long time_now = System.currentTimeMillis() / 1000;
+            Integer tokenDeadline = tokenService.getById(id).getDeadline();
+            Integer timeNow = Math.toIntExact(System.currentTimeMillis() / 1000);
 
-            if (time_now >= token_time) {
+            if (timeNow >= tokenDeadline) {
                 return false;
             } else {
                 return uuid.equals(token);
@@ -65,8 +65,8 @@ public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements
     public String setNewToken() {
         if (usersService.getUserInfo() != null) {
             String newToken = String.valueOf(UUID.randomUUID());
-            String id = usersService.getUserInfo().getUser_id();
-            Long time = System.currentTimeMillis() / 1000 + (30 + 60);
+            String id = usersService.getUserInfo().getId();
+            Integer time = Math.toIntExact(System.currentTimeMillis() / 1000 + (30 + 60));
 
             Token token = new Token(id, newToken, time);
             System.out.println(token);
@@ -82,17 +82,12 @@ public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements
     }
 
     /**
-     * ============================================
-     *
-     * @Name:
-     * @Param: null ->
-     * @Return: null
-     * ===========================================
+     * 注 册 时 设 置 Token
      */
     public Boolean setRegToken(String id) {
         if (id != null) {
             String newToken = String.valueOf(UUID.randomUUID());
-            Long time = System.currentTimeMillis() / 1000 + (30 + 60);
+            Integer time = Math.toIntExact(System.currentTimeMillis() / 1000 + (30 + 60));
             Token token = new Token(id, newToken, time);
             return tokenService.saveOrUpdate(token);
         }
@@ -100,17 +95,11 @@ public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements
     }
 
     /**
-     * 获 取 Token
-     * ============================================
-     *
-     * @Name: getToken
-     * @Param: null ->
-     * @Return: String
-     * ===========================================
+     * 得 到 token
      */
     public String getToken() {
         if (usersService.getUserInfo() != null) {
-            String id = usersService.getUserInfo().getUser_id();
+            String id = usersService.getUserInfo().getId();
             Token token = tokenService.getById(id);
             return token.getToken();
         } else {
