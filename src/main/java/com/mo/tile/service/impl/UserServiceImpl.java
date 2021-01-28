@@ -22,9 +22,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     User user = new User();
     @Resource
-    private UserMapper usersMapper;
-    @Resource
-    private UserServiceImpl usersService;
+    private UserMapper userMapper;
 
     /**
      * 分 页 查 询 业 务
@@ -40,17 +38,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 注 册 业 务
      */
     public Boolean register(User user) {
-
         if (user != null) {
             String id = user.getId();
-            return usersMapper.selectById(id) == null && tokenService.setRegToken(id) && usersMapper.insert(user) == 1;
+            return userMapper.selectById(id) == null && tokenService.setRegToken(id) && userMapper.insert(user) == 1;
         } else {
             return false;
         }
     }
 
+    /**
+     * 拿到已登录用户信息
+     */
     public User getUserInfo() {
-
+        // 从 容 器 中 取 得 已 登 录 的 用 户
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!authentication.isAuthenticated()) {
             return null;
@@ -63,7 +63,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             id = principal.toString();
         }
 
-        user = usersMapper.selectById(id);
+        user = userMapper.selectById(id);
         return user;
+    }
+
+    public Boolean setName(String name) {
+        User userToName;
+        userToName = getUserInfo();
+        userToName.setUsername(name);
+        System.out.println(userToName);
+        return userMapper.updateById(userToName) == 1;
     }
 }

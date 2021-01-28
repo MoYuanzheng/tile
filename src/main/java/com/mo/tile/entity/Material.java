@@ -1,5 +1,6 @@
 package com.mo.tile.entity;
 
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.*;
 
 import java.io.Serializable;
@@ -20,4 +21,7 @@ public class Material implements Serializable {
     private String id;
     private String cnName;
     private String enName;
+
+    @Version
+    private Integer version;
 }

@@ -1,5 +1,6 @@
 package com.mo.tile.entity;
 
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.*;
 
 import java.io.Serializable;
@@ -23,4 +24,7 @@ public class Supplier implements Serializable {
     private String header;
     private String phone;
     private String address;
+
+    @Version
+    private Integer version;
 }

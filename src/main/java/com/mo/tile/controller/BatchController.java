@@ -3,7 +3,10 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Batch;
 import com.mo.tile.service.impl.BatchServiceImpl;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -36,7 +39,6 @@ public class BatchController {
     /**
      * 分 页 查 询
      */
-    @ResponseBody
     @GetMapping("table")
     public Page<Batch> page(@RequestParam("pages") Integer pages) {
         return batchService.selectPage(pages);

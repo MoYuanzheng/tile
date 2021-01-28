@@ -3,7 +3,10 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Material;
 import com.mo.tile.service.impl.MaterialServiceImpl;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -36,7 +39,6 @@ public class MaterialController {
     /**
      * 分 页 查 询
      */
-    @ResponseBody
     @GetMapping("table")
     public Page<Material> page(@RequestParam("pages") Integer pages) {
         return materialService.selectPage(pages);

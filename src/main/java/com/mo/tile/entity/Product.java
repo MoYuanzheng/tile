@@ -1,5 +1,6 @@
 package com.mo.tile.entity;
 
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.*;
 
 import java.io.Serializable;
@@ -23,4 +24,7 @@ public class Product implements Serializable {
     private Integer places;
     private Integer price;
     private String qrCode;
+
+    @Version
+    private Integer version;
 }

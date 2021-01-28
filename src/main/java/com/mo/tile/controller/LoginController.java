@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 /**
  * @author Naruto
  */
+
 @Controller
 public class LoginController {
 
@@ -49,8 +50,7 @@ public class LoginController {
     }
 
     /**
-     * 注 册
-     * Register
+     * 注 册 Register
      */
     @ResponseBody
     @PostMapping("reg")
@@ -75,8 +75,8 @@ public class LoginController {
         return userService.register(user);
     }
 
-    @GetMapping("setToken")
     @ResponseBody
+    @GetMapping("setToken")
     public String setToken() {
         return tokenService.setNewToken();
     }
@@ -84,10 +84,16 @@ public class LoginController {
     /**
      * 拿 到 Token
      */
-    @GetMapping("getToken")
     @ResponseBody
+    @GetMapping("getToken")
     public String getToken() {
         return tokenService.getToken();
     }
 
+    @ResponseBody
+    @GetMapping("setName")
+    public Boolean setName(@RequestParam("name") String name) {
+
+        return userService.setName(name);
+    }
 }

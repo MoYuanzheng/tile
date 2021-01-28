@@ -33,7 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     */
 
-
     /**
      * 密 码 取 消 加 密
      * 数 据 库 明 文
@@ -56,7 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/token/**").hasRole("admin")
                 .antMatchers("/product/**").hasRole("user,admin")
                 .antMatchers("/profile").authenticated();
-
 
         /**
          * 没 有 权 限 返 回 登 录 页

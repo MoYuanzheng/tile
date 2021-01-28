@@ -1,5 +1,6 @@
 package com.mo.tile.entity;
 
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.*;
 
 import java.io.Serializable;
@@ -23,4 +24,7 @@ public class Batch implements Serializable {
     private Date completeTime;
     private Integer productType;
     private Integer total;
+
+    @Version
+    private Integer version;
 }
