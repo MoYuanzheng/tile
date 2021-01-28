@@ -2,7 +2,6 @@ package com.mo.tile.controller;
 
 
 import com.mo.tile.entity.User;
-import com.mo.tile.mapper.UserMapper;
 import com.mo.tile.service.impl.TokenServiceImpl;
 import com.mo.tile.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -91,19 +90,4 @@ public class LoginController {
         return tokenService.getToken();
     }
 
-    @ResponseBody
-    @GetMapping("setName")
-    public Boolean setName(@RequestParam("name") String name) {
-
-        return userService.setName(name);
-    }
-
-    @Resource
-    UserMapper userMapper;
-
-    @ResponseBody
-    @GetMapping("delUser")
-    public Boolean delUser() {
-        return userMapper.deleteById("admin") == 1;
-    }
 }
