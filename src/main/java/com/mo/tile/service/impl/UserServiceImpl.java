@@ -67,6 +67,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return user;
     }
 
+    /**
+     * 留 作 修 改
+     */
     public Boolean setName(String name) {
         User userToName;
         userToName = getUserInfo();
