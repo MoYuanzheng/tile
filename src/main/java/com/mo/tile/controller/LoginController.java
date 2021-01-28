@@ -2,6 +2,7 @@ package com.mo.tile.controller;
 
 
 import com.mo.tile.entity.User;
+import com.mo.tile.mapper.UserMapper;
 import com.mo.tile.service.impl.TokenServiceImpl;
 import com.mo.tile.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,10 @@ import javax.annotation.Resource;
 public class LoginController {
 
     @Resource
-    private UserServiceImpl userService;
+    UserServiceImpl userService;
 
     @Resource
-    private TokenServiceImpl tokenService;
+    TokenServiceImpl tokenService;
 
     /**
      * 重 定 向 至 前 端 登 录 页 面
@@ -95,5 +96,14 @@ public class LoginController {
     public Boolean setName(@RequestParam("name") String name) {
 
         return userService.setName(name);
+    }
+
+    @Resource
+    UserMapper userMapper;
+
+    @ResponseBody
+    @GetMapping("delUser")
+    public Boolean delUser() {
+        return userMapper.deleteById("admin") == 1;
     }
 }
