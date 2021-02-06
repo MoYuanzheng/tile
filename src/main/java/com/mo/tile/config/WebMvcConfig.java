@@ -16,8 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
-     * 跨域问题处理
-     * */
+     * 跨 域 问 题 处 理
+     */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins("http://localhost:63343")
@@ -32,7 +32,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 拦截器设置
+     * 拦 截 器 设 置
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -42,7 +42,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 //放行的
                 .excludePathPatterns("/", "/login", "/css/**", "/fonts/**", "/images/**", "/js/**");
     }
-
-
 
 }

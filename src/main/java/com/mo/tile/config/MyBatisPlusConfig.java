@@ -33,7 +33,7 @@ public class MyBatisPlusConfig {
     }
 
     /**
-     * 分页插件 1
+     * 分 页 插 件 1
      */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
@@ -43,7 +43,7 @@ public class MyBatisPlusConfig {
     }
 
     /**
-     * 分页插件 2
+     * 分 页 插 件 2
      */
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {

@@ -11,9 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-
 /**
- * @author Naruto
+ * @author MoYz
  */
 @Service("UserService")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -24,15 +23,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Resource
     private UserMapper userMapper;
 
-    /**
-     * 分 页 查 询 业 务
-     */
     @Resource
     private TokenServiceImpl tokenService;
-
-    /**
-     * 登 录 业 务 ( 已 交 给 Spring Security 完 成  )
-     * */
 
     /**
      * 注 册 业 务
@@ -71,10 +63,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 留 作 修 改
      */
     public Boolean setName(String name) {
-        User userToName;
-        userToName = getUserInfo();
-        userToName.setUsername(name);
-        System.out.println(userToName);
-        return userMapper.updateById(userToName) == 1;
+        user.setUsername(name);
+        System.out.println(user);
+        return userMapper.updateById(user) == 1;
     }
 }
