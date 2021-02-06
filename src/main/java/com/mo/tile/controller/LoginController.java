@@ -4,6 +4,9 @@ package com.mo.tile.controller;
 import com.mo.tile.entity.User;
 import com.mo.tile.service.impl.TokenServiceImpl;
 import com.mo.tile.service.impl.UserServiceImpl;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,11 +52,19 @@ public class LoginController {
         return userService.getUserInfo();
     }
 
-    /**
-     * 注 册 Register
-     */
+
     @ResponseBody
     @PostMapping("reg")
+    @ApiOperation(value = "注册 Register", notes = "接收注册信息", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "账号", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "pwd", value = "密码", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "roles", value = "身份", required = true, dataType = "Integer"),
+            @ApiImplicitParam(name = "phone", value = "电话号码", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "email", value = "电子邮箱", required = true, dataType = "E-mail"),
+            @ApiImplicitParam(name = "remarks", value = "备注", required = false, dataType = "string")
+    })
     public Boolean reg(@RequestParam("id") String id,
                        @RequestParam("username") String username,
                        @RequestParam("pwd") String pwd,
@@ -62,7 +73,7 @@ public class LoginController {
                        @RequestParam("email") String email,
                        @RequestParam("remarks") String remarks
     ) {
-        User user = new User(
+        return userService.register(new User(
                 id,
                 username,
                 pwd,
@@ -70,9 +81,7 @@ public class LoginController {
                 phone,
                 email,
                 remarks
-        );
-
-        return userService.register(user);
+        ));
     }
 
     @ResponseBody

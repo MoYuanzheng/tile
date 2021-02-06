@@ -26,12 +26,10 @@ public class SwaggerConfig {
     public Docket docket(Environment environment) {
 
         /**
-         * 判 断 生 产 环 境
-         * 非 生 产 环 境 swagger 不 启 用
+         * 判 断 生 产 环 境，非 生 产 环 境 swagger 不 启 用
          */
         Profiles profiles = Profiles.of("dev", "test");
         boolean flag = environment.acceptsProfiles(profiles);
-        System.out.println("---------------" + flag);
         Docket docket = new Docket(DocumentationType.SWAGGER_2);
 
         /**
