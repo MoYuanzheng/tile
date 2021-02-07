@@ -16,19 +16,14 @@ import javax.annotation.Resource;
  */
 @Service("UserService")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-    /**
-     * 获 取 当 前 登 录 用 户 信 息
-     */
-    User user = new User();
+    User user;
     @Resource
     private UserMapper userMapper;
 
     @Resource
     private TokenServiceImpl tokenService;
 
-    /**
-     * 注 册 业 务
-     */
+    @Override
     public Boolean register(User user) {
         if (user != null) {
             String id = user.getId();
@@ -38,9 +33,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
     }
 
-    /**
-     * 拿到已登录用户信息
-     */
+    @Override
     public User getUserInfo() {
         // 从 容 器 中 取 得 已 登 录 的 用 户
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -59,9 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return user;
     }
 
-    /**
-     * 留 作 修 改
-     */
+    @Override
     public Boolean setName(String name) {
         user.setUsername(name);
         System.out.println(user);

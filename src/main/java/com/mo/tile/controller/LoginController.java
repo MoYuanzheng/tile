@@ -63,7 +63,7 @@ public class LoginController {
             @ApiImplicitParam(name = "roles", value = "身份", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "phone", value = "电话号码", required = true, dataType = "string"),
             @ApiImplicitParam(name = "email", value = "电子邮箱", required = true, dataType = "E-mail"),
-            @ApiImplicitParam(name = "remarks", value = "备注", required = false, dataType = "string")
+            @ApiImplicitParam(name = "remarks", value = "备注", dataType = "string")
     })
     public Boolean reg(@RequestParam("id") String id,
                        @RequestParam("username") String username,
