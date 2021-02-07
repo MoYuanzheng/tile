@@ -1,8 +1,7 @@
-package com.mo.tile.service;
+package com.mo.tile.service.impl;
 
 
 import com.mo.tile.entity.User;
-import com.mo.tile.service.impl.UserServiceImpl;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,8 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * @author Naruto
- * @ImplName: MyUserDetailsServiceImpl
+ * @author MoYz
  */
 @Service
 @Component
@@ -28,7 +26,6 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 
         user = userService.getById(id);
-        System.out.println(user);
         String password = user.getPwd();
         String userId = user.getId();
         String role = user.getRoles();

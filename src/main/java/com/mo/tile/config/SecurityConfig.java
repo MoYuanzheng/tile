@@ -1,7 +1,7 @@
 package com.mo.tile.config;
 
 
-import com.mo.tile.service.MyUserDetailsServiceImpl;
+import com.mo.tile.service.impl.MyUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

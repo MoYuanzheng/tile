@@ -26,7 +26,7 @@ public class MaterialController {
     private MaterialServiceImpl materialService;
 
     /**
-     * 通过主键查询单条数据
+     * 通 过 主 键 查 询 单 条 数 据
      *
      * @param id 主键
      * @return 单条数据
