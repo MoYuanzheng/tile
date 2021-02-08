@@ -24,6 +24,15 @@ import java.util.Date;
 @ApiModel("订单表相关")
 public class Batch implements Serializable {
 
+    public Batch(String id, Date orderTime, Date completeTime, Integer productType, Integer total, String remark) {
+        this.id = id;
+        this.orderTime = orderTime;
+        this.completeTime = completeTime;
+        this.productType = productType;
+        this.total = total;
+        this.remark = remark;
+    }
+
     @ApiModelProperty(value = "主键")
     private String id;
 

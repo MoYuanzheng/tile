@@ -24,6 +24,19 @@ import java.util.Date;
 @ApiModel("相关")
 public class Token implements Serializable {
 
+    public Token(String id, String token, Integer deadline) {
+        this.id = id;
+        this.token = token;
+        this.deadline = deadline;
+    }
+
+    public Token(String id, String token, Integer deadline, String remark) {
+        this.id = id;
+        this.token = token;
+        this.deadline = deadline;
+        this.remark = remark;
+    }
+
     @ApiModelProperty(value = "主键")
     private String id;
 

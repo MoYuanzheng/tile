@@ -24,6 +24,13 @@ import java.util.Date;
 @ApiModel("相关")
 public class Material implements Serializable {
 
+    public Material(String id, String cnName, String enName, String remark) {
+        this.id = id;
+        this.cnName = cnName;
+        this.enName = enName;
+        this.remark = remark;
+    }
+
     @ApiModelProperty(value = "$column.comment")
     private String id;
 

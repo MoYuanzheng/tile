@@ -8,42 +8,46 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * (User)实体类
  *
  * @author MoYz
- * @since 2021-01-23 17:20:30
+ * @since 2021-02-08 17:53:13
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("用户实体类")
+@ApiModel("相关")
 public class User implements Serializable {
 
-    @ApiModelProperty(value = "账号", example = "admin")
+    @ApiModelProperty(value = "主键")
     private String id;
-
-    @ApiModelProperty("用户名")
+    @ApiModelProperty(value = "用户名 用于显示")
     private String username;
-
-    @ApiModelProperty("密码")
+    @ApiModelProperty(value = "密码，最长 20 位")
     private String pwd;
-
-    @ApiModelProperty("身份")
+    @ApiModelProperty(value = "权限")
     private String roles;
-
-    @ApiModelProperty("电话号码")
+    @ApiModelProperty(value = "电话")
     private String phone;
-
-    @ApiModelProperty("电子邮箱")
+    @ApiModelProperty(value = "电子邮箱")
     private String email;
-
     @ApiModelProperty("备注")
-    private String remarks;
+    private String remark;
+
+    public User(String id, String username, String pwd, String roles, String phone, String email, String remark) {
+        this.id = id;
+        this.username = username;
+        this.pwd = pwd;
+        this.roles = roles;
+        this.phone = phone;
+        this.email = email;
+        this.remark = remark;
+    }
 
     @ApiModelProperty("逻辑删除标志位")
     private Integer delFlag;
@@ -59,14 +63,4 @@ public class User implements Serializable {
     @ApiModelProperty("更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-
-    public User(String id, String username, String pwd, String roles, String phone, String email, String remarks) {
-        this.id = id;
-        this.username = username;
-        this.pwd = pwd;
-        this.roles = roles;
-        this.phone = phone;
-        this.email = email;
-        this.remarks = remarks;
-    }
 }

@@ -24,6 +24,16 @@ import java.util.Date;
 @ApiModel("相关")
 public class Supplier implements Serializable {
 
+    public Supplier(String id, String material, String fullName, String header, String phone, String address, String remark) {
+        this.id = id;
+        this.material = material;
+        this.fullName = fullName;
+        this.header = header;
+        this.phone = phone;
+        this.address = address;
+        this.remark = remark;
+    }
+
     @ApiModelProperty(value = "主键")
     private String id;
 

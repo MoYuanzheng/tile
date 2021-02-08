@@ -24,6 +24,15 @@ import java.util.Date;
 @ApiModel("相关")
 public class Product implements Serializable {
 
+    public Product(String id, Integer type, String batch, Object price, String qrCode, String remark) {
+        this.id = id;
+        this.type = type;
+        this.batch = batch;
+        this.price = price;
+        this.qrCode = qrCode;
+        this.remark = remark;
+    }
+
     @ApiModelProperty(value = "$column.comment")
     private String id;
 

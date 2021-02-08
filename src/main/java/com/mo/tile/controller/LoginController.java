@@ -73,7 +73,7 @@ public class LoginController {
                        @RequestParam("roles") String roles,
                        @RequestParam("phone") String phone,
                        @RequestParam("email") String email,
-                       @RequestParam("remarks") String remarks
+                       @RequestParam("remark") String remark
     ) {
         return userService.register(new User(
                 id,
@@ -82,12 +82,11 @@ public class LoginController {
                 roles,
                 phone,
                 email,
-                remarks
+                remark
         ));
     }
 
     @ApiOperation("更 新 token")
-    @PostMapping("reg")
     @ResponseBody
     @GetMapping("setToken")
     public String setToken() {

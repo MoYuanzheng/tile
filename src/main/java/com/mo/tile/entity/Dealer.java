@@ -24,6 +24,16 @@ import java.util.Date;
 @ApiModel("经销商相关")
 public class Dealer implements Serializable {
 
+    public Dealer(String id, String alias, String fullName, Integer grade, String address, String area, String remark) {
+        this.id = id;
+        this.alias = alias;
+        this.fullName = fullName;
+        this.grade = grade;
+        this.address = address;
+        this.area = area;
+        this.remark = remark;
+    }
+
     @ApiModelProperty(value = "$column.comment")
     private String id;
 
