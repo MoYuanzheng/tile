@@ -1,6 +1,5 @@
 package com.mo.tile.config;
 
-
 import com.mo.tile.service.impl.MyUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.annotation.Resource;
 
 /**
- * @author Naruto
+ * @author MoYz
  */
 @EnableWebSecurity
 @Configuration
@@ -23,15 +22,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private MyUserDetailsServiceImpl myUserDetailsService;
 
-    /*
-    * 密 码 加 密
-    * 数 据 库 对 应 加 密 存 储
-    *
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-    */
+    /**
+     * 密 码 加 密
+     * 数 据 库 对 应 加 密 存 储
+     *
+     * @Bean
+     * public BCryptPasswordEncoder bCryptPasswordEncoder(){
+     *   return new BCryptPasswordEncoder();
+     * }
+     */
 
     /**
      * 密 码 取 消 加 密
@@ -53,12 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/reg").permitAll()
                 .antMatchers("/token/**").hasRole("admin")
-                .antMatchers("/product/**").hasRole("user,admin")
                 .antMatchers("/profile").authenticated();
 
         /**
          * 没 有 权 限 返 回 登 录 页
-         * */
+         */
         http.formLogin()
                 .loginPage("/toLogin")
                 .loginProcessingUrl("/login")
@@ -67,17 +65,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         /**
          * Cross—Site Request Forgery
          * 关 闭 跨 站 点 请 求 伪 造
-         * */
+         */
         http.csrf().disable();
 
         /**
          * 开 启 注 销 功 能
-         * */
+         */
         http.logout().logoutSuccessUrl("/");
 
-        /*
+        /**
          * 开 启 Remember Me
-         * */
+         */
         http.rememberMe().rememberMeParameter("remember");
     }
 

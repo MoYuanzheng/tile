@@ -3,6 +3,8 @@ package com.mo.tile.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.User;
 
+import java.util.List;
+
 /**
  * (User)表服务接口
  *
@@ -30,12 +32,32 @@ public interface UserService extends IService<User> {
     User getUserInfo();
 
     /**
-     * 修 改 备 用
+     * 修 改 用 户 信 息
      *
-     * @param name -> 姓名
+     * @param user -> 用户对象
      * @return bool
      * @author Moyz
-     * @date 2021/02/07 15:58
+     * @date 2021/02/08 18:07
      */
-    Boolean setName(String name);
+    Boolean updateUserInfo(User user);
+
+    /**
+     * 逻 辑 删 除 用 户 信 息
+     *
+     * @param id -> 用户主键
+     * @return bool
+     * @author Moyz
+     * @date 2021/02/08 18:20
+     */
+    Boolean deleteUserInfo(String id);
+
+    /**
+     * 展 示 用 户 列 表 / 查 询 用 户 / 模 糊 查 询
+     *
+     * @param key -> 关键字
+     * @return List<User></>用户列表
+     * @author Moyz
+     * @date 2021/02/08 18:29
+     */
+    List<User> showListUserInfo(String key);
 }

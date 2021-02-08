@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author MoYz
@@ -53,9 +54,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public Boolean setName(String name) {
-        user.setUsername(name);
-        System.out.println(user);
+    public Boolean updateUserInfo(User user) {
         return userMapper.updateById(user) == 1;
+    }
+
+    @Override
+    public Boolean deleteUserInfo(String id) {
+        return userMapper.deleteById(id) == 1;
+    }
+
+    @Override
+    public List<User> showListUserInfo(String key) {
+//        return userMapper.selectList(key);
+        return null;
     }
 }

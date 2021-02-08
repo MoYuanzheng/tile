@@ -8,12 +8,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author MoYz
@@ -37,6 +35,9 @@ public class LoginController {
         return "redirect:http://localhost:63343/1/index.html";
     }
 
+    /**
+     * 跳 转 至 主 页
+     */
     @ApiOperation("跳 转 至 主 页")
     @ResponseBody
     @GetMapping(value = {"/"})
@@ -47,7 +48,7 @@ public class LoginController {
     /**
      * 跳 转 至 个 人 信 息
      */
-    @ApiOperation("拿 到 当 前 用 户 信 息")
+    @ApiOperation("返 回 当 前 用 户 信 息")
     @ResponseBody
     @GetMapping(value = {"profile"})
     public User login() {
@@ -55,6 +56,9 @@ public class LoginController {
     }
 
 
+    /**
+     * 注 册 账 号 / 新 增 用 户
+     */
     @ApiOperation(value = "注册 Register", notes = "接收注册信息", httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "账号", required = true, dataType = "string"),
@@ -85,6 +89,54 @@ public class LoginController {
                 remark
         ));
     }
+
+    /**
+     * 修 改 个 人 信 息
+     */
+    @ApiOperation("修 改 个 人 信 息")
+    @ResponseBody
+    @PutMapping("getToken")
+    public Boolean updateUserInfo(
+            @RequestParam("id") String id,
+            @RequestParam("username") String username,
+            @RequestParam("pwd") String pwd,
+            @RequestParam("roles") String roles,
+            @RequestParam("phone") String phone,
+            @RequestParam("email") String email,
+            @RequestParam("remark") String remark
+    ) {
+        return userService.updateUserInfo(new User(
+                id,
+                username,
+                pwd,
+                roles,
+                phone,
+                email,
+                remark
+        ));
+    }
+
+    /**
+     * 通 过 id 删 除 个 人 信 息
+     */
+    @ApiOperation("删 除 个 人 信 息")
+    @ResponseBody
+    @DeleteMapping
+    public Boolean deleteUserInfo(@RequestParam("id") String id) {
+
+        return userService.deleteUserInfo(id);
+    }
+
+    /**
+     * 展 示 用 户 列 表 / 查 询 用 户 / 模 糊 查 询
+     */
+    @ApiOperation("展 示 用 户 列 表 / 查 询 用 户 / 模 糊 查 询")
+    @ResponseBody
+    @GetMapping
+    public List<User> showListUserInfo(@RequestParam("key") String key) {
+        return userService.showListUserInfo(key);
+    }
+
 
     @ApiOperation("更 新 token")
     @ResponseBody

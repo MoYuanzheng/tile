@@ -7,18 +7,17 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author MoYz
  */
 @Controller
+@ResponseBody
 @RequestMapping("product")
 @Api(tags = "产品相关")
 public class ProductController {
@@ -49,5 +48,30 @@ public class ProductController {
     @GetMapping("table")
     public Page<Product> page(@RequestParam("pages") @ApiParam("页数") Integer pages) {
         return productService.selectPage(pages);
+    }
+
+    @ApiOperation("添 加")
+    @PostMapping("add")
+    public Boolean add(@RequestParam("id") String id,
+                       @RequestParam("type") Integer type,
+                       @RequestParam("batch") String batch,
+                       @RequestParam("price") String price,
+                       @RequestParam("qrCode") String qrCode,
+                       @RequestParam("remark") String remark
+    ) {
+        return productService.add(new Product(
+                id,
+                type,
+                batch,
+                price,
+                qrCode,
+                remark
+        ));
+    }
+
+    @ApiOperation("拿 到 所 有 产 品 数 据")
+    @GetMapping("query")
+    public List<Map<String, Object>> query(@RequestParam("key") String key) {
+        return productService.query(key);
     }
 }
