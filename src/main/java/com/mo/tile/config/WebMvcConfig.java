@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
-     * 跨 域 问 题 处 理
+     * 跨 域 处 理
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
