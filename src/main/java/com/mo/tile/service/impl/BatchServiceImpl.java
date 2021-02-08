@@ -8,6 +8,8 @@ import com.mo.tile.service.BatchService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * (Batch)表服务实现类
@@ -23,6 +25,27 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
     @Resource
     private BatchMapper batchMapper;
 
+    @Override
+    public Boolean add(Batch batch) {
+        return null;
+    }
+
+    @Override
+    public Boolean del(String id) {
+        return null;
+    }
+
+    @Override
+    public Boolean update(Batch batch) {
+        return null;
+    }
+
+    @Override
+    public List<Map<String, Object>> query(String key) {
+        return null;
+    }
+
+    @Override
     public Page<Batch> selectPage(Integer pages) {
         System.out.println("PageServiceImpl");
         Page<Batch> page = new Page<>(pages, 10);
