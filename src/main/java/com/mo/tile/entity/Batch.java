@@ -14,7 +14,7 @@ import java.util.Date;
  * 订单表(Batch)实体类
  *
  * @author MoYz
- * @since 2021-02-08 15:35:31
+ * @since 2021-02-09 15:20:00
  */
 @Data
 @AllArgsConstructor
@@ -23,15 +23,23 @@ import java.util.Date;
 @EqualsAndHashCode
 @ApiModel("订单表相关")
 public class Batch implements Serializable {
-
-    public Batch(String id, Date orderTime, Date completeTime, Integer productType, Integer total, String remark) {
+    public Batch(
+            String id,
+            Date orderTime,
+            Date completeTime,
+            Integer productType,
+            Integer total,
+            String remark
+    ) {
         this.id = id;
         this.orderTime = orderTime;
         this.completeTime = completeTime;
         this.productType = productType;
         this.total = total;
         this.remark = remark;
+
     }
+
 
     @ApiModelProperty(value = "主键")
     private String id;

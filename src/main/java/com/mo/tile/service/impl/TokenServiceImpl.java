@@ -43,8 +43,8 @@ public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements
      */
     public Boolean isToken(String uuid) {
         //获 取 登 录 用 户 ID 并 据 此 ID 获 取 Token 与 终 止 时 间
-        if (usersService.getUserInfo() != null) {
-            String id = usersService.getUserInfo().getId();
+        if (usersService.getLoggedUserInfo() != null) {
+            String id = usersService.getLoggedUserInfo().getId();
             String token = tokenService.getById(id).getToken();
             Integer tokenDeadline = tokenService.getById(id).getDeadline();
             Integer timeNow = Math.toIntExact(System.currentTimeMillis() / 1000);
@@ -63,9 +63,9 @@ public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements
      * 设 置 Token , 每 次 登 录 刷 新 Token
      */
     public String setNewToken() {
-        if (usersService.getUserInfo() != null) {
+        if (usersService.getLoggedUserInfo() != null) {
             String newToken = String.valueOf(UUID.randomUUID());
-            String id = usersService.getUserInfo().getId();
+            String id = usersService.getLoggedUserInfo().getId();
             Integer time = Math.toIntExact(System.currentTimeMillis() / 1000 + (30 + 60));
 
             Token token = new Token(id, newToken, time);
@@ -98,8 +98,8 @@ public class TokenServiceImpl extends ServiceImpl<TokenMapper, Token> implements
      * 得 到 token
      */
     public String getToken() {
-        if (usersService.getUserInfo() != null) {
-            String id = usersService.getUserInfo().getId();
+        if (usersService.getLoggedUserInfo() != null) {
+            String id = usersService.getLoggedUserInfo().getId();
             Token token = tokenService.getById(id);
             return token.getToken();
         } else {

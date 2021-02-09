@@ -9,8 +9,6 @@ import com.mo.tile.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
 
 /**
  * (Product)表服务实现类
@@ -49,24 +47,11 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     /**
-     * 分 页 查 询
+     * 模 糊 查 询 及 分页
      */
     @Override
-    public Page<Product> selectPage(Integer pages) {
-        System.out.println("PageServiceImpl");
+    public Page<Product> query(Integer pages, String key) {
         Page<Product> page = new Page<>(pages, 10);
-        productMapper.selectPage(page, null);
-        page.getRecords().forEach(System.out::println);
-        return page;
-    }
-
-    /**
-     * 条 件 查 询
-     *
-     * @return List<Map < String, Object>>
-     */
-    @Override
-    public List<Map<String, Object>> query(String key) {
         QueryWrapper<Product> wrapper = new QueryWrapper<>();
         wrapper
                 .like("type", key).or()
@@ -75,8 +60,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 .like("qr_code", key).or()
                 .like("remark", key).or()
                 .like("id", key);
-        List<Map<String, Object>> maps = productMapper.selectMaps(wrapper);
-        maps.forEach(System.out::println);
-        return maps;
+        productMapper.selectPage(page, wrapper);
+        return page;
     }
+
 }

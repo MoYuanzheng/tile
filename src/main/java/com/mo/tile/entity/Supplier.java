@@ -14,7 +14,7 @@ import java.util.Date;
  * (Supplier)实体类
  *
  * @author MoYz
- * @since 2021-02-08 15:35:33
+ * @since 2021-02-09 15:20:01
  */
 @Data
 @AllArgsConstructor
@@ -23,8 +23,15 @@ import java.util.Date;
 @EqualsAndHashCode
 @ApiModel("相关")
 public class Supplier implements Serializable {
-
-    public Supplier(String id, String material, String fullName, String header, String phone, String address, String remark) {
+    public Supplier(
+            String id,
+            String material,
+            String fullName,
+            String header,
+            String phone,
+            String address,
+            String remark
+    ) {
         this.id = id;
         this.material = material;
         this.fullName = fullName;
@@ -32,7 +39,9 @@ public class Supplier implements Serializable {
         this.phone = phone;
         this.address = address;
         this.remark = remark;
+
     }
+
 
     @ApiModelProperty(value = "主键")
     private String id;

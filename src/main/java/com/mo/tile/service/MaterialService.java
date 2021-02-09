@@ -3,15 +3,11 @@ package com.mo.tile.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.Material;
-
-import java.util.List;
-import java.util.Map;
-
 /**
  * (Material)表服务接口
  *
  * @author MoYz
- * @since 2021-02-09 00:46:53
+ * @since 2021-02-09 15:12:12
  */
 public interface MaterialService extends IService<Material> {
     /**
@@ -20,7 +16,7 @@ public interface MaterialService extends IService<Material> {
      * @param material -> Material实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 00:46:53
+     * @date 2021-02-09 15:12:12
      */
     Boolean add(Material material);
 
@@ -30,7 +26,7 @@ public interface MaterialService extends IService<Material> {
      * @param id -> 主键
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 00:46:53
+     * @date 2021-02-09 15:12:12
      */
     Boolean del(String id);
 
@@ -40,27 +36,18 @@ public interface MaterialService extends IService<Material> {
      * @param material -> Material实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 00:46:53
+     * @date 2021-02-09 15:12:12
      */
     Boolean update(Material material);
 
     /**
-     * 分 页 查 询
+     * 模 糊 查 询 及 分 页
      *
      * @param pages -> 页数
-     * @return bool
+     * @param key   -> 关键字
+     * @return page
      * @author Moyz
-     * @date 2021-02-09 00:46:53
+     * @date 2021-02-09 15:12:12
      */
-    Page<Material> selectPage(Integer pages);
-
-    /**
-     * 条 件 查 询
-     *
-     * @param key -> 关键字
-     * @return List<material>
-     * @author Moyz
-     * @date 2021-02-09 00:46:53
-     */
-    List<Map<String, Object>> query(String key);
+    Page<Material> query(Integer pages, String key);
 }

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
+ * 登 录 验 证
+ *
  * @author MoYz
  */
 @Service

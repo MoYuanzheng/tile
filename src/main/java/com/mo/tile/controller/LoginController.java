@@ -52,7 +52,7 @@ public class LoginController {
     @ResponseBody
     @GetMapping(value = {"profile"})
     public User login() {
-        return userService.getUserInfo();
+        return userService.getLoggedUserInfo();
     }
 
 
@@ -71,7 +71,7 @@ public class LoginController {
     })
     @ResponseBody
     @PostMapping("reg")
-    public Boolean reg(@RequestParam("id") String id,
+    public Boolean add(@RequestParam("id") String id,
                        @RequestParam("username") String username,
                        @RequestParam("pwd") String pwd,
                        @RequestParam("roles") String roles,
@@ -79,7 +79,7 @@ public class LoginController {
                        @RequestParam("email") String email,
                        @RequestParam("remark") String remark
     ) {
-        return userService.register(new User(
+        return userService.add(new User(
                 id,
                 username,
                 pwd,
@@ -96,7 +96,7 @@ public class LoginController {
     @ApiOperation("修 改 个 人 信 息")
     @ResponseBody
     @PutMapping("getToken")
-    public Boolean updateUserInfo(
+    public Boolean update(
             @RequestParam("id") String id,
             @RequestParam("username") String username,
             @RequestParam("pwd") String pwd,
@@ -105,7 +105,7 @@ public class LoginController {
             @RequestParam("email") String email,
             @RequestParam("remark") String remark
     ) {
-        return userService.updateUserInfo(new User(
+        return userService.update(new User(
                 id,
                 username,
                 pwd,
@@ -122,9 +122,9 @@ public class LoginController {
     @ApiOperation("删 除 个 人 信 息")
     @ResponseBody
     @DeleteMapping
-    public Boolean deleteUserInfo(@RequestParam("id") String id) {
+    public Boolean del(@RequestParam("id") String id) {
 
-        return userService.deleteUserInfo(id);
+        return userService.del(id);
     }
 
     /**
@@ -133,8 +133,8 @@ public class LoginController {
     @ApiOperation("展 示 用 户 列 表 / 查 询 用 户 / 模 糊 查 询")
     @ResponseBody
     @GetMapping
-    public List<User> showListUserInfo(@RequestParam("key") String key) {
-        return userService.showListUserInfo(key);
+    public List<User> query(@RequestParam("key") String key) {
+        return userService.query(key);
     }
 
 

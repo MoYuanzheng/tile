@@ -3,18 +3,17 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Supplier;
 import com.mo.tile.service.impl.SupplierServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 /**
  * (Supplier)表控制层
  *
- * @author mo
- * @since 2021-01-23 15:26:32
+ * @author MoYz
+ * @since 2021-02-09 15:25:34
  */
 @RestController
 @RequestMapping("supplier")
@@ -25,22 +24,66 @@ public class SupplierController {
     @Resource
     private SupplierServiceImpl supplierService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public Supplier selectOne(String id) {
-        return supplierService.getById(id);
+    @ApiOperation("添 加")
+    @PostMapping("add")
+    public Boolean add(
+            @RequestParam("id") String id,
+            @RequestParam("material") String material,
+            @RequestParam("fullName") String fullName,
+            @RequestParam("header") String header,
+            @RequestParam("phone") String phone,
+            @RequestParam("address") String address,
+            @RequestParam("remark") String remark
+    ) {
+        return supplierService.update(new Supplier(
+                id,
+                material,
+                fullName,
+                header,
+                phone,
+                address,
+                remark
+        ));
+    }
+
+    @ApiOperation("删 除")
+    @DeleteMapping("del")
+    public Boolean del(
+            @RequestParam("id") @ApiParam("账号") String id
+    ) {
+        return supplierService.del(id);
+    }
+
+    @ApiOperation("修 改")
+    @PutMapping("update")
+    public Boolean update(
+            @RequestParam("id") String id,
+            @RequestParam("material") String material,
+            @RequestParam("fullName") String fullName,
+            @RequestParam("header") String header,
+            @RequestParam("phone") String phone,
+            @RequestParam("address") String address,
+            @RequestParam("remark") String remark
+    ) {
+        return supplierService.update(new Supplier(
+                id,
+                material,
+                fullName,
+                header,
+                phone,
+                address,
+                remark
+        ));
     }
 
     /**
-     * 分 页 查 询
+     * 模 糊 查 询 并 分 页
      */
-    @GetMapping("table")
-    public Page<Supplier> page(@RequestParam("pages") Integer pages) {
-        return supplierService.selectPage(pages);
+    @GetMapping("query")
+    public Page<Supplier> query(
+            @RequestParam("pages") Integer pages,
+            @RequestParam("key") String key
+    ) {
+        return supplierService.query(pages, key);
     }
 }

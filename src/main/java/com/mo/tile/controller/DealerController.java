@@ -1,8 +1,8 @@
 package com.mo.tile.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mo.tile.entity.Batch;
-import com.mo.tile.service.impl.BatchServiceImpl;
+import com.mo.tile.entity.Dealer;
+import com.mo.tile.service.impl.DealerServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
@@ -10,36 +10,38 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * 订单表(Batch)表控制层
+ * 经销商(Dealer)表控制层
  *
  * @author MoYz
  * @since 2021-02-09 15:25:33
  */
 @RestController
-@RequestMapping("batch")
-public class BatchController {
+@RequestMapping("dealer")
+public class DealerController {
     /**
      * 服务对象
      */
     @Resource
-    private BatchServiceImpl batchService;
+    private DealerServiceImpl dealerService;
 
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
             @RequestParam("id") String id,
-            @RequestParam("orderTime") Date orderTime,
-            @RequestParam("completeTime") Date completeTime,
-            @RequestParam("productType") Integer productType,
-            @RequestParam("total") Integer total,
+            @RequestParam("alias") String alias,
+            @RequestParam("fullName") String fullName,
+            @RequestParam("grade") Integer grade,
+            @RequestParam("address") String address,
+            @RequestParam("area") String area,
             @RequestParam("remark") String remark
     ) {
-        return batchService.update(new Batch(
+        return dealerService.update(new Dealer(
                 id,
-                orderTime,
-                completeTime,
-                productType,
-                total,
+                alias,
+                fullName,
+                grade,
+                address,
+                area,
                 remark
         ));
     }
@@ -49,25 +51,27 @@ public class BatchController {
     public Boolean del(
             @RequestParam("id") @ApiParam("账号") String id
     ) {
-        return batchService.del(id);
+        return dealerService.del(id);
     }
 
     @ApiOperation("修 改")
     @PutMapping("update")
     public Boolean update(
             @RequestParam("id") String id,
-            @RequestParam("orderTime") Date orderTime,
-            @RequestParam("completeTime") Date completeTime,
-            @RequestParam("productType") Integer productType,
-            @RequestParam("total") Integer total,
+            @RequestParam("alias") String alias,
+            @RequestParam("fullName") String fullName,
+            @RequestParam("grade") Integer grade,
+            @RequestParam("address") String address,
+            @RequestParam("area") String area,
             @RequestParam("remark") String remark
     ) {
-        return batchService.update(new Batch(
+        return dealerService.update(new Dealer(
                 id,
-                orderTime,
-                completeTime,
-                productType,
-                total,
+                alias,
+                fullName,
+                grade,
+                address,
+                area,
                 remark
         ));
     }
@@ -76,10 +80,10 @@ public class BatchController {
      * 模 糊 查 询 并 分 页
      */
     @GetMapping("query")
-    public Page<Batch> query(
+    public Page<Dealer> query(
             @RequestParam("pages") Integer pages,
             @RequestParam("key") String key
     ) {
-        return batchService.query(pages, key);
+        return dealerService.query(pages, key);
     }
 }

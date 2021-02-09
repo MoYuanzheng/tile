@@ -11,10 +11,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (Material)实体类
+ * (TestTime)实体类
  *
  * @author MoYz
- * @since 2021-02-09 15:20:00
+ * @since 2021-02-08 20:38:43
  */
 @Data
 @AllArgsConstructor
@@ -22,29 +22,13 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 @ApiModel("相关")
-public class Material implements Serializable {
-    public Material(
-            String id,
-            String cnName,
-            String enName,
-            String remark
-    ) {
-        this.id = id;
-        this.cnName = cnName;
-        this.enName = enName;
-        this.remark = remark;
-
-    }
-
+public class TestTime implements Serializable {
 
     @ApiModelProperty(value = "$column.comment")
     private String id;
 
-    @ApiModelProperty(value = "中文名")
-    private String cnName;
-
-    @ApiModelProperty(value = "英文名")
-    private String enName;
+    @ApiModelProperty(value = "$column.comment")
+    private String names;
 
     @ApiModelProperty("备注")
     private String remark;
@@ -63,4 +47,9 @@ public class Material implements Serializable {
     @ApiModelProperty("更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
+
+    public TestTime(String id, String names) {
+        this.id = id;
+        this.names = names;
+    }
 }

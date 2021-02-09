@@ -14,7 +14,7 @@ import java.util.Date;
  * 经销商(Dealer)实体类
  *
  * @author MoYz
- * @since 2021-02-08 15:35:32
+ * @since 2021-02-09 15:20:00
  */
 @Data
 @AllArgsConstructor
@@ -23,8 +23,15 @@ import java.util.Date;
 @EqualsAndHashCode
 @ApiModel("经销商相关")
 public class Dealer implements Serializable {
-
-    public Dealer(String id, String alias, String fullName, Integer grade, String address, String area, String remark) {
+    public Dealer(
+            String id,
+            String alias,
+            String fullName,
+            Integer grade,
+            String address,
+            String area,
+            String remark
+    ) {
         this.id = id;
         this.alias = alias;
         this.fullName = fullName;
@@ -32,7 +39,9 @@ public class Dealer implements Serializable {
         this.address = address;
         this.area = area;
         this.remark = remark;
+
     }
+
 
     @ApiModelProperty(value = "$column.comment")
     private String id;

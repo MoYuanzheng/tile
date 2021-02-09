@@ -25,7 +25,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private TokenServiceImpl tokenService;
 
     @Override
-    public Boolean register(User user) {
+    public Boolean add(User user) {
         if (user != null) {
             String id = user.getId();
             return userMapper.selectById(id) == null && tokenService.setRegToken(id) && userMapper.insert(user) == 1;
@@ -35,7 +35,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User getUserInfo() {
+    public User getLoggedUserInfo() {
         // 从 容 器 中 取 得 已 登 录 的 用 户
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!authentication.isAuthenticated()) {
@@ -54,17 +54,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public Boolean updateUserInfo(User user) {
+    public Boolean update(User user) {
         return userMapper.updateById(user) == 1;
     }
 
     @Override
-    public Boolean deleteUserInfo(String id) {
+    public Boolean del(String id) {
         return userMapper.deleteById(id) == 1;
     }
 
     @Override
-    public List<User> showListUserInfo(String key) {
+    public List<User> query(String key) {
         return null;
     }
 }

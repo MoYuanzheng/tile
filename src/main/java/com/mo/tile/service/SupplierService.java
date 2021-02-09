@@ -3,15 +3,11 @@ package com.mo.tile.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.Supplier;
-
-import java.util.List;
-import java.util.Map;
-
 /**
  * (Supplier)表服务接口
  *
  * @author MoYz
- * @since 2021-02-09 00:46:52
+ * @since 2021-02-09 15:12:15
  */
 public interface SupplierService extends IService<Supplier> {
     /**
@@ -20,7 +16,7 @@ public interface SupplierService extends IService<Supplier> {
      * @param supplier -> Supplier实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 00:46:52
+     * @date 2021-02-09 15:12:15
      */
     Boolean add(Supplier supplier);
 
@@ -30,7 +26,7 @@ public interface SupplierService extends IService<Supplier> {
      * @param id -> 主键
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 00:46:52
+     * @date 2021-02-09 15:12:15
      */
     Boolean del(String id);
 
@@ -40,27 +36,18 @@ public interface SupplierService extends IService<Supplier> {
      * @param supplier -> Supplier实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 00:46:52
+     * @date 2021-02-09 15:12:15
      */
     Boolean update(Supplier supplier);
 
     /**
-     * 分 页 查 询
+     * 模 糊 查 询 及 分 页
      *
      * @param pages -> 页数
-     * @return bool
+     * @param key   -> 关键字
+     * @return page
      * @author Moyz
-     * @date 2021-02-09 00:46:52
+     * @date 2021-02-09 15:12:15
      */
-    Page<Supplier> selectPage(Integer pages);
-
-    /**
-     * 条 件 查 询
-     *
-     * @param key -> 关键字
-     * @return List<supplier>
-     * @author Moyz
-     * @date 2021-02-09 00:46:52
-     */
-    List<Map<String, Object>> query(String key);
+    Page<Supplier> query(Integer pages, String key);
 }

@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.Product;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * (Product)表服务接口
  *
@@ -46,22 +43,13 @@ public interface ProductService extends IService<Product> {
     Boolean update(Product product);
 
     /**
-     * 分 页 查 询
+     * 模 糊 查 询 及 分 页
      *
      * @param pages -> 页数
      * @return bool
      * @author Moyz
      * @date 2021/02/08 21:03
      */
-    Page<Product> selectPage(Integer pages);
+    Page<Product> query(Integer pages, String key);
 
-    /**
-     * 条 件 查 询
-     *
-     * @param key -> 关键字
-     * @return List<Product>
-     * @author Moyz
-     * @date 2021/02/08 21:03
-     */
-    List<Map<String, Object>> query(String key);
 }
