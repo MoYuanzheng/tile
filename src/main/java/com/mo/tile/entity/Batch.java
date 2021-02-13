@@ -11,17 +11,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 订单表(Batch)实体类
+ * 订单批次表(Batch)实体类
  *
  * @author MoYz
- * @since 2021-02-09 15:20:00
+ * @since 2021-02-09 17:03:07
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("订单表相关")
+@ApiModel("订单批次表相关")
 public class Batch implements Serializable {
     public Batch(
             String id,
@@ -41,22 +41,23 @@ public class Batch implements Serializable {
     }
 
 
-    @ApiModelProperty(value = "主键")
+    @ApiModelProperty(value = "主键", required = true)
     private String id;
 
-    @ApiModelProperty(value = "下单时间")
+    @ApiModelProperty(value = "下单时间", required = true)
     private Date orderTime;
 
-    @ApiModelProperty(value = "订单完成时间")
+    @ApiModelProperty(value = "订单完成时间", required = true)
     private Date completeTime;
 
-    @ApiModelProperty(value = "产品型号")
+    @ApiModelProperty(value = "产品型号", required = true)
     private Integer productType;
 
-    @ApiModelProperty(value = "订单总数")
+    @ApiModelProperty(value = "订单总数", required = true)
     private Integer total;
 
-    @ApiModelProperty("备注")
+
+    @ApiModelProperty(value = "备注")
     private String remark;
 
     @ApiModelProperty("逻辑删除标志位")

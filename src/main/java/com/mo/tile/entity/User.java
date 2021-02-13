@@ -11,35 +11,43 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (User)实体类
+ * 用户(User)实体类
  *
  * @author MoYz
- * @since 2021-02-08 17:53:13
+ * @since 2021-02-09 16:33:00
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("相关")
+@ApiModel("用户相关")
 public class User implements Serializable {
-
-    @ApiModelProperty(value = "主键")
+    @ApiModelProperty(value = "主键", required = true)
     private String id;
-    @ApiModelProperty(value = "用户名 用于显示")
+    @ApiModelProperty(value = "用户名 用于显示", required = true)
     private String username;
-    @ApiModelProperty(value = "密码，最长 20 位")
+    @ApiModelProperty(value = "密码，最长 20 位", required = true)
     private String pwd;
-    @ApiModelProperty(value = "权限")
+    @ApiModelProperty(value = "权限", required = true)
     private String roles;
-    @ApiModelProperty(value = "电话")
+    @ApiModelProperty(value = "电话", required = true)
     private String phone;
-    @ApiModelProperty(value = "电子邮箱")
+    @ApiModelProperty(value = "电子邮箱", required = true)
     private String email;
-    @ApiModelProperty("备注")
+    @ApiModelProperty(value = "备注")
     private String remark;
 
-    public User(String id, String username, String pwd, String roles, String phone, String email, String remark) {
+
+    public User(
+            String id,
+            String username,
+            String pwd,
+            String roles,
+            String phone,
+            String email,
+            String remark
+    ) {
         this.id = id;
         this.username = username;
         this.pwd = pwd;
@@ -47,6 +55,7 @@ public class User implements Serializable {
         this.phone = phone;
         this.email = email;
         this.remark = remark;
+
     }
 
     @ApiModelProperty("逻辑删除标志位")

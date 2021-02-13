@@ -11,18 +11,34 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (Supplier)实体类
+ * 供应商(Supplier)实体类
  *
  * @author MoYz
- * @since 2021-02-09 15:20:01
+ * @since 2021-02-09 17:03:11
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("相关")
+@ApiModel("供应商相关")
 public class Supplier implements Serializable {
+    @ApiModelProperty(value = "主键", required = true)
+    private String id;
+    @ApiModelProperty(value = "所供应材料", required = true)
+    private String material;
+    @ApiModelProperty(value = "供应商全称", required = true)
+    private String fullName;
+    @ApiModelProperty(value = "负责人名字", required = true)
+    private String header;
+    @ApiModelProperty(value = "联系电话", required = true)
+    private String phone;
+    @ApiModelProperty(value = "联系地址", required = true)
+    private String address;
+    @ApiModelProperty(value = "备注")
+    private String remark;
+
+
     public Supplier(
             String id,
             String material,
@@ -41,28 +57,6 @@ public class Supplier implements Serializable {
         this.remark = remark;
 
     }
-
-
-    @ApiModelProperty(value = "主键")
-    private String id;
-
-    @ApiModelProperty(value = "所供应材料")
-    private String material;
-
-    @ApiModelProperty(value = "供应商全称")
-    private String fullName;
-
-    @ApiModelProperty(value = "负责人名字")
-    private String header;
-
-    @ApiModelProperty(value = "联系电话")
-    private String phone;
-
-    @ApiModelProperty(value = "联系地址")
-    private String address;
-
-    @ApiModelProperty("备注")
-    private String remark;
 
     @ApiModelProperty("逻辑删除标志位")
     private Integer delFlag;

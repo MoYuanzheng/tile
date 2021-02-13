@@ -11,43 +11,39 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (Token)实体类
+ * Token(Token)实体类
  *
  * @author MoYz
- * @since 2021-02-08 15:35:33
+ * @since 2021-02-09 16:33:00
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("相关")
+@ApiModel("Token相关")
 public class Token implements Serializable {
+    @ApiModelProperty(value = "主键", required = true)
+    private String id;
+    @ApiModelProperty(value = "UUID生成", required = true)
+    private String token;
+    @ApiModelProperty(value = "失效时间", required = true)
+    private Integer deadline;
+    @ApiModelProperty(value = "备注")
+    private String remark;
 
-    public Token(String id, String token, Integer deadline) {
-        this.id = id;
-        this.token = token;
-        this.deadline = deadline;
-    }
 
-    public Token(String id, String token, Integer deadline, String remark) {
+    public Token(
+            String id,
+            String token,
+            Integer deadline
+    ) {
         this.id = id;
         this.token = token;
         this.deadline = deadline;
         this.remark = remark;
+
     }
-
-    @ApiModelProperty(value = "主键")
-    private String id;
-
-    @ApiModelProperty(value = "UUID生成")
-    private String token;
-
-    @ApiModelProperty(value = "失效时间")
-    private Integer deadline;
-
-    @ApiModelProperty("备注")
-    private String remark;
 
     @ApiModelProperty("逻辑删除标志位")
     private Integer delFlag;

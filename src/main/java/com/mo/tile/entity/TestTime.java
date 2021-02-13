@@ -11,27 +11,40 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TestTime)实体类
+ * 测试表(TestTime)实体类
  *
  * @author MoYz
- * @since 2021-02-08 20:38:43
+ * @since 2021-02-09 16:34:25
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("相关")
+@ApiModel("测试表相关")
 public class TestTime implements Serializable {
-
-    @ApiModelProperty(value = "$column.comment")
+    @ApiModelProperty(value = "主键", required = true)
     private String id;
-
-    @ApiModelProperty(value = "$column.comment")
-    private String names;
-
-    @ApiModelProperty("备注")
+    @ApiModelProperty(value = "用户名", required = true)
+    private String username;
+    @ApiModelProperty(value = "密码", required = true)
+    private Integer secret;
+    @ApiModelProperty(value = "备注")
     private String remark;
+
+
+    public TestTime(
+            String id,
+            String username,
+            Integer secret,
+            String remark
+    ) {
+        this.id = id;
+        this.username = username;
+        this.secret = secret;
+        this.remark = remark;
+
+    }
 
     @ApiModelProperty("逻辑删除标志位")
     private Integer delFlag;
@@ -47,9 +60,4 @@ public class TestTime implements Serializable {
     @ApiModelProperty("更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-
-    public TestTime(String id, String names) {
-        this.id = id;
-        this.names = names;
-    }
 }

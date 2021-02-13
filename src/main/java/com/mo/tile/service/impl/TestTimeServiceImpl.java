@@ -9,12 +9,11 @@ import com.mo.tile.service.TestTimeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-
 /**
- * (TestTime)表服务实现类
+ * 测试表(TestTime)表服务实现类
  *
  * @author MoYz
- * @since 2021-02-09 14:29:54
+ * @since 2021-02-09 16:34:27
  */
 @Service("testTimeService")
 public class TestTimeServiceImpl extends ServiceImpl<TestTimeMapper, TestTime> implements TestTimeService {
@@ -54,8 +53,10 @@ public class TestTimeServiceImpl extends ServiceImpl<TestTimeMapper, TestTime> i
         Page<TestTime> page = new Page<>(pages, 10);
         QueryWrapper<TestTime> wrapper = new QueryWrapper<>();
         wrapper
-                .like("names", key).or()
-                .like("id", key);
+                .like("id", key).or()
+                .like("username", key).or()
+                .like("secret", key).or()
+                .like("remark", key);
         testTimeMapper.selectPage(page, wrapper);
         return page;
     }

@@ -2,12 +2,11 @@ package com.mo.tile.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mo.tile.entity.TestTime;
-
 /**
- * (TestTime)表数据库访问层
+ * 测试表(TestTime)表数据库访问层
  *
  * @author MoYz
- * @since 2021-02-08 20:17:09
+ * @since 2021-02-09 16:34:27
  */
 public interface TestTimeMapper extends BaseMapper<TestTime> {
 

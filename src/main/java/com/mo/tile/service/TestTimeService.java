@@ -3,12 +3,11 @@ package com.mo.tile.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.TestTime;
-
 /**
- * (TestTime)表服务接口
+ * 测试表(TestTime)表服务接口
  *
  * @author MoYz
- * @since 2021-02-09 14:29:53
+ * @since 2021-02-09 16:34:27
  */
 public interface TestTimeService extends IService<TestTime> {
     /**
@@ -17,7 +16,7 @@ public interface TestTimeService extends IService<TestTime> {
      * @param testTime -> TestTime实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 14:29:53
+     * @date 2021-02-09 16:34:27
      */
     Boolean add(TestTime testTime);
 
@@ -27,7 +26,7 @@ public interface TestTimeService extends IService<TestTime> {
      * @param id -> 主键
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 14:29:53
+     * @date 2021-02-09 16:34:27
      */
     Boolean del(String id);
 
@@ -37,7 +36,7 @@ public interface TestTimeService extends IService<TestTime> {
      * @param testTime -> TestTime实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 14:29:53
+     * @date 2021-02-09 16:34:27
      */
     Boolean update(TestTime testTime);
 
@@ -48,7 +47,7 @@ public interface TestTimeService extends IService<TestTime> {
      * @param key   -> 关键字
      * @return page
      * @author Moyz
-     * @date 2021-02-09 14:29:53
+     * @date 2021-02-09 16:34:27
      */
     Page<TestTime> query(Integer pages, String key);
 }

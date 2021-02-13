@@ -14,7 +14,7 @@ import java.util.Date;
  * 经销商(Dealer)实体类
  *
  * @author MoYz
- * @since 2021-02-09 15:20:00
+ * @since 2021-02-09 17:03:08
  */
 @Data
 @AllArgsConstructor
@@ -23,6 +23,22 @@ import java.util.Date;
 @EqualsAndHashCode
 @ApiModel("经销商相关")
 public class Dealer implements Serializable {
+    @ApiModelProperty(value = "主键", required = true)
+    private String id;
+    @ApiModelProperty(value = "别名", required = true)
+    private String alias;
+    @ApiModelProperty(value = "全称", required = true)
+    private String fullName;
+    @ApiModelProperty(value = "经销商等级，1 === 一级经销商", required = true)
+    private Integer grade;
+    @ApiModelProperty(value = "办公地址", required = true)
+    private String address;
+    @ApiModelProperty(value = "销售负责区域", required = true)
+    private String area;
+    @ApiModelProperty(value = "备注")
+    private String remark;
+
+
     public Dealer(
             String id,
             String alias,
@@ -41,28 +57,6 @@ public class Dealer implements Serializable {
         this.remark = remark;
 
     }
-
-
-    @ApiModelProperty(value = "$column.comment")
-    private String id;
-
-    @ApiModelProperty(value = "别名")
-    private String alias;
-
-    @ApiModelProperty(value = "全称")
-    private String fullName;
-
-    @ApiModelProperty(value = "经销商等级，1 === 一级经销商")
-    private Integer grade;
-
-    @ApiModelProperty(value = "办公地址")
-    private String address;
-
-    @ApiModelProperty(value = "销售负责区域")
-    private String area;
-
-    @ApiModelProperty("备注")
-    private String remark;
 
     @ApiModelProperty("逻辑删除标志位")
     private Integer delFlag;

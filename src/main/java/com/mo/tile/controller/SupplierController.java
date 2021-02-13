@@ -3,6 +3,7 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Supplier;
 import com.mo.tile.service.impl.SupplierServiceImpl;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
@@ -10,11 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * (Supplier)表控制层
+ * 供应商(Supplier)表控制层
  *
  * @author MoYz
- * @since 2021-02-09 15:25:34
+ * @since 2021-02-09 17:03:12
  */
+@Api(tags = "供应商相关")
 @RestController
 @RequestMapping("supplier")
 public class SupplierController {
@@ -27,12 +29,12 @@ public class SupplierController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("id") String id,
-            @RequestParam("material") String material,
-            @RequestParam("fullName") String fullName,
-            @RequestParam("header") String header,
-            @RequestParam("phone") String phone,
-            @RequestParam("address") String address,
+            @RequestParam("id") @ApiParam("主键") String id,
+            @RequestParam("material") @ApiParam("所供应材料") String material,
+            @RequestParam("fullName") @ApiParam("供应商全称") String fullName,
+            @RequestParam("header") @ApiParam("负责人名字") String header,
+            @RequestParam("phone") @ApiParam("联系电话") String phone,
+            @RequestParam("address") @ApiParam("联系地址") String address,
             @RequestParam("remark") String remark
     ) {
         return supplierService.update(new Supplier(
@@ -49,7 +51,7 @@ public class SupplierController {
     @ApiOperation("删 除")
     @DeleteMapping("del")
     public Boolean del(
-            @RequestParam("id") @ApiParam("账号") String id
+            @RequestParam("id") @ApiParam("登录账号") String id
     ) {
         return supplierService.del(id);
     }
@@ -57,13 +59,13 @@ public class SupplierController {
     @ApiOperation("修 改")
     @PutMapping("update")
     public Boolean update(
-            @RequestParam("id") String id,
-            @RequestParam("material") String material,
-            @RequestParam("fullName") String fullName,
-            @RequestParam("header") String header,
-            @RequestParam("phone") String phone,
-            @RequestParam("address") String address,
-            @RequestParam("remark") String remark
+            @RequestParam("id") @ApiParam("主键") String id,
+            @RequestParam("material") @ApiParam("所供应材料") String material,
+            @RequestParam("fullName") @ApiParam("供应商全称") String fullName,
+            @RequestParam("header") @ApiParam("负责人名字") String header,
+            @RequestParam("phone") @ApiParam("联系电话") String phone,
+            @RequestParam("address") @ApiParam("联系地址") String address,
+            @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return supplierService.update(new Supplier(
                 id,
@@ -81,8 +83,8 @@ public class SupplierController {
      */
     @GetMapping("query")
     public Page<Supplier> query(
-            @RequestParam("pages") Integer pages,
-            @RequestParam("key") String key
+            @RequestParam("pages") @ApiParam("页数") Integer pages,
+            @RequestParam("key") @ApiParam("关键词") String key
     ) {
         return supplierService.query(pages, key);
     }

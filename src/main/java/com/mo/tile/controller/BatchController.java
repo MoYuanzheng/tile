@@ -3,6 +3,7 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Batch;
 import com.mo.tile.service.impl.BatchServiceImpl;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +12,12 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
- * 订单表(Batch)表控制层
+ * 订单批次表(Batch)表控制层
  *
  * @author MoYz
- * @since 2021-02-09 15:25:33
+ * @since 2021-02-09 17:03:08
  */
+@Api(tags = "订单批次表相关")
 @RestController
 @RequestMapping("batch")
 public class BatchController {
@@ -28,11 +30,11 @@ public class BatchController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("id") String id,
-            @RequestParam("orderTime") Date orderTime,
-            @RequestParam("completeTime") Date completeTime,
-            @RequestParam("productType") Integer productType,
-            @RequestParam("total") Integer total,
+            @RequestParam("id") @ApiParam("主键") String id,
+            @RequestParam("orderTime") @ApiParam("下单时间") Date orderTime,
+            @RequestParam("completeTime") @ApiParam("订单完成时间") Date completeTime,
+            @RequestParam("productType") @ApiParam("产品型号") Integer productType,
+            @RequestParam("total") @ApiParam("订单总数") Integer total,
             @RequestParam("remark") String remark
     ) {
         return batchService.update(new Batch(
@@ -48,7 +50,7 @@ public class BatchController {
     @ApiOperation("删 除")
     @DeleteMapping("del")
     public Boolean del(
-            @RequestParam("id") @ApiParam("账号") String id
+            @RequestParam("id") @ApiParam("登录账号") String id
     ) {
         return batchService.del(id);
     }
@@ -56,12 +58,12 @@ public class BatchController {
     @ApiOperation("修 改")
     @PutMapping("update")
     public Boolean update(
-            @RequestParam("id") String id,
-            @RequestParam("orderTime") Date orderTime,
-            @RequestParam("completeTime") Date completeTime,
-            @RequestParam("productType") Integer productType,
-            @RequestParam("total") Integer total,
-            @RequestParam("remark") String remark
+            @RequestParam("id") @ApiParam("主键") String id,
+            @RequestParam("orderTime") @ApiParam("下单时间") Date orderTime,
+            @RequestParam("completeTime") @ApiParam("订单完成时间") Date completeTime,
+            @RequestParam("productType") @ApiParam("产品型号") Integer productType,
+            @RequestParam("total") @ApiParam("订单总数") Integer total,
+            @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return batchService.update(new Batch(
                 id,
@@ -78,8 +80,8 @@ public class BatchController {
      */
     @GetMapping("query")
     public Page<Batch> query(
-            @RequestParam("pages") Integer pages,
-            @RequestParam("key") String key
+            @RequestParam("pages") @ApiParam("页数") Integer pages,
+            @RequestParam("key") @ApiParam("关键词") String key
     ) {
         return batchService.query(pages, key);
     }

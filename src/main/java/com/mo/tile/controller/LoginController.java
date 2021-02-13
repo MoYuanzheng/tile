@@ -3,10 +3,7 @@ package com.mo.tile.controller;
 import com.mo.tile.entity.User;
 import com.mo.tile.service.impl.TokenServiceImpl;
 import com.mo.tile.service.impl.UserServiceImpl;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -97,13 +94,13 @@ public class LoginController {
     @ResponseBody
     @PutMapping("getToken")
     public Boolean update(
-            @RequestParam("id") String id,
-            @RequestParam("username") String username,
-            @RequestParam("pwd") String pwd,
-            @RequestParam("roles") String roles,
-            @RequestParam("phone") String phone,
-            @RequestParam("email") String email,
-            @RequestParam("remark") String remark
+            @RequestParam("id") @ApiParam("登录名") String id,
+            @RequestParam("username") @ApiParam("用户名") String username,
+            @RequestParam("pwd") @ApiParam("密码") String pwd,
+            @RequestParam("roles") @ApiParam("权限") String roles,
+            @RequestParam("phone") @ApiParam("电话号码") String phone,
+            @RequestParam("email") @ApiParam("邮件") String email,
+            @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return userService.update(new User(
                 id,
@@ -121,7 +118,7 @@ public class LoginController {
      */
     @ApiOperation("删 除 个 人 信 息")
     @ResponseBody
-    @DeleteMapping
+    @DeleteMapping("del")
     public Boolean del(@RequestParam("id") String id) {
 
         return userService.del(id);
@@ -132,7 +129,7 @@ public class LoginController {
      */
     @ApiOperation("展 示 用 户 列 表 / 查 询 用 户 / 模 糊 查 询")
     @ResponseBody
-    @GetMapping
+    @GetMapping("query")
     public List<User> query(@RequestParam("key") String key) {
         return userService.query(key);
     }

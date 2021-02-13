@@ -11,18 +11,28 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (Material)实体类
+ * 材料(Material)实体类
  *
  * @author MoYz
- * @since 2021-02-09 15:20:00
+ * @since 2021-02-09 17:03:10
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("相关")
+@ApiModel("材料相关")
 public class Material implements Serializable {
+    @ApiModelProperty(value = "主键", required = true)
+    private String id;
+    @ApiModelProperty(value = "中文名", required = true)
+    private String cnName;
+    @ApiModelProperty(value = "英文名", required = true)
+    private String enName;
+    @ApiModelProperty(value = "备注")
+    private String remark;
+
+
     public Material(
             String id,
             String cnName,
@@ -35,19 +45,6 @@ public class Material implements Serializable {
         this.remark = remark;
 
     }
-
-
-    @ApiModelProperty(value = "$column.comment")
-    private String id;
-
-    @ApiModelProperty(value = "中文名")
-    private String cnName;
-
-    @ApiModelProperty(value = "英文名")
-    private String enName;
-
-    @ApiModelProperty("备注")
-    private String remark;
 
     @ApiModelProperty("逻辑删除标志位")
     private Integer delFlag;
