@@ -151,4 +151,43 @@ public class LoginController {
     public String getToken() {
         return tokenService.getToken();
     }
+
+
+    /**
+     * 用 户 登 陆 时 获 取 验 证 码
+     *
+     * @author Moyz
+     * @date 2021/02/15 15:10
+     */
+    @ApiOperation("新增或更新验证码表")
+    @GetMapping("sentSmsCode")
+    @ResponseBody
+    public String sentSmsCode(@RequestParam("phone") String phone) {
+        /*
+         * 0. 先查询有无此手机号，无手机号则令其注册
+         * 1. 去数据库查询是否已存在验证码(若验证码生成小于1分钟则不生成新的)
+         * 2. 若存在则返回 false , 若成功则进行下一步
+         * 3. 生成验证码并存到数据库，设置生效时间
+         * 4. 调用 SendSmsImpl 进行发送
+         * */
+
+        if (userService.isEmptyPhone(phone)) {
+            //判断时间小于一分钟就更新
+            if (userService.checkTime(phone)) {
+                //更新校验码
+                Boolean flag1 = userService.updateSms(phone, userService.smsCode());
+                //发送校验码
+                Boolean flag2 = userService.sendSmsCode(phone, userService.getUseByPhone(phone).getCode());
+                if (flag1 && flag2) {
+                    return "已成功发送效验码，请查收！";
+                } else {
+                    return "未知错误！";
+                }
+            } else {
+                return "禁止频繁发送验证码！";
+            }
+        } else {
+            return "未查询到该用户，请注册后登录！";
+        }
+    }
 }

@@ -60,4 +60,66 @@ public interface UserService extends IService<User> {
      * @date 2021/02/08 18:29
      */
     List<User> query(String key);
+
+    /**
+     * 通过手机号找人
+     *
+     * @param phone -> 手机号
+     * @return User
+     * @author Moyz
+     * @date 2021/02/16 00:29
+     */
+    User getUseByPhone(String phone);
+
+    /**
+     * 检查时间是否小于一分钟
+     *
+     * @param phone -> 电话号码 主键
+     * @return bool
+     * @author Moyz
+     * @date 2021/02/15 14:20
+     */
+    Boolean checkTime(String phone);
+
+    /**
+     * 发 送 短 息 业 务
+     *
+     * @param phone -> 接受的手机号码
+     * @param code  -> 验证码
+     * @return Boolean
+     * @author Moyz
+     * @date 2021/02/15 13:48
+     */
+    Boolean sendSmsCode(String phone, String code);
+
+    /**
+     * 生 成 校 验 码
+     *
+     * @return String
+     * @author Moyz
+     * @date 2021/02/15 14:02
+     */
+    String smsCode();
+
+    /**
+     * 添 加 操 作
+     *
+     * @param phone -> 手机号
+     * @param code  -> 验证码
+     * @return bool
+     * @author Moyz
+     * @date 2021-02-15 13:43:55
+     */
+    Boolean updateSms(String phone, String code);
+
+    /**
+     * 检查该手机号是否已注册
+     *
+     * @param phone -> 手机号
+     * @return bool
+     * @author Moyz
+     * @date 2021/02/16 00:45
+     */
+    Boolean isEmptyPhone(String phone);
+
 }

@@ -38,6 +38,10 @@ public class User implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remark;
 
+    @ApiModelProperty("短信验证码")
+    private String code;
+    @ApiModelProperty("短信验证失效时间")
+    private Date deadline;
 
     public User(
             String id,
@@ -55,7 +59,6 @@ public class User implements Serializable {
         this.phone = phone;
         this.email = email;
         this.remark = remark;
-
     }
 
     @ApiModelProperty("逻辑删除标志位")

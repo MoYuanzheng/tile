@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * 数据库创建时间、更新时间处理类
+ * 数 据 库 字 段 CREATE_TIME 及 UPDATE_TIME 处 理 类
  *
  * @author Moyz
  * @date 2021/02/08 20:08
