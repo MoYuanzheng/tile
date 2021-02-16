@@ -1,8 +1,4 @@
-package com.mo.tile.controller;/**
- * @author: MoYz
- * @description:
- * @data: 2021/2/14
- */
+package com.mo.tile.controller;
 
 import com.mo.tile.entity.Sms;
 import com.mo.tile.service.impl.SmsServiceImpl;

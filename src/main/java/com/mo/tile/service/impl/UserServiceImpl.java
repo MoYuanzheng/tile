@@ -1,12 +1,5 @@
 package com.mo.tile.service.impl;
 
-import com.aliyuncs.CommonRequest;
-import com.aliyuncs.CommonResponse;
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.http.MethodType;
-import com.aliyuncs.profile.DefaultProfile;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.entity.User;
@@ -101,37 +94,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         System.out.println(time);
         User user = getUseByPhone(phone);
         return user.getDeadline().getTime() <= new Date(time.getTime() + 60 * 1000).getTime();
-    }
-
-    /**
-     * 发 送 code
-     */
-    @Override
-    public Boolean sendSmsCode(String phone, String code) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4GKq7haEzq8ZUDrfDLD1", "4L6QmWjFE5bmyeEWeaWJqefFGkaIZY");
-        IAcsClient client = new DefaultAcsClient(profile);
-
-        CommonRequest request = new CommonRequest();
-        request.setSysMethod(MethodType.POST);
-        request.setSysDomain("dysmsapi.aliyuncs.com");
-        request.setSysVersion("2017-05-25");
-        request.setSysAction("SendSms");
-
-        /**
-         * 自 定 义 参 数
-         */
-        request.putQueryParameter("PhoneNumbers", phone);
-        request.putQueryParameter("SignName", "商品信息追溯系统");
-        request.putQueryParameter("TemplateCode", "TemplateCode");
-        request.putQueryParameter("TemplateParam", code);
-        try {
-            CommonResponse response = client.getCommonResponse(request);
-            System.out.println(response.getData());
-            return response.getHttpResponse().isSuccess();
-        } catch (ClientException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     /**

@@ -82,17 +82,6 @@ public interface UserService extends IService<User> {
     Boolean checkTime(String phone);
 
     /**
-     * 发 送 短 息 业 务
-     *
-     * @param phone -> 接受的手机号码
-     * @param code  -> 验证码
-     * @return Boolean
-     * @author Moyz
-     * @date 2021/02/15 13:48
-     */
-    Boolean sendSmsCode(String phone, String code);
-
-    /**
      * 生 成 校 验 码
      *
      * @return String

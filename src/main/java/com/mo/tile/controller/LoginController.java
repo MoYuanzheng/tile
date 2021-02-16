@@ -1,6 +1,7 @@
 package com.mo.tile.controller;
 
 import com.mo.tile.entity.User;
+import com.mo.tile.service.impl.SmsServiceImpl;
 import com.mo.tile.service.impl.TokenServiceImpl;
 import com.mo.tile.service.impl.UserServiceImpl;
 import io.swagger.annotations.*;
@@ -22,6 +23,9 @@ public class LoginController {
 
     @Resource
     TokenServiceImpl tokenService;
+
+    @Resource
+    SmsServiceImpl smsService;
 
     /**
      * 重 定 向 至 前 端 登 录 页 面
@@ -152,7 +156,6 @@ public class LoginController {
         return tokenService.getToken();
     }
 
-
     /**
      * 用 户 登 陆 时 获 取 验 证 码
      *
@@ -177,7 +180,7 @@ public class LoginController {
                 //更新校验码
                 Boolean flag1 = userService.updateSms(phone, userService.smsCode());
                 //发送校验码
-                Boolean flag2 = userService.sendSmsCode(phone, userService.getUseByPhone(phone).getCode());
+                Boolean flag2 = smsService.sendSmsCode(phone, userService.getUseByPhone(phone).getCode());
                 if (flag1 && flag2) {
                     return "已成功发送效验码，请查收！";
                 } else {
