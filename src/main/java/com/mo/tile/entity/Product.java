@@ -14,7 +14,7 @@ import java.util.Date;
  * 产品(Product)实体类
  *
  * @author MoYz
- * @since 2021-02-09 17:03:10
+ * @since 2021-02-17 18:21:40
  */
 @Data
 @AllArgsConstructor
@@ -27,12 +27,10 @@ public class Product implements Serializable {
     private String id;
     @ApiModelProperty(value = "产品型号", required = true)
     private Integer type;
-    @ApiModelProperty(value = "批次号", required = true)
-    private String batch;
+    @ApiModelProperty(value = "中文名称", required = true)
+    private String cnName;
     @ApiModelProperty(value = "单价", required = true)
     private Object price;
-    @ApiModelProperty(value = "追溯二维码", required = true)
-    private String qrCode;
     @ApiModelProperty(value = "备注")
     private String remark;
 
@@ -40,18 +38,15 @@ public class Product implements Serializable {
     public Product(
             String id,
             Integer type,
-            String batch,
+            String cnName,
             Object price,
-            String qrCode,
             String remark
     ) {
         this.id = id;
         this.type = type;
-        this.batch = batch;
+        this.cnName = cnName;
         this.price = price;
-        this.qrCode = qrCode;
         this.remark = remark;
-
     }
 
     @ApiModelProperty("逻辑删除标志位")

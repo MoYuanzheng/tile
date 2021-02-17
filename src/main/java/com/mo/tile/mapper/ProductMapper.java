@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mo.tile.entity.Product;
 
 /**
- * (Products)表数据库访问层
+ * 产品(Product)表数据库访问层
  *
- * @author mo
- * @since 2021-01-23 01:33:19
+ * @author MoYz
+ * @since 2021-02-17 18:21:41
  */
 public interface ProductMapper extends BaseMapper<Product> {
 

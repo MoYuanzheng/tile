@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * (Product)表服务实现类
+ * 产品(Product)表服务实现类
  *
  * @author MoYz
- * @since 2021-01-23 15:31:45
+ * @since 2021-02-17 18:21:42
  */
 @Service("productService")
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements ProductService {
@@ -47,21 +47,19 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     /**
-     * 模 糊 查 询 及 分页
+     * 模 糊 查 询 及 分 页
      */
     @Override
     public Page<Product> query(Integer pages, String key) {
         Page<Product> page = new Page<>(pages, 10);
         QueryWrapper<Product> wrapper = new QueryWrapper<>();
         wrapper
+                .like("id", key).or()
                 .like("type", key).or()
-                .like("batch", key).or()
+                .like("cn_name", key).or()
                 .like("price", key).or()
-                .like("qr_code", key).or()
-                .like("remark", key).or()
-                .like("id", key);
+                .like("remark", key);
         productMapper.selectPage(page, wrapper);
         return page;
     }
-
 }

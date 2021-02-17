@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 产品(Product)表控制层
  *
  * @author MoYz
- * @since 2021-02-09 17:03:10
+ * @since 2021-02-17 18:21:42
  */
 @Api(tags = "产品相关")
 @RestController
@@ -31,17 +31,15 @@ public class ProductController {
     public Boolean add(
             @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("type") @ApiParam("产品型号") Integer type,
-            @RequestParam("batch") @ApiParam("批次号") String batch,
+            @RequestParam("cnName") @ApiParam("中文名称") String cnName,
             @RequestParam("price") @ApiParam("单价") Object price,
-            @RequestParam("qrCode") @ApiParam("追溯二维码") String qrCode,
-            @RequestParam("remark") String remark
+            @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return productService.update(new Product(
                 id,
                 type,
-                batch,
+                cnName,
                 price,
-                qrCode,
                 remark
         ));
     }
@@ -59,17 +57,15 @@ public class ProductController {
     public Boolean update(
             @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("type") @ApiParam("产品型号") Integer type,
-            @RequestParam("batch") @ApiParam("批次号") String batch,
+            @RequestParam("cnName") @ApiParam("中文名称") String cnName,
             @RequestParam("price") @ApiParam("单价") Object price,
-            @RequestParam("qrCode") @ApiParam("追溯二维码") String qrCode,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return productService.update(new Product(
                 id,
                 type,
-                batch,
+                cnName,
                 price,
-                qrCode,
                 remark
         ));
     }
