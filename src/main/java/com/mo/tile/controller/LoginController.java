@@ -1,5 +1,6 @@
 package com.mo.tile.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.User;
 import com.mo.tile.service.impl.SmsServiceImpl;
 import com.mo.tile.service.impl.TokenServiceImpl;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author MoYz
@@ -72,13 +72,14 @@ public class LoginController {
     })
     @ResponseBody
     @PostMapping("reg")
-    public Boolean add(@RequestParam("id") String id,
-                       @RequestParam("username") String username,
-                       @RequestParam("pwd") String pwd,
-                       @RequestParam("roles") String roles,
-                       @RequestParam("phone") String phone,
-                       @RequestParam("email") String email,
-                       @RequestParam("remark") String remark
+    public Boolean add(
+            @RequestParam("id") String id,
+            @RequestParam("username") String username,
+            @RequestParam("pwd") String pwd,
+            @RequestParam("roles") String roles,
+            @RequestParam("phone") String phone,
+            @RequestParam("email") String email,
+            @RequestParam("remark") String remark
     ) {
         return userService.add(new User(
                 id,
@@ -134,8 +135,11 @@ public class LoginController {
     @ApiOperation("展 示 用 户 列 表 / 查 询 用 户 / 模 糊 查 询")
     @ResponseBody
     @GetMapping("query")
-    public List<User> query(@RequestParam("key") String key) {
-        return userService.query(key);
+    public Page<User> query(
+            @RequestParam("key") String key,
+            @RequestParam("page") Integer page
+    ) {
+        return userService.query(page, key);
     }
 
 

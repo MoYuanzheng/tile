@@ -1,9 +1,8 @@
 package com.mo.tile.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.User;
-
-import java.util.List;
 
 /**
  * (User)表服务接口
@@ -54,12 +53,13 @@ public interface UserService extends IService<User> {
     /**
      * 展 示 用 户 列 表 / 查 询 用 户 / 模 糊 查 询
      *
-     * @param key -> 关键字
-     * @return List<User></>用户列表
+     * @param pages -> 页数
+     * @param key   -> 关键字
+     * @return Page<User>用户列表
      * @author Moyz
-     * @date 2021/02/08 18:29
+     * @date 2021/02/17 17:36
      */
-    List<User> query(String key);
+    Page<User> query(Integer pages, String key);
 
     /**
      * 通过手机号找人

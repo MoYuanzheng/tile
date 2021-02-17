@@ -1,6 +1,7 @@
 package com.mo.tile.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.entity.User;
 import com.mo.tile.mapper.UserMapper;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -28,6 +28,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Resource
     private TokenServiceImpl tokenService;
 
+    /**
+     * 添 加 用 户
+     */
     @Override
     public Boolean add(User user) {
         if (user != null) {
@@ -38,9 +41,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
     }
 
+    /**
+     * 获 取 已 登 录 的 用 户 信 息
+     */
     @Override
     public User getLoggedUserInfo() {
-        // 从 容 器 中 取 得 已 登 录 的 用 户
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!authentication.isAuthenticated()) {
             return null;
@@ -57,19 +63,38 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return user;
     }
 
+    /**
+     * 修 改
+     */
     @Override
     public Boolean update(User user) {
         return userMapper.updateById(user) == 1;
     }
 
+    /**
+     * 删 除 单 个
+     */
     @Override
     public Boolean del(String id) {
         return userMapper.deleteById(id) == 1;
     }
 
+    /**
+     * 展 示 用 户 列 表 / 查 询 用 户 / 模 糊 查 询
+     */
     @Override
-    public List<User> query(String key) {
-        return null;
+    public Page<User> query(Integer pages, String key) {
+        Page<User> page = new Page<>(pages, 10);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper
+                .like("id", key).or()
+                .like("username", key).or()
+                .like("roles", key).or()
+                .like("phone", key)
+                .like("email", key)
+                .like("remark", key);
+        userMapper.selectPage(page, wrapper);
+        return page;
     }
 
     /**
