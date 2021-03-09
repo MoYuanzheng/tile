@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.Material;
 
 /**
- * (Material)表服务接口
+ * 材料(Material)表服务接口
  *
  * @author MoYz
- * @since 2021-02-09 15:12:12
+ * @since 2021-03-09 22:42:37
  */
 public interface MaterialService extends IService<Material> {
     /**
@@ -17,7 +17,7 @@ public interface MaterialService extends IService<Material> {
      * @param material -> Material实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 15:12:12
+     * @date 2021-03-09 22:42:37
      */
     Boolean add(Material material);
 
@@ -27,7 +27,7 @@ public interface MaterialService extends IService<Material> {
      * @param id -> 主键
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 15:12:12
+     * @date 2021-03-09 22:42:37
      */
     Boolean del(String id);
 
@@ -37,7 +37,7 @@ public interface MaterialService extends IService<Material> {
      * @param material -> Material实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 15:12:12
+     * @date 2021-03-09 22:42:37
      */
     Boolean update(Material material);
 
@@ -48,7 +48,7 @@ public interface MaterialService extends IService<Material> {
      * @param key   -> 关键字
      * @return page
      * @author Moyz
-     * @date 2021-02-09 15:12:12
+     * @date 2021-03-09 22:42:37
      */
     Page<Material> query(Integer pages, String key);
 }

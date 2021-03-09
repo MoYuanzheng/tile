@@ -15,7 +15,7 @@ import java.util.Date;
  * 订单批次表(Batch)表控制层
  *
  * @author MoYz
- * @since 2021-02-09 17:03:08
+ * @since 2021-03-09 22:43:18
  */
 @Api(tags = "订单批次表相关")
 @RestController
@@ -35,7 +35,7 @@ public class BatchController {
             @RequestParam("completeTime") @ApiParam("订单完成时间") Date completeTime,
             @RequestParam("productType") @ApiParam("产品型号") Integer productType,
             @RequestParam("total") @ApiParam("订单总数") Integer total,
-            @RequestParam("remark") String remark
+            @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return batchService.update(new Batch(
                 id,

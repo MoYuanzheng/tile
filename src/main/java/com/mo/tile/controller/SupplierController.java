@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 供应商(Supplier)表控制层
  *
  * @author MoYz
- * @since 2021-02-09 17:03:12
+ * @since 2021-03-09 22:40:04
  */
 @Api(tags = "供应商相关")
 @RestController
@@ -35,7 +35,7 @@ public class SupplierController {
             @RequestParam("header") @ApiParam("负责人名字") String header,
             @RequestParam("phone") @ApiParam("联系电话") String phone,
             @RequestParam("address") @ApiParam("联系地址") String address,
-            @RequestParam("remark") String remark
+            @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return supplierService.update(new Supplier(
                 id,

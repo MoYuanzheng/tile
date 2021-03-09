@@ -37,7 +37,17 @@ public class Dealer implements Serializable {
     private String area;
     @ApiModelProperty(value = "备注")
     private String remark;
-
+    @ApiModelProperty("逻辑删除标志位")
+    private Integer delFlag;
+    @ApiModelProperty("乐观锁")
+    @Version
+    private Integer version;
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+    @ApiModelProperty("更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
     public Dealer(
             String id,
@@ -57,19 +67,4 @@ public class Dealer implements Serializable {
         this.remark = remark;
 
     }
-
-    @ApiModelProperty("逻辑删除标志位")
-    private Integer delFlag;
-
-    @ApiModelProperty("乐观锁")
-    @Version
-    private Integer version;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
 }

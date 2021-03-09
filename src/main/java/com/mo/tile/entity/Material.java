@@ -14,7 +14,7 @@ import java.util.Date;
  * 材料(Material)实体类
  *
  * @author MoYz
- * @since 2021-02-09 17:03:10
+ * @since 2021-03-09 22:42:36
  */
 @Data
 @AllArgsConstructor
@@ -31,7 +31,17 @@ public class Material implements Serializable {
     private String enName;
     @ApiModelProperty(value = "备注")
     private String remark;
-
+    @ApiModelProperty("逻辑删除标志位")
+    private Integer delFlag;
+    @ApiModelProperty("乐观锁")
+    @Version
+    private Integer version;
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+    @ApiModelProperty("更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
     public Material(
             String id,
@@ -45,19 +55,4 @@ public class Material implements Serializable {
         this.remark = remark;
 
     }
-
-    @ApiModelProperty("逻辑删除标志位")
-    private Integer delFlag;
-
-    @ApiModelProperty("乐观锁")
-    @Version
-    private Integer version;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
 }

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * 订单表(Batch)表服务实现类
+ * 订单批次表(Batch)表服务实现类
  *
  * @author MoYz
- * @since 2021-02-09 15:12:14
+ * @since 2021-03-09 22:43:17
  */
 @Service("batchService")
 public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements BatchService {

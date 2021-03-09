@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 材料(Material)表控制层
  *
  * @author MoYz
- * @since 2021-02-09 17:03:10
+ * @since 2021-03-09 22:42:37
  */
 @Api(tags = "材料相关")
 @RestController
@@ -32,7 +32,7 @@ public class MaterialController {
             @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("cnName") @ApiParam("中文名") String cnName,
             @RequestParam("enName") @ApiParam("英文名") String enName,
-            @RequestParam("remark") String remark
+            @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return materialService.update(new Material(
                 id,

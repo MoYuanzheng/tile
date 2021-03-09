@@ -14,7 +14,7 @@ import java.util.Date;
  * 订单批次表(Batch)实体类
  *
  * @author MoYz
- * @since 2021-02-09 17:03:07
+ * @since 2021-03-09 22:43:16
  */
 @Data
 @AllArgsConstructor
@@ -23,6 +23,30 @@ import java.util.Date;
 @EqualsAndHashCode
 @ApiModel("订单批次表相关")
 public class Batch implements Serializable {
+    @ApiModelProperty(value = "主键", required = true)
+    private String id;
+    @ApiModelProperty(value = "下单时间", required = true)
+    private Date orderTime;
+    @ApiModelProperty(value = "订单完成时间", required = true)
+    private Date completeTime;
+    @ApiModelProperty(value = "产品型号", required = true)
+    private Integer productType;
+    @ApiModelProperty(value = "订单总数", required = true)
+    private Integer total;
+    @ApiModelProperty(value = "备注")
+    private String remark;
+    @ApiModelProperty("逻辑删除标志位")
+    private Integer delFlag;
+    @ApiModelProperty("乐观锁")
+    @Version
+    private Integer version;
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+    @ApiModelProperty("更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
+
     public Batch(
             String id,
             Date orderTime,
@@ -39,39 +63,4 @@ public class Batch implements Serializable {
         this.remark = remark;
 
     }
-
-
-    @ApiModelProperty(value = "主键", required = true)
-    private String id;
-
-    @ApiModelProperty(value = "下单时间", required = true)
-    private Date orderTime;
-
-    @ApiModelProperty(value = "订单完成时间", required = true)
-    private Date completeTime;
-
-    @ApiModelProperty(value = "产品型号", required = true)
-    private Integer productType;
-
-    @ApiModelProperty(value = "订单总数", required = true)
-    private Integer total;
-
-
-    @ApiModelProperty(value = "备注")
-    private String remark;
-
-    @ApiModelProperty("逻辑删除标志位")
-    private Integer delFlag;
-
-    @ApiModelProperty("乐观锁")
-    @Version
-    private Integer version;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
 }

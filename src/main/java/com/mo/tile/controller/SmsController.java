@@ -52,7 +52,7 @@ public class SmsController {
             if (smsService.checkTime(phone)) {
                 smsService.updateSms(new Sms(phone, smsService.smsCode()));
             } else {
-                //判断时间大于一分钟则更新code
+                //判断时间大于一分钟不予发送
                 return false;
             }
         } else {

@@ -31,7 +31,17 @@ public class Token implements Serializable {
     private Integer deadline;
     @ApiModelProperty(value = "备注")
     private String remark;
-
+    @ApiModelProperty("逻辑删除标志位")
+    private Integer delFlag;
+    @ApiModelProperty("乐观锁")
+    @Version
+    private Integer version;
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+    @ApiModelProperty("更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
     public Token(
             String id,
@@ -41,22 +51,5 @@ public class Token implements Serializable {
         this.id = id;
         this.token = token;
         this.deadline = deadline;
-        this.remark = remark;
-
     }
-
-    @ApiModelProperty("逻辑删除标志位")
-    private Integer delFlag;
-
-    @ApiModelProperty("乐观锁")
-    @Version
-    private Integer version;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
 }

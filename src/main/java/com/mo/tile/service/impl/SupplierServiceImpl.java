@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * (Supplier)表服务实现类
+ * 供应商(Supplier)表服务实现类
  *
  * @author MoYz
- * @since 2021-02-09 15:12:16
+ * @since 2021-03-09 22:40:04
  */
 @Service("supplierService")
 public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> implements SupplierService {

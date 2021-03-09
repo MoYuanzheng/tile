@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.Batch;
 
 /**
- * 订单表(Batch)表服务接口
+ * 订单批次表(Batch)表服务接口
  *
  * @author MoYz
- * @since 2021-02-09 15:12:14
+ * @since 2021-03-09 22:43:17
  */
 public interface BatchService extends IService<Batch> {
     /**
@@ -17,7 +17,7 @@ public interface BatchService extends IService<Batch> {
      * @param batch -> Batch实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 15:12:14
+     * @date 2021-03-09 22:43:17
      */
     Boolean add(Batch batch);
 
@@ -27,7 +27,7 @@ public interface BatchService extends IService<Batch> {
      * @param id -> 主键
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 15:12:14
+     * @date 2021-03-09 22:43:17
      */
     Boolean del(String id);
 
@@ -37,7 +37,7 @@ public interface BatchService extends IService<Batch> {
      * @param batch -> Batch实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 15:12:14
+     * @date 2021-03-09 22:43:17
      */
     Boolean update(Batch batch);
 
@@ -48,7 +48,7 @@ public interface BatchService extends IService<Batch> {
      * @param key   -> 关键字
      * @return page
      * @author Moyz
-     * @date 2021-02-09 15:12:14
+     * @date 2021-03-09 22:43:17
      */
     Page<Batch> query(Integer pages, String key);
 }

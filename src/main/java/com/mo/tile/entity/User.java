@@ -42,6 +42,17 @@ public class User implements Serializable {
     private String code;
     @ApiModelProperty("短信验证失效时间")
     private Date deadline;
+    @ApiModelProperty("逻辑删除标志位")
+    private Integer delFlag;
+    @ApiModelProperty("乐观锁")
+    @Version
+    private Integer version;
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+    @ApiModelProperty("更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
     public User(
             String id,
@@ -61,18 +72,19 @@ public class User implements Serializable {
         this.remark = remark;
     }
 
-    @ApiModelProperty("逻辑删除标志位")
-    private Integer delFlag;
-
-    @ApiModelProperty("乐观锁")
-    @Version
-    private Integer version;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+    public User(
+            String id,
+            String username,
+            String pwd,
+            String roles,
+            String phone,
+            String email
+    ) {
+        this.id = id;
+        this.username = username;
+        this.pwd = pwd;
+        this.roles = roles;
+        this.phone = phone;
+        this.email = email;
+    }
 }

@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.Supplier;
 
 /**
- * (Supplier)表服务接口
+ * 供应商(Supplier)表服务接口
  *
  * @author MoYz
- * @since 2021-02-09 15:12:15
+ * @since 2021-03-09 22:40:04
  */
 public interface SupplierService extends IService<Supplier> {
     /**
@@ -17,7 +17,7 @@ public interface SupplierService extends IService<Supplier> {
      * @param supplier -> Supplier实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 15:12:15
+     * @date 2021-03-09 22:40:04
      */
     Boolean add(Supplier supplier);
 
@@ -27,7 +27,7 @@ public interface SupplierService extends IService<Supplier> {
      * @param id -> 主键
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 15:12:15
+     * @date 2021-03-09 22:40:04
      */
     Boolean del(String id);
 
@@ -37,7 +37,7 @@ public interface SupplierService extends IService<Supplier> {
      * @param supplier -> Supplier实例
      * @return bool
      * @author Moyz
-     * @date 2021-02-09 15:12:15
+     * @date 2021-03-09 22:40:04
      */
     Boolean update(Supplier supplier);
 
@@ -48,7 +48,7 @@ public interface SupplierService extends IService<Supplier> {
      * @param key   -> 关键字
      * @return page
      * @author Moyz
-     * @date 2021-02-09 15:12:15
+     * @date 2021-03-09 22:40:04
      */
     Page<Supplier> query(Integer pages, String key);
 }

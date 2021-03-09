@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * (Material)表服务实现类
+ * 材料(Material)表服务实现类
  *
  * @author MoYz
- * @since 2021-02-09 15:12:12
+ * @since 2021-03-09 22:42:37
  */
 @Service("materialService")
 public class MaterialServiceImpl extends ServiceImpl<MaterialMapper, Material> implements MaterialService {

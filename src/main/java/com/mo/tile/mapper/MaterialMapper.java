@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mo.tile.entity.Material;
 
 /**
- * (Material)表数据库访问层
+ * 材料(Material)表数据库访问层
  *
  * @author MoYz
- * @since 2021-02-09 15:12:11
+ * @since 2021-03-09 22:42:37
  */
 public interface MaterialMapper extends BaseMapper<Material> {
 
