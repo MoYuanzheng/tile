@@ -12,12 +12,12 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
- * (Trace)表控制层
+ * 追溯相关(Trace)表控制层
  *
  * @author MoYz
- * @since 2021-03-12 21:15:29
+ * @since 2021-03-12 21:43:09
  */
-@Api(tags = "相关")
+@Api(tags = "追溯相关")
 @RestController
 @RequestMapping("trace")
 public class TraceController {

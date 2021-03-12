@@ -17,7 +17,7 @@ import java.util.Date;
  * @author MoYz
  * @since 2021-03-09 22:42:17
  */
-@Api(tags = "相关")
+@Api(tags = "所有产品相关")
 @RestController
 @RequestMapping("productAll")
 public class ProductAllController {

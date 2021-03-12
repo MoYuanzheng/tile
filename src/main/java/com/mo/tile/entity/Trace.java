@@ -23,6 +23,30 @@ import java.util.Date;
 @EqualsAndHashCode
 @ApiModel("追溯相关相关")
 public class Trace implements Serializable {
+    @ApiModelProperty(value = "主键-对应商品追溯码", required = true)
+    private String id;
+    @ApiModelProperty(value = "操作员", required = true)
+    private Integer operationPerson;
+    @ApiModelProperty(value = "操作时间", required = true)
+    private Date operationTime;
+    @ApiModelProperty(value = "内容", required = true)
+    private String content;
+    @ApiModelProperty(value = "物流或者分销", required = true)
+    private String type;
+    @ApiModelProperty(value = "备注")
+    private String remark;
+    @ApiModelProperty("逻辑删除标志位")
+    private Integer delFlag;
+    @ApiModelProperty("乐观锁")
+    @Version
+    private Integer version;
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+    @ApiModelProperty("更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
+
     public Trace(
             String id,
             Integer operationPerson,
@@ -39,39 +63,4 @@ public class Trace implements Serializable {
         this.remark = remark;
 
     }
-
-
-    @ApiModelProperty(value = "主键-对应商品追溯码", required = true)
-    private String id;
-
-    @ApiModelProperty(value = "操作员", required = true)
-    private Integer operationPerson;
-
-    @ApiModelProperty(value = "操作时间", required = true)
-    private Date operationTime;
-
-    @ApiModelProperty(value = "内容", required = true)
-    private String content;
-
-    @ApiModelProperty(value = "物流或者分销", required = true)
-    private String type;
-
-
-    @ApiModelProperty(value = "备注")
-    private String remark;
-
-    @ApiModelProperty("逻辑删除标志位")
-    private Integer delFlag;
-
-    @ApiModelProperty("乐观锁")
-    @Version
-    private Integer version;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    @ApiModelProperty("更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
 }
