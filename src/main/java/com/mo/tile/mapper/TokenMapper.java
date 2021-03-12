@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mo.tile.entity.Token;
 
 /**
- * (Token)表数据库访问层
+ * Token(Token)表数据库访问层
  *
  * @author MoYz
- * @since 2021-01-23 15:21:07
+ * @since 2021-03-12 21:08:54
  */
 public interface TokenMapper extends BaseMapper<Token> {
 
