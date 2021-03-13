@@ -12,10 +12,10 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
- * 追溯相关(Trace)表控制层
+ * 追溯(Trace)表控制层
  *
  * @author MoYz
- * @since 2021-03-12 21:43:09
+ * @since 2021-03-13 17:07:34
  */
 @Api(tags = "追溯相关")
 @RestController
@@ -31,6 +31,7 @@ public class TraceController {
     @PostMapping("add")
     public Boolean add(
             @RequestParam("id") @ApiParam("主键-对应商品追溯码") String id,
+            @RequestParam("productId") @ApiParam("商品ID") String productId,
             @RequestParam("operationPerson") @ApiParam("操作员") Integer operationPerson,
             @RequestParam("operationTime") @ApiParam("操作时间") Date operationTime,
             @RequestParam("content") @ApiParam("内容") String content,
@@ -39,6 +40,7 @@ public class TraceController {
     ) {
         return traceService.update(new Trace(
                 id,
+                productId,
                 operationPerson,
                 operationTime,
                 content,
@@ -59,6 +61,7 @@ public class TraceController {
     @PutMapping("update")
     public Boolean update(
             @RequestParam("id") @ApiParam("主键-对应商品追溯码") String id,
+            @RequestParam("productId") @ApiParam("商品ID") String productId,
             @RequestParam("operationPerson") @ApiParam("操作员") Integer operationPerson,
             @RequestParam("operationTime") @ApiParam("操作时间") Date operationTime,
             @RequestParam("content") @ApiParam("内容") String content,
@@ -67,6 +70,7 @@ public class TraceController {
     ) {
         return traceService.update(new Trace(
                 id,
+                productId,
                 operationPerson,
                 operationTime,
                 content,

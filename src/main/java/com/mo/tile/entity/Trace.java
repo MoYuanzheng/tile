@@ -11,20 +11,22 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 追溯相关(Trace)实体类
+ * 追溯(Trace)实体类
  *
  * @author MoYz
- * @since 2021-03-12 21:40:35
+ * @since 2021-03-13 17:07:33
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("追溯相关相关")
+@ApiModel("追溯相关")
 public class Trace implements Serializable {
     @ApiModelProperty(value = "主键-对应商品追溯码", required = true)
     private String id;
+    @ApiModelProperty(value = "商品ID", required = true)
+    private String productId;
     @ApiModelProperty(value = "操作员", required = true)
     private Integer operationPerson;
     @ApiModelProperty(value = "操作时间", required = true)
@@ -49,6 +51,7 @@ public class Trace implements Serializable {
 
     public Trace(
             String id,
+            String productId,
             Integer operationPerson,
             Date operationTime,
             String content,
@@ -56,6 +59,7 @@ public class Trace implements Serializable {
             String remark
     ) {
         this.id = id;
+        this.productId = productId;
         this.operationPerson = operationPerson;
         this.operationTime = operationTime;
         this.content = content;

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * (Trace)表服务实现类
+ * 追溯(Trace)表服务实现类
  *
  * @author MoYz
- * @since 2021-03-12 21:15:29
+ * @since 2021-03-13 17:07:34
  */
 @Service("traceService")
 public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements TraceService {
@@ -55,6 +55,7 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
         QueryWrapper<Trace> wrapper = new QueryWrapper<>();
         wrapper
                 .like("id", key).or()
+                .like("product_id", key).or()
                 .like("operation_person", key).or()
                 .like("operation_time", key).or()
                 .like("content", key).or()

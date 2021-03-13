@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.Trace;
 
 /**
- * (Trace)表服务接口
+ * 追溯(Trace)表服务接口
  *
  * @author MoYz
- * @since 2021-03-12 21:15:29
+ * @since 2021-03-13 17:07:34
  */
 public interface TraceService extends IService<Trace> {
     /**
@@ -17,7 +17,7 @@ public interface TraceService extends IService<Trace> {
      * @param trace -> Trace实例
      * @return bool
      * @author Moyz
-     * @date 2021-03-12 21:15:29
+     * @date 2021-03-13 17:07:34
      */
     Boolean add(Trace trace);
 
@@ -27,7 +27,7 @@ public interface TraceService extends IService<Trace> {
      * @param id -> 主键
      * @return bool
      * @author Moyz
-     * @date 2021-03-12 21:15:29
+     * @date 2021-03-13 17:07:34
      */
     Boolean del(String id);
 
@@ -37,7 +37,7 @@ public interface TraceService extends IService<Trace> {
      * @param trace -> Trace实例
      * @return bool
      * @author Moyz
-     * @date 2021-03-12 21:15:29
+     * @date 2021-03-13 17:07:34
      */
     Boolean update(Trace trace);
 
@@ -48,7 +48,7 @@ public interface TraceService extends IService<Trace> {
      * @param key   -> 关键字
      * @return page
      * @author Moyz
-     * @date 2021-03-12 21:15:29
+     * @date 2021-03-13 17:07:34
      */
     Page<Trace> query(Integer pages, String key);
 }
