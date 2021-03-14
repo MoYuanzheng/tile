@@ -32,12 +32,12 @@ public class BatchController {
     public Boolean add(
             @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("orderTime") @ApiParam("下单时间") Date orderTime,
-            @RequestParam("completeTime") @ApiParam("订单完成时间") Date completeTime,
+            @RequestParam("completeTime") @ApiParam("预计订单完成时间") Date completeTime,
             @RequestParam("productType") @ApiParam("产品型号") Integer productType,
             @RequestParam("total") @ApiParam("订单总数") Integer total,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
-        return batchService.update(new Batch(
+        return batchService.add(new Batch(
                 id,
                 orderTime,
                 completeTime,

@@ -25,9 +25,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Resource
     private UserMapper userMapper;
 
-    @Resource
-    private TokenServiceImpl tokenService;
-
     /**
      * 添 加 用 户
      */
@@ -35,7 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Boolean add(User user) {
         if (user != null) {
             String id = user.getId();
-            return userMapper.selectById(id) == null && tokenService.setRegToken(id) && userMapper.insert(user) == 1;
+            return userMapper.selectById(id) == null && userMapper.insert(user) == 1;
         } else {
             return false;
         }

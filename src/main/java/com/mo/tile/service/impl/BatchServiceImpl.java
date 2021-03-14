@@ -21,13 +21,20 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
 
     @Resource
     private BatchMapper batchMapper;
+    @Resource
+    private ProductAllServiceImpl productAllService;
 
     /**
      * 添 加 操 作
      */
     @Override
     public Boolean add(Batch batch) {
-        return batchMapper.insert(batch) == 1;
+        if (batchMapper.insert(batch) == 1) {
+            System.out.println(batch);
+            return productAllService.batchCreation(batch.getTotal(), batch.getId(), batch.getProductType());
+        } else {
+            return false;
+        }
     }
 
     /**

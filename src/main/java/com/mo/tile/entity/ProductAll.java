@@ -11,28 +11,30 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (ProductAll)实体类
+ * 所有商品(ProductAll)实体类
  *
  * @author MoYz
- * @since 2021-03-09 22:42:15
+ * @since 2021-03-14 14:15:32
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("相关")
+@ApiModel("所有商品相关")
 public class ProductAll implements Serializable {
     @ApiModelProperty(value = "主键", required = true)
     private String id;
     @ApiModelProperty(value = "产品类别", required = true)
-    private String type;
+    private Integer type;
     @ApiModelProperty(value = "批次", required = true)
     private String batch;
     @ApiModelProperty(value = "生产日期", required = true)
     private Date manufactureDate;
     @ApiModelProperty(value = "质检日期", required = true)
     private Date inspectionDate;
+    @ApiModelProperty(value = "具体商店", required = true)
+    private String dealerShop;
     @ApiModelProperty(value = "备注")
     private String remark;
     @ApiModelProperty("逻辑删除标志位")
@@ -49,7 +51,7 @@ public class ProductAll implements Serializable {
 
     public ProductAll(
             String id,
-            String type,
+            Integer type,
             String batch,
             Date manufactureDate,
             Date inspectionDate,
@@ -60,6 +62,18 @@ public class ProductAll implements Serializable {
         this.batch = batch;
         this.manufactureDate = manufactureDate;
         this.inspectionDate = inspectionDate;
+        this.remark = remark;
+    }
+
+    public ProductAll(
+            String id,
+            Integer type,
+            String batch,
+            String remark
+    ) {
+        this.id = id;
+        this.type = type;
+        this.batch = batch;
         this.remark = remark;
     }
 }

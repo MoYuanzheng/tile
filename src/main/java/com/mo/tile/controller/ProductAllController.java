@@ -12,12 +12,12 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
- * (ProductAll)表控制层
+ * 所有商品(ProductAll)表控制层
  *
  * @author MoYz
- * @since 2021-03-09 22:42:17
+ * @since 2021-03-14 14:15:34
  */
-@Api(tags = "所有产品相关")
+@Api(tags = "所有商品相关")
 @RestController
 @RequestMapping("productAll")
 public class ProductAllController {
@@ -31,18 +31,16 @@ public class ProductAllController {
     @PostMapping("add")
     public Boolean add(
             @RequestParam("id") @ApiParam("主键") String id,
-            @RequestParam("type") @ApiParam("产品类别") String type,
+            @RequestParam("type") @ApiParam("产品类别") Integer type,
             @RequestParam("batch") @ApiParam("批次") String batch,
-            @RequestParam("manufactureDate") @ApiParam("生产日期") Date manufactureDate,
-            @RequestParam("inspectionDate") @ApiParam("质检日期") Date inspectionDate,
+//            @RequestParam("manufactureDate") @ApiParam("生产日期") Date manufactureDate,
+//            @RequestParam("inspectionDate") @ApiParam("质检日期") Date inspectionDate,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
-        return productAllService.update(new ProductAll(
+        return productAllService.add(new ProductAll(
                 id,
                 type,
                 batch,
-                manufactureDate,
-                inspectionDate,
                 remark
         ));
     }
@@ -59,7 +57,7 @@ public class ProductAllController {
     @PutMapping("update")
     public Boolean update(
             @RequestParam("id") @ApiParam("主键") String id,
-            @RequestParam("type") @ApiParam("产品类别") String type,
+            @RequestParam("type") @ApiParam("产品类别") Integer type,
             @RequestParam("batch") @ApiParam("批次") String batch,
             @RequestParam("manufactureDate") @ApiParam("生产日期") Date manufactureDate,
             @RequestParam("inspectionDate") @ApiParam("质检日期") Date inspectionDate,

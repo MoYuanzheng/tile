@@ -63,4 +63,11 @@ public class Batch implements Serializable {
         this.remark = remark;
 
     }
+
+    public Batch(String id, Integer productType, Integer total, String remark) {
+        this.id = id;
+        this.productType = productType;
+        this.total = total;
+        this.remark = remark;
+    }
 }

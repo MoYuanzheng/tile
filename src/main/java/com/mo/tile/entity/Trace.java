@@ -65,6 +65,5 @@ public class Trace implements Serializable {
         this.content = content;
         this.type = type;
         this.remark = remark;
-
     }
 }

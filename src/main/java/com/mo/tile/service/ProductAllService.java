@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.ProductAll;
 
 /**
- * (ProductAll)表服务接口
+ * 所有商品(ProductAll)表服务接口
  *
  * @author MoYz
- * @since 2021-03-09 22:42:16
+ * @since 2021-03-14 14:15:33
  */
 public interface ProductAllService extends IService<ProductAll> {
     /**
@@ -17,7 +17,7 @@ public interface ProductAllService extends IService<ProductAll> {
      * @param productAll -> ProductAll实例
      * @return bool
      * @author Moyz
-     * @date 2021-03-09 22:42:16
+     * @date 2021-03-14 14:15:33
      */
     Boolean add(ProductAll productAll);
 
@@ -27,7 +27,7 @@ public interface ProductAllService extends IService<ProductAll> {
      * @param id -> 主键
      * @return bool
      * @author Moyz
-     * @date 2021-03-09 22:42:16
+     * @date 2021-03-14 14:15:33
      */
     Boolean del(String id);
 
@@ -37,7 +37,7 @@ public interface ProductAllService extends IService<ProductAll> {
      * @param productAll -> ProductAll实例
      * @return bool
      * @author Moyz
-     * @date 2021-03-09 22:42:16
+     * @date 2021-03-14 14:15:33
      */
     Boolean update(ProductAll productAll);
 
@@ -48,7 +48,19 @@ public interface ProductAllService extends IService<ProductAll> {
      * @param key   -> 关键字
      * @return page
      * @author Moyz
-     * @date 2021-03-09 22:42:16
+     * @date 2021-03-14 14:15:33
      */
     Page<ProductAll> query(Integer pages, String key);
+
+    /**
+     * 批量创建
+     *
+     * @param num   数量
+     * @param batch 批号
+     * @param type  类型
+     * @return bool
+     * @author Moyz
+     * @date 2021/03/14 14:16
+     */
+    Boolean batchCreation(int num, String batch, Integer type);
 }

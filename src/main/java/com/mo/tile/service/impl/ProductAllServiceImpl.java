@@ -9,6 +9,7 @@ import com.mo.tile.service.ProductAllService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * (ProductAll)表服务实现类
@@ -62,5 +63,19 @@ public class ProductAllServiceImpl extends ServiceImpl<ProductAllMapper, Product
                 .like("remark", key);
         productAllMapper.selectPage(page, wrapper);
         return page;
+    }
+
+    @Override
+    public Boolean batchCreation(int num, String batch, Integer type) {
+        boolean flag = true;
+        while (num != 0) {
+//            if (!) {
+//                flag = false;
+//                break;
+//            }
+            add(new ProductAll(UUID.randomUUID().toString().substring(0, 18), type, batch, "批量生产"));
+            num--;
+        }
+        return flag;
     }
 }
