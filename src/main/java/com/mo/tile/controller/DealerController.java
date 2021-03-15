@@ -37,7 +37,7 @@ public class DealerController {
             @RequestParam("area") @ApiParam("销售负责区域") String area,
             @RequestParam("remark") String remark
     ) {
-        return dealerService.update(new Dealer(
+        return dealerService.add(new Dealer(
                 id,
                 alias,
                 fullName,

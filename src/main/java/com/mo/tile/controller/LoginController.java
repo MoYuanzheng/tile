@@ -140,7 +140,7 @@ public class LoginController {
 
 
     /**
-     * 用 户 登 陆 时 获 取 验 证 码
+     * 用 户 登 录 时 获 取 验 证 码
      *
      * @author Moyz
      * @date 2021/02/15 15:10

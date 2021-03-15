@@ -37,7 +37,7 @@ public class SupplierController {
             @RequestParam("address") @ApiParam("联系地址") String address,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
-        return supplierService.update(new Supplier(
+        return supplierService.add(new Supplier(
                 id,
                 material,
                 fullName,

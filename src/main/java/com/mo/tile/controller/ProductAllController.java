@@ -32,8 +32,6 @@ public class ProductAllController {
             @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("type") @ApiParam("产品类别") Integer type,
             @RequestParam("batch") @ApiParam("批次") String batch,
-//            @RequestParam("manufactureDate") @ApiParam("生产日期") Date manufactureDate,
-//            @RequestParam("inspectionDate") @ApiParam("质检日期") Date inspectionDate,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return productAllService.add(new ProductAll(

@@ -34,7 +34,7 @@ public class MaterialController {
             @RequestParam("enName") @ApiParam("英文名") String enName,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
-        return materialService.update(new Material(
+        return materialService.add(new Material(
                 id,
                 cnName,
                 enName,

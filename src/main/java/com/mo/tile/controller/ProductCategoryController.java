@@ -35,7 +35,7 @@ public class ProductCategoryController {
             @RequestParam("price") @ApiParam("单价") Object price,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
-        return productCategoryService.update(new ProductCategory(
+        return productCategoryService.add(new ProductCategory(
                 id,
                 type,
                 cnName,
