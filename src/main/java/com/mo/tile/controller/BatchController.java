@@ -49,7 +49,6 @@ public class BatchController {
     public Boolean del(
             @RequestParam("id") @ApiParam("订单号") String id
     ) {
-        System.out.println("-------------------" + id);
         return batchService.del(id);
     }
 
