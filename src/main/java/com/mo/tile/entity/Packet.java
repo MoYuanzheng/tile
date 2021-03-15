@@ -11,32 +11,22 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 所有商品(ProductAll)实体类
+ * 大包装追溯码(Packet)实体类
  *
  * @author MoYz
- * @since 2021-03-15 10:02:30
+ * @since 2021-03-15 15:34:37
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("所有商品相关")
-public class ProductAll implements Serializable {
-    @ApiModelProperty(value = "生产日期", required = true)
-    private String manufactureDate;
-    @ApiModelProperty(value = "质检日期", required = true)
-    private String inspectionDate;
-
-
-    @ApiModelProperty(value = "主键", required = true)
+@ApiModel("大包装追溯码相关")
+public class Packet implements Serializable {
+    @ApiModelProperty(value = "主键，包裹追溯码", required = true)
     private String id;
-
-    @ApiModelProperty(value = "产品类别", required = true)
-    private Integer type;
-
-    @ApiModelProperty(value = "批次", required = true)
-    private String batch;
+    @ApiModelProperty(value = "包裹容量", required = true)
+    private Integer size;
     @ApiModelProperty(value = "备注")
     private String remark;
     @ApiModelProperty("逻辑删除标志位")
@@ -51,31 +41,21 @@ public class ProductAll implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
-    public ProductAll(
+    public Packet(
             String id,
-            Integer type,
-            String batch,
-            String manufactureDate,
-            String inspectionDate,
+            Integer size,
             String remark
     ) {
         this.id = id;
-        this.type = type;
-        this.batch = batch;
-        this.manufactureDate = manufactureDate;
-        this.inspectionDate = inspectionDate;
+        this.size = size;
         this.remark = remark;
     }
 
-    public ProductAll(
+    public Packet(
             String id,
-            Integer type,
-            String batch,
-            String remark
+            Integer size
     ) {
         this.id = id;
-        this.type = type;
-        this.batch = batch;
-        this.remark = remark;
+        this.size = size;
     }
 }

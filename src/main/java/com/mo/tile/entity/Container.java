@@ -11,32 +11,24 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 所有商品(ProductAll)实体类
+ * (Container)实体类
  *
  * @author MoYz
- * @since 2021-03-15 10:02:30
+ * @since 2021-03-15 16:42:58
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("所有商品相关")
-public class ProductAll implements Serializable {
-    @ApiModelProperty(value = "生产日期", required = true)
-    private String manufactureDate;
-    @ApiModelProperty(value = "质检日期", required = true)
-    private String inspectionDate;
-
-
-    @ApiModelProperty(value = "主键", required = true)
+@ApiModel("相关")
+public class Container implements Serializable {
+    @ApiModelProperty(value = "$column.comment", required = true)
     private String id;
-
-    @ApiModelProperty(value = "产品类别", required = true)
-    private Integer type;
-
-    @ApiModelProperty(value = "批次", required = true)
-    private String batch;
+    @ApiModelProperty(value = "大尺寸包装追溯码", required = true)
+    private String bigId;
+    @ApiModelProperty(value = "小尺寸追溯码", required = true)
+    private String smallId;
     @ApiModelProperty(value = "备注")
     private String remark;
     @ApiModelProperty("逻辑删除标志位")
@@ -51,31 +43,27 @@ public class ProductAll implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
-    public ProductAll(
+    public Container(
             String id,
-            Integer type,
-            String batch,
-            String manufactureDate,
-            String inspectionDate,
+            String bigId,
+            String smallId,
             String remark
     ) {
         this.id = id;
-        this.type = type;
-        this.batch = batch;
-        this.manufactureDate = manufactureDate;
-        this.inspectionDate = inspectionDate;
+        this.bigId = bigId;
+        this.smallId = smallId;
         this.remark = remark;
+
     }
 
-    public ProductAll(
-            String id,
-            Integer type,
-            String batch,
+    public Container(
+            String bigId,
+            String smallId,
             String remark
     ) {
-        this.id = id;
-        this.type = type;
-        this.batch = batch;
+        this.bigId = bigId;
+        this.smallId = smallId;
         this.remark = remark;
+
     }
 }

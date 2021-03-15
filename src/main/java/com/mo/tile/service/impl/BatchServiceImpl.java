@@ -85,7 +85,7 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
         QueryWrapper<Batch> wrapper = new QueryWrapper<>();
         wrapper
                 .like("id", key).or()
-                .like("order_time", key).or()
+                .like("operator", key).or()
                 .like("complete_time", key).or()
                 .like("product_type", key).or()
                 .like("total", key).or()

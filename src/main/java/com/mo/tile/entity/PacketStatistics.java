@@ -11,32 +11,26 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 所有商品(ProductAll)实体类
+ * 包装盒数量统计(PacketStatistics)实体类
  *
  * @author MoYz
- * @since 2021-03-15 10:02:30
+ * @since 2021-03-15 16:56:54
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("所有商品相关")
-public class ProductAll implements Serializable {
-    @ApiModelProperty(value = "生产日期", required = true)
-    private String manufactureDate;
-    @ApiModelProperty(value = "质检日期", required = true)
-    private String inspectionDate;
-
-
+@ApiModel("包装盒数量统计相关")
+public class PacketStatistics implements Serializable {
     @ApiModelProperty(value = "主键", required = true)
     private String id;
-
-    @ApiModelProperty(value = "产品类别", required = true)
-    private Integer type;
-
-    @ApiModelProperty(value = "批次", required = true)
-    private String batch;
+    @ApiModelProperty(value = "容量", required = true)
+    private Integer size;
+    @ApiModelProperty(value = "剩余数量", required = true)
+    private Integer surplus;
+    @ApiModelProperty(value = "总共生产", required = true)
+    private Integer total;
     @ApiModelProperty(value = "备注")
     private String remark;
     @ApiModelProperty("逻辑删除标志位")
@@ -51,31 +45,17 @@ public class ProductAll implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
-    public ProductAll(
+    public PacketStatistics(
             String id,
-            Integer type,
-            String batch,
-            String manufactureDate,
-            String inspectionDate,
+            Integer size,
+            Integer surplus,
+            Integer total,
             String remark
     ) {
         this.id = id;
-        this.type = type;
-        this.batch = batch;
-        this.manufactureDate = manufactureDate;
-        this.inspectionDate = inspectionDate;
-        this.remark = remark;
-    }
-
-    public ProductAll(
-            String id,
-            Integer type,
-            String batch,
-            String remark
-    ) {
-        this.id = id;
-        this.type = type;
-        this.batch = batch;
+        this.size = size;
+        this.surplus = surplus;
+        this.total = total;
         this.remark = remark;
     }
 }
