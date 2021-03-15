@@ -1,9 +1,11 @@
 package com.mo.tile.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.entity.Batch;
+import com.mo.tile.entity.ProductAll;
 import com.mo.tile.mapper.BatchMapper;
 import com.mo.tile.service.BatchService;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,8 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
 
     @Resource
     private BatchMapper batchMapper;
+    @Resource
+    private BatchService batchService;
     @Resource
     private ProductAllServiceImpl productAllService;
 
@@ -51,6 +55,24 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
     @Override
     public Boolean update(Batch batch) {
         return batchMapper.updateById(batch) == 1;
+    }
+
+    /**
+     * 修 改 完 成 时 间 操 作
+     */
+    @Override
+    public Boolean updateCompleteTime(String id, String completeTime) {
+        UpdateWrapper<Batch> wrapperBatch = new UpdateWrapper<>();
+        wrapperBatch
+                .eq("id", id)
+                .set("complete_time", completeTime);
+        UpdateWrapper<ProductAll> wrapperProductAll = new UpdateWrapper<>();
+
+        wrapperProductAll
+                .eq("batch", id)
+                .set("manufacture_date", completeTime);
+
+        return batchService.update(wrapperBatch) && productAllService.update(wrapperProductAll);
     }
 
     /**

@@ -30,12 +30,14 @@ public class BatchController {
     @PostMapping("add")
     public Boolean add(
             @RequestParam("id") @ApiParam("主键") String id,
+            @RequestParam("operator") @ApiParam("创建人员工号") String operator,
             @RequestParam("productType") @ApiParam("产品型号") Integer productType,
             @RequestParam("total") @ApiParam("订单总数") Integer total,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return batchService.add(new Batch(
                 id,
+                operator,
                 productType,
                 total,
                 remark
@@ -54,6 +56,7 @@ public class BatchController {
     @PutMapping("update")
     public Boolean update(
             @RequestParam("id") @ApiParam("主键") String id,
+            @RequestParam("operator") @ApiParam("创建人员工号") String operator,
             @RequestParam("completeTime") @ApiParam("订单完成时间") String completeTime,
             @RequestParam("productType") @ApiParam("产品型号") Integer productType,
             @RequestParam("total") @ApiParam("订单总数") Integer total,
@@ -61,11 +64,21 @@ public class BatchController {
     ) {
         return batchService.update(new Batch(
                 id,
-                completeTime,
+                operator,
                 productType,
                 total,
+                completeTime,
                 remark
         ));
+    }
+
+    @ApiOperation("更新订单完成时间")
+    @PutMapping("updateCompleteTime")
+    public Boolean updateCompleteTime(
+            @RequestParam("id") @ApiParam("主键") String id,
+            @RequestParam("completeTime") @ApiParam("订单完成时间") String completeTime
+    ) {
+        return batchService.updateCompleteTime(id, completeTime);
     }
 
     /**

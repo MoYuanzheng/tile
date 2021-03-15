@@ -42,6 +42,17 @@ public interface BatchService extends IService<Batch> {
     Boolean update(Batch batch);
 
     /**
+     * 更新订单完成时间
+     *
+     * @param id           订单ID
+     * @param completeTime 完成时间
+     * @return bool
+     * @author Moyz
+     * @date 2021/03/15 11:04
+     */
+    Boolean updateCompleteTime(String id, String completeTime);
+
+    /**
      * 模 糊 查 询 及 分 页
      *
      * @param pages -> 页数

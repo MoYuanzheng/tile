@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 /**
  * @author MoYz
  */
-@Api(tags = "登 录 相 关")
+@Api(tags = "登录相关")
 @Controller
 public class LoginController {
 
