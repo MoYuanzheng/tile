@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * 追溯(Trace)表控制层
@@ -33,12 +32,12 @@ public class TraceController {
             @RequestParam("id") @ApiParam("主键-对应商品追溯码") String id,
             @RequestParam("productId") @ApiParam("商品ID") String productId,
             @RequestParam("operationPerson") @ApiParam("操作员") Integer operationPerson,
-            @RequestParam("operationTime") @ApiParam("操作时间") Date operationTime,
+            @RequestParam("operationTime") @ApiParam("操作时间") String operationTime,
             @RequestParam("content") @ApiParam("内容") String content,
             @RequestParam("type") @ApiParam("物流或者分销") String type,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
-        return traceService.update(new Trace(
+        return traceService.add(new Trace(
                 id,
                 productId,
                 operationPerson,
@@ -63,7 +62,7 @@ public class TraceController {
             @RequestParam("id") @ApiParam("主键-对应商品追溯码") String id,
             @RequestParam("productId") @ApiParam("商品ID") String productId,
             @RequestParam("operationPerson") @ApiParam("操作员") Integer operationPerson,
-            @RequestParam("operationTime") @ApiParam("操作时间") Date operationTime,
+            @RequestParam("operationTime") @ApiParam("操作时间") String operationTime,
             @RequestParam("content") @ApiParam("内容") String content,
             @RequestParam("type") @ApiParam("物流或者分销") String type,
             @RequestParam("remark") @ApiParam("备注") String remark

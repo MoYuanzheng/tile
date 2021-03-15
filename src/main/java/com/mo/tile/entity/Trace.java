@@ -14,7 +14,7 @@ import java.util.Date;
  * 追溯(Trace)实体类
  *
  * @author MoYz
- * @since 2021-03-13 17:07:33
+ * @since 2021-03-15 09:52:52
  */
 @Data
 @AllArgsConstructor
@@ -30,7 +30,7 @@ public class Trace implements Serializable {
     @ApiModelProperty(value = "操作员", required = true)
     private Integer operationPerson;
     @ApiModelProperty(value = "操作时间", required = true)
-    private Date operationTime;
+    private String operationTime;
     @ApiModelProperty(value = "内容", required = true)
     private String content;
     @ApiModelProperty(value = "物流或者分销", required = true)
@@ -53,7 +53,7 @@ public class Trace implements Serializable {
             String id,
             String productId,
             Integer operationPerson,
-            Date operationTime,
+            String operationTime,
             String content,
             String type,
             String remark
@@ -65,5 +65,6 @@ public class Trace implements Serializable {
         this.content = content;
         this.type = type;
         this.remark = remark;
+
     }
 }

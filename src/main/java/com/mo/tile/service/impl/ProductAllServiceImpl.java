@@ -69,11 +69,10 @@ public class ProductAllServiceImpl extends ServiceImpl<ProductAllMapper, Product
     public Boolean batchCreation(int num, String batch, Integer type) {
         boolean flag = true;
         while (num != 0) {
-//            if (!) {
-//                flag = false;
-//                break;
-//            }
-            add(new ProductAll(UUID.randomUUID().toString().substring(0, 18), type, batch, "批量生产"));
+            if (!add(new ProductAll(UUID.randomUUID().toString().replace("-", "").substring(0, 18), type, batch, "批量生产"))) {
+                flag = false;
+                break;
+            }
             num--;
         }
         return flag;

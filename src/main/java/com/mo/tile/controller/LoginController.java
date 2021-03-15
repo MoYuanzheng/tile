@@ -3,7 +3,6 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.User;
 import com.mo.tile.service.impl.SmsServiceImpl;
-import com.mo.tile.service.impl.TokenServiceImpl;
 import com.mo.tile.service.impl.UserServiceImpl;
 import io.swagger.annotations.*;
 import org.springframework.stereotype.Controller;
@@ -20,9 +19,6 @@ public class LoginController {
 
     @Resource
     UserServiceImpl userService;
-
-    @Resource
-    TokenServiceImpl tokenService;
 
     @Resource
     SmsServiceImpl smsService;
@@ -142,23 +138,6 @@ public class LoginController {
         return userService.query(page, key);
     }
 
-
-    @ApiOperation("更 新 token")
-    @ResponseBody
-    @GetMapping("setToken")
-    public String setToken() {
-        return tokenService.setNewToken();
-    }
-
-    /**
-     * 拿 到 Token
-     */
-    @ApiOperation("拿 到 Token")
-    @ResponseBody
-    @GetMapping("getToken")
-    public String getToken() {
-        return tokenService.getToken();
-    }
 
     /**
      * 用 户 登 陆 时 获 取 验 证 码

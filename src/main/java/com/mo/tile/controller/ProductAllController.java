@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * 所有商品(ProductAll)表控制层
@@ -59,8 +58,8 @@ public class ProductAllController {
             @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("type") @ApiParam("产品类别") Integer type,
             @RequestParam("batch") @ApiParam("批次") String batch,
-            @RequestParam("manufactureDate") @ApiParam("生产日期") Date manufactureDate,
-            @RequestParam("inspectionDate") @ApiParam("质检日期") Date inspectionDate,
+            @RequestParam("manufactureDate") @ApiParam("生产日期") String manufactureDate,
+            @RequestParam("inspectionDate") @ApiParam("质检日期") String inspectionDate,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return productAllService.update(new ProductAll(
