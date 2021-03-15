@@ -46,7 +46,9 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
      */
     @Override
     public Boolean del(String id) {
-        return batchMapper.deleteById(id) == 1;
+        QueryWrapper<ProductAll> wrapperProductAll = new QueryWrapper<>();
+        wrapperProductAll.eq("batch", id);
+        return batchMapper.deleteById(id) == 1 && productAllService.remove(wrapperProductAll);
     }
 
     /**
@@ -66,12 +68,11 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
         wrapperBatch
                 .eq("id", id)
                 .set("complete_time", completeTime);
-        UpdateWrapper<ProductAll> wrapperProductAll = new UpdateWrapper<>();
 
+        UpdateWrapper<ProductAll> wrapperProductAll = new UpdateWrapper<>();
         wrapperProductAll
                 .eq("batch", id)
                 .set("manufacture_date", completeTime);
-
         return batchService.update(wrapperBatch) && productAllService.update(wrapperProductAll);
     }
 

@@ -47,8 +47,9 @@ public class BatchController {
     @ApiOperation("删 除")
     @DeleteMapping("del")
     public Boolean del(
-            @RequestParam("id") @ApiParam("登录账号") String id
+            @RequestParam("id") @ApiParam("订单号") String id
     ) {
+        System.out.println("-------------------" + id);
         return batchService.del(id);
     }
 
