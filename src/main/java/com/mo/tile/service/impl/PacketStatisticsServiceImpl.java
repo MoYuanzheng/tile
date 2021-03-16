@@ -1,6 +1,7 @@
 package com.mo.tile.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.entity.PacketStatistics;
@@ -61,5 +62,27 @@ public class PacketStatisticsServiceImpl extends ServiceImpl<PacketStatisticsMap
                 .like("remark", key);
         packetStatisticsMapper.selectPage(page, wrapper);
         return page;
+    }
+
+    /**
+     * 通过容量作为筛选关键词更新剩余容量
+     *
+     * @param size 容量
+     * @return bool
+     * @author Moyz
+     * @date 2021/03/16 11:25
+     */
+    @Override
+    public Boolean updateSurplusBySize(Integer size) {
+        QueryWrapper<PacketStatistics> wrapper = new QueryWrapper<>();
+        wrapper.eq("size", size);
+        PacketStatistics packetStatistics;
+        packetStatistics = getOne(wrapper);
+
+        UpdateWrapper<PacketStatistics> wrapperUpdate = new UpdateWrapper<>();
+        wrapperUpdate.
+                eq("size", size).
+                set("surplus", packetStatistics.getSurplus() - 1);
+        return update(wrapperUpdate);
     }
 }

@@ -51,4 +51,14 @@ public interface ContainerService extends IService<Container> {
      * @date 2021-03-15 15:56:24
      */
     Page<Container> query(Integer pages, String key);
+
+    /**
+     * 两个盒子之间建立链接
+     *
+     * @param container 实体类
+     * @return bool
+     * @author Moyz
+     * @date 2021/03/16 11:34
+     */
+    Boolean createLink(Container container);
 }

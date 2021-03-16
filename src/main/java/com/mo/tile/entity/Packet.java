@@ -27,6 +27,10 @@ public class Packet implements Serializable {
     private String id;
     @ApiModelProperty(value = "包裹容量", required = true)
     private Integer size;
+    @ApiModelProperty(value = "剩余容量", required = true)
+    private Integer surplus;
+    @ApiModelProperty(value = "使用标志位", required = true)
+    private Integer useFlag;
     @ApiModelProperty(value = "备注")
     private String remark;
     @ApiModelProperty("逻辑删除标志位")
@@ -44,18 +48,36 @@ public class Packet implements Serializable {
     public Packet(
             String id,
             Integer size,
+            Integer surplus,
             String remark
     ) {
         this.id = id;
         this.size = size;
+        this.surplus = surplus;
         this.remark = remark;
     }
 
     public Packet(
             String id,
-            Integer size
+            Integer size,
+            Integer surplus
     ) {
         this.id = id;
         this.size = size;
+        this.surplus = surplus;
+    }
+
+    public Packet(
+            String id,
+            Integer size,
+            Integer surplus,
+            Integer useFlag,
+            String remark
+    ) {
+        this.id = id;
+        this.size = size;
+        this.surplus = surplus;
+        this.useFlag = useFlag;
+        this.remark = remark;
     }
 }

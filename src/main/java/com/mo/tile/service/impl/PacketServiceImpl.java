@@ -36,6 +36,7 @@ public class PacketServiceImpl extends ServiceImpl<PacketMapper, Packet> impleme
         while (number != 0) {
             add(new Packet(
                     UUID.randomUUID().toString().replace("-", "").substring(0, 18),
+                    size,
                     size
             ));
             number--;
@@ -44,8 +45,7 @@ public class PacketServiceImpl extends ServiceImpl<PacketMapper, Packet> impleme
         //拿到库存数据
         PacketStatistics packetStatistics;
         QueryWrapper<PacketStatistics> wrapperQuery = new QueryWrapper<>();
-        wrapperQuery.
-                eq("size", size);
+        wrapperQuery.eq("size", size);
         packetStatistics = packetStatisticsService.getOne(wrapperQuery);
         //更新库存数据
         UpdateWrapper<PacketStatistics> wrapperUpdate = new UpdateWrapper<>();

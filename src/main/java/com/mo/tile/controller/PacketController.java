@@ -36,6 +36,7 @@ public class PacketController {
         return packetService.add(new Packet(
                 id,
                 size,
+                size,
                 remark
         ));
     }
@@ -62,11 +63,13 @@ public class PacketController {
     public Boolean update(
             @RequestParam("id") @ApiParam("主键，包裹追溯码") String id,
             @RequestParam("size") @ApiParam("包裹容量") Integer size,
+            @RequestParam("surplus") @ApiParam("包裹容量") Integer surplus,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return packetService.update(new Packet(
                 id,
                 size,
+                surplus,
                 remark
         ));
     }

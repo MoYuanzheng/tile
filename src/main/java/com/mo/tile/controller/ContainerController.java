@@ -29,13 +29,13 @@ public class ContainerController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("bigSize") @ApiParam("大尺寸包装追溯码") String bigSize,
-            @RequestParam("smallSize") @ApiParam("小尺寸追溯码") String smallSize,
+            @RequestParam("bigId") @ApiParam("大尺寸包装追溯码") String bigId,
+            @RequestParam("smallId") @ApiParam("小尺寸追溯码") String smallId,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return containerService.add(new Container(
-                bigSize,
-                smallSize,
+                bigId,
+                smallId,
                 remark
         ));
     }

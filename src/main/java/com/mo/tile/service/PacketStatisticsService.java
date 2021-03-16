@@ -51,4 +51,14 @@ public interface PacketStatisticsService extends IService<PacketStatistics> {
      * @date 2021-03-15 16:56:54
      */
     Page<PacketStatistics> query(Integer pages, String key);
+
+    /**
+     * 通过容量作为筛选关键词更新剩余容量
+     *
+     * @param size 容量
+     * @return bool
+     * @author Moyz
+     * @date 2021/03/16 11:25
+     */
+    Boolean updateSurplusBySize(Integer size);
 }
