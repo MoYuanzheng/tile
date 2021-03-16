@@ -15,6 +15,7 @@ public interface ContainerService extends IService<Container> {
      * 添 加 操 作
      *
      * @param container -> Container实例
+     * @param material  -> 原材料代码
      * @return bool
      * @author Moyz
      * @date 2021-03-15 15:56:24

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * 材料(Material)表服务实现类
+ * 材料表(Material)表服务实现类
  *
  * @author MoYz
- * @since 2021-03-09 22:42:37
+ * @since 2021-03-16 17:50:13
  */
 @Service("materialService")
 public class MaterialServiceImpl extends ServiceImpl<MaterialMapper, Material> implements MaterialService {
@@ -55,8 +55,11 @@ public class MaterialServiceImpl extends ServiceImpl<MaterialMapper, Material> i
         QueryWrapper<Material> wrapper = new QueryWrapper<>();
         wrapper
                 .like("id", key).or()
-                .like("cn_name", key).or()
-                .like("en_name", key).or()
+                .like("alias", key).or()
+                .like("supplier", key).or()
+                .like("surplus", key).or()
+                .like("total", key).or()
+                .like("deadline", key).or()
                 .like("remark", key);
         materialMapper.selectPage(page, wrapper);
         return page;

@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * 材料(Material)表控制层
+ * 材料表(Material)表控制层
  *
  * @author MoYz
- * @since 2021-03-09 22:42:37
+ * @since 2021-03-16 17:50:13
  */
-@Api(tags = "材料相关")
+@Api(tags = "材料表相关")
 @RestController
 @RequestMapping("material")
 public class MaterialController {
@@ -30,14 +30,20 @@ public class MaterialController {
     @PostMapping("add")
     public Boolean add(
             @RequestParam("id") @ApiParam("主键") String id,
-            @RequestParam("cnName") @ApiParam("中文名") String cnName,
-            @RequestParam("enName") @ApiParam("英文名") String enName,
+            @RequestParam("alias") @ApiParam("商品代号，对应材料表主键") String alias,
+            @RequestParam("supplier") @ApiParam("供货商") String supplier,
+            @RequestParam("surplus") @ApiParam("剩余货物数量") Integer surplus,
+            @RequestParam("total") @ApiParam("该批货物总重量") Integer total,
+            @RequestParam("deadline") @ApiParam("截止日期时间戳") String deadline,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return materialService.add(new Material(
                 id,
-                cnName,
-                enName,
+                alias,
+                supplier,
+                surplus,
+                total,
+                deadline,
                 remark
         ));
     }
@@ -45,7 +51,7 @@ public class MaterialController {
     @ApiOperation("删 除")
     @DeleteMapping("del")
     public Boolean del(
-            @RequestParam("id") @ApiParam("登录账号") String id
+            @RequestParam("id") @ApiParam("主键") String id
     ) {
         return materialService.del(id);
     }
@@ -54,14 +60,20 @@ public class MaterialController {
     @PutMapping("update")
     public Boolean update(
             @RequestParam("id") @ApiParam("主键") String id,
-            @RequestParam("cnName") @ApiParam("中文名") String cnName,
-            @RequestParam("enName") @ApiParam("英文名") String enName,
+            @RequestParam("alias") @ApiParam("商品代号，对应材料表主键") String alias,
+            @RequestParam("supplier") @ApiParam("供货商") String supplier,
+            @RequestParam("surplus") @ApiParam("剩余货物数量") Integer surplus,
+            @RequestParam("total") @ApiParam("该批货物总重量") Integer total,
+            @RequestParam("deadline") @ApiParam("截止日期时间戳") String deadline,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return materialService.update(new Material(
                 id,
-                cnName,
-                enName,
+                alias,
+                supplier,
+                surplus,
+                total,
+                deadline,
                 remark
         ));
     }

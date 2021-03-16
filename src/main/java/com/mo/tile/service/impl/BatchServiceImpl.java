@@ -32,7 +32,9 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
      * 添 加 操 作
      */
     @Override
-    public Boolean add(Batch batch) {
+    public Boolean add(Batch batch, String material) {
+        System.out.println("--------------------" + material);
+        String[] materialArray = material.split(",");
         if (batchMapper.insert(batch) == 1) {
             System.out.println(batch);
             return productAllService.batchCreation(batch.getTotal(), batch.getId(), batch.getProductType());

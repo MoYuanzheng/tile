@@ -14,12 +14,13 @@ public interface BatchService extends IService<Batch> {
     /**
      * 添 加 操 作
      *
-     * @param batch -> Batch实例
+     * @param batch    -> Batch实例
+     * @param material -> 原材料
      * @return bool
      * @author Moyz
      * @date 2021-03-09 22:43:17
      */
-    Boolean add(Batch batch);
+    Boolean add(Batch batch, String material);
 
     /**
      * 删 除 操 作

@@ -11,24 +11,30 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 材料(Material)实体类
+ * 材料表(Material)实体类
  *
  * @author MoYz
- * @since 2021-03-09 22:42:36
+ * @since 2021-03-16 17:50:12
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@ApiModel("材料相关")
+@ApiModel("材料表相关")
 public class Material implements Serializable {
     @ApiModelProperty(value = "主键", required = true)
     private String id;
-    @ApiModelProperty(value = "中文名", required = true)
-    private String cnName;
-    @ApiModelProperty(value = "英文名", required = true)
-    private String enName;
+    @ApiModelProperty(value = "商品代号，对应材料表主键", required = true)
+    private String alias;
+    @ApiModelProperty(value = "供货商", required = true)
+    private String supplier;
+    @ApiModelProperty(value = "剩余货物数量", required = true)
+    private Integer surplus;
+    @ApiModelProperty(value = "该批货物总重量", required = true)
+    private Integer total;
+    @ApiModelProperty(value = "截止日期时间戳", required = true)
+    private String deadline;
     @ApiModelProperty(value = "备注")
     private String remark;
     @ApiModelProperty("逻辑删除标志位")
@@ -45,13 +51,19 @@ public class Material implements Serializable {
 
     public Material(
             String id,
-            String cnName,
-            String enName,
+            String alias,
+            String supplier,
+            Integer surplus,
+            Integer total,
+            String deadline,
             String remark
     ) {
         this.id = id;
-        this.cnName = cnName;
-        this.enName = enName;
+        this.alias = alias;
+        this.supplier = supplier;
+        this.surplus = surplus;
+        this.total = total;
+        this.deadline = deadline;
         this.remark = remark;
 
     }
