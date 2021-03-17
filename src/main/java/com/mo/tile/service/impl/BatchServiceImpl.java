@@ -8,6 +8,8 @@ import com.mo.tile.entity.Batch;
 import com.mo.tile.entity.ProductAll;
 import com.mo.tile.mapper.BatchMapper;
 import com.mo.tile.service.BatchService;
+import com.mo.tile.service.ProductAllService;
+import com.mo.tile.service.TraceService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,18 +28,19 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
     @Resource
     private BatchService batchService;
     @Resource
-    private ProductAllServiceImpl productAllService;
+    private ProductAllService productAllService;
+    @Resource
+    private TraceService traceService;
 
     /**
      * 添 加 操 作
      */
     @Override
     public Boolean add(Batch batch, String material) {
-        System.out.println("--------------------" + material);
-        String[] materialArray = material.split(",");
         if (batchMapper.insert(batch) == 1) {
             System.out.println(batch);
-            return productAllService.batchCreation(batch.getTotal(), batch.getId(), batch.getProductType());
+            return productAllService.batchCreation(batch.getTotal(), batch.getId(), batch.getProductType())
+                    && traceService.batchMaterial(batch.getId(), material, batch.getOperator());
         } else {
             return false;
         }

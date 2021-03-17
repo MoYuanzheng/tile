@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.entity.ProductAll;
 import com.mo.tile.mapper.ProductAllMapper;
 import com.mo.tile.service.ProductAllService;
+import com.mo.tile.util.GeneralFunctions;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.UUID;
 
 /**
  * (ProductAll)表服务实现类
@@ -69,7 +69,7 @@ public class ProductAllServiceImpl extends ServiceImpl<ProductAllMapper, Product
     public Boolean batchCreation(int num, String batch, Integer type) {
         boolean flag = true;
         while (num != 0) {
-            if (!add(new ProductAll(UUID.randomUUID().toString().replace("-", "").substring(0, 18), type, batch, "批量生产"))) {
+            if (!add(new ProductAll(GeneralFunctions.getRandomId(), type, batch, "批量生产"))) {
                 flag = false;
                 break;
             }

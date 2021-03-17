@@ -3,6 +3,7 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Batch;
 import com.mo.tile.service.impl.BatchServiceImpl;
+import com.mo.tile.util.GeneralFunctions;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,7 +30,6 @@ public class BatchController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("operator") @ApiParam("创建人员工号") String operator,
             @RequestParam("productType") @ApiParam("产品型号") Integer productType,
             @RequestParam("total") @ApiParam("订单总数") Integer total,
@@ -37,7 +37,7 @@ public class BatchController {
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return batchService.add(new Batch(
-                id,
+                GeneralFunctions.getRandomId(),
                 operator,
                 productType,
                 total,

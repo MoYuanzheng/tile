@@ -51,4 +51,16 @@ public interface TraceService extends IService<Trace> {
      * @date 2021-03-13 17:07:34
      */
     Page<Trace> query(Integer pages, String key);
+
+    /**
+     * 关联订单与使用的原材料
+     *
+     * @param batchId    订单ID
+     * @param materialId 原材料ID
+     * @param operator   操作员
+     * @return bool
+     * @author Moyz
+     * @date 2021/03/17 10:12
+     */
+    Boolean batchMaterial(String batchId, String materialId, String operator);
 }

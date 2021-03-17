@@ -8,10 +8,10 @@ import com.mo.tile.entity.Packet;
 import com.mo.tile.mapper.ContainerMapper;
 import com.mo.tile.service.ContainerService;
 import com.mo.tile.service.PacketService;
+import com.mo.tile.util.GeneralFunctions;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.UUID;
 
 /**
  * (Container)表服务实现类
@@ -70,7 +70,8 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
              */
             packetBig.setUseFlag(1);
             packetBig.setSurplus(packetBig.getSurplus() - 1);
-            return packetStatisticsService.updateSurplusBySize(packetBig.getSize()) && createLink(container) && packetService.update(packetBig);
+            return packetStatisticsService.updateSurplusBySize(packetBig.getSize())
+                    && createLink(container) && packetService.update(packetBig);
         }
 
 
@@ -113,7 +114,7 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
      */
     @Override
     public Boolean createLink(Container container) {
-        container.setId(UUID.randomUUID().toString().replace("-", "").substring(0, 18));
+        container.setId(GeneralFunctions.getRandomId());
         return containerMapper.insert(container) == 1;
     }
 }

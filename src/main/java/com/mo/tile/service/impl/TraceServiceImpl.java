@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.entity.Trace;
 import com.mo.tile.mapper.TraceMapper;
 import com.mo.tile.service.TraceService;
+import com.mo.tile.util.GeneralFunctions;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -57,11 +58,25 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
                 .like("id", key).or()
                 .like("product_id", key).or()
                 .like("operation_person", key).or()
-                .like("operation_time", key).or()
                 .like("content", key).or()
                 .like("type", key).or()
                 .like("remark", key);
         traceMapper.selectPage(page, wrapper);
         return page;
+    }
+
+    /**
+     * 订单与原材料建立联系
+     */
+    @Override
+    public Boolean batchMaterial(String batchId, String materialId, String operator) {
+        return add(new Trace(
+                GeneralFunctions.getRandomId(),
+                batchId,
+                operator,
+                materialId,
+                "3",
+                null
+        ));
     }
 }

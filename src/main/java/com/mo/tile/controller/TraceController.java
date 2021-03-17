@@ -31,17 +31,15 @@ public class TraceController {
     public Boolean add(
             @RequestParam("id") @ApiParam("主键-对应商品追溯码") String id,
             @RequestParam("productId") @ApiParam("商品ID") String productId,
-            @RequestParam("operationPerson") @ApiParam("操作员") Integer operationPerson,
-            @RequestParam("operationTime") @ApiParam("操作时间") String operationTime,
+            @RequestParam("operationPerson") @ApiParam("操作员") String operationPerson,
             @RequestParam("content") @ApiParam("内容") String content,
-            @RequestParam("type") @ApiParam("物流或者分销") String type,
+            @RequestParam("type") @ApiParam("1物流，2装箱，3原材料") String type,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return traceService.add(new Trace(
                 id,
                 productId,
                 operationPerson,
-                operationTime,
                 content,
                 type,
                 remark
@@ -61,8 +59,8 @@ public class TraceController {
     public Boolean update(
             @RequestParam("id") @ApiParam("主键-对应商品追溯码") String id,
             @RequestParam("productId") @ApiParam("商品ID") String productId,
-            @RequestParam("operationPerson") @ApiParam("操作员") Integer operationPerson,
-            @RequestParam("operationTime") @ApiParam("操作时间") String operationTime,
+            @RequestParam("operationPerson") @ApiParam("操作员") String operationPerson,
+
             @RequestParam("content") @ApiParam("内容") String content,
             @RequestParam("type") @ApiParam("物流或者分销") String type,
             @RequestParam("remark") @ApiParam("备注") String remark
@@ -71,7 +69,6 @@ public class TraceController {
                 id,
                 productId,
                 operationPerson,
-                operationTime,
                 content,
                 type,
                 remark
