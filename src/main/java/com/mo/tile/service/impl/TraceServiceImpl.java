@@ -5,11 +5,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.entity.Trace;
 import com.mo.tile.mapper.TraceMapper;
+import com.mo.tile.service.ContainerService;
 import com.mo.tile.service.TraceService;
 import com.mo.tile.util.GeneralFunctions;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 追溯(Trace)表服务实现类
@@ -22,13 +25,45 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
 
     @Resource
     private TraceMapper traceMapper;
+    private static final String TYPE_LOGISTICS = "1";
+    @Resource
+    ProductAllServiceImpl productAllService;
+    @Resource
+    ContainerService containerService;
 
     /**
      * 添 加 操 作
      */
     @Override
     public Boolean add(Trace trace) {
-        return traceMapper.insert(trace) == 1;
+        if (trace.getType().equals(TYPE_LOGISTICS)) {
+            String operator = trace.getOperationPerson();
+            String content = trace.getContent();
+            List<String> productId = new ArrayList<>();
+            productId.add(trace.getProductId());
+            /**
+             * 1.查询trace.productId()是否存在于product_all表中
+             * 1.1.是则直接插入
+             * 1.2.否就查询与BIG_ID相关联的SMALL_ID插入到列表中
+             */
+            String pdtId;
+            for (int i = 0; i < productId.size(); i++) {
+                pdtId = productId.get(i);
+                traceMapper.insert(new Trace(
+                        GeneralFunctions.getRandomId(),
+                        pdtId,
+                        operator,
+                        content,
+                        "1",
+                        "扫码-物流"
+                ));
+                if (!productAllService.isExist(pdtId)) {
+                    //查询所有container表中bigId与trace.productId()相同的记录
+                    productId.addAll(containerService.getSmallIdByBigId(pdtId));
+                }
+            }
+        }
+        return true;
     }
 
     /**

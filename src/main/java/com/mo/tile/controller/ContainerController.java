@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Container)表控制层
@@ -73,5 +74,15 @@ public class ContainerController {
             @RequestParam("key") @ApiParam("关键词") String key
     ) {
         return containerService.query(pages, key);
+    }
+
+    /**
+     * 通过大盒子，找到小盒子
+     */
+    @GetMapping("getSmallIdByBigId")
+    public List<String> getSmallIdByBigId(
+            @RequestParam("bigId") String bigId
+    ) {
+        return containerService.getSmallIdByBigId(bigId);
     }
 }

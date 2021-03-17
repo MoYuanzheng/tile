@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.Container;
 
+import java.util.List;
+
 /**
  * (Container)表服务接口
  *
@@ -15,7 +17,6 @@ public interface ContainerService extends IService<Container> {
      * 添 加 操 作
      *
      * @param container -> Container实例
-     * @param material  -> 原材料代码
      * @return bool
      * @author Moyz
      * @date 2021-03-15 15:56:24
@@ -62,4 +63,14 @@ public interface ContainerService extends IService<Container> {
      * @date 2021/03/16 11:34
      */
     Boolean createLink(Container container);
+
+    /**
+     * 通过大盒子找到其包含的小盒子
+     *
+     * @param bigId 大盒子ID
+     * @return 小盒子ID列表
+     * @author Moyz
+     * @date 2021/03/17 16:58
+     */
+    List<String> getSmallIdByBigId(String bigId);
 }

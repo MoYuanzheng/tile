@@ -3,6 +3,7 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Trace;
 import com.mo.tile.service.impl.TraceServiceImpl;
+import com.mo.tile.util.GeneralFunctions;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,7 +30,6 @@ public class TraceController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("id") @ApiParam("主键-对应商品追溯码") String id,
             @RequestParam("productId") @ApiParam("商品ID") String productId,
             @RequestParam("operationPerson") @ApiParam("操作员") String operationPerson,
             @RequestParam("content") @ApiParam("内容") String content,
@@ -37,7 +37,7 @@ public class TraceController {
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return traceService.add(new Trace(
-                id,
+                GeneralFunctions.getRandomId(),
                 productId,
                 operationPerson,
                 content,

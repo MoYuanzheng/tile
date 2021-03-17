@@ -65,6 +65,19 @@ public class ProductAllServiceImpl extends ServiceImpl<ProductAllMapper, Product
         return page;
     }
 
+    /**
+     * 查询该产品是否存在（该ID是否为最小单位包装）
+     * 是就返回 1
+     */
+    public Boolean isExist(String productId) {
+        QueryWrapper<ProductAll> wrapper = new QueryWrapper<>();
+        wrapper.eq("id", productId);
+        return count(wrapper) == 1;
+    }
+
+    /**
+     * 订单批量创建产品
+     */
     @Override
     public Boolean batchCreation(int num, String batch, Integer type) {
         boolean flag = true;

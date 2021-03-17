@@ -8,10 +8,13 @@ import com.mo.tile.entity.Packet;
 import com.mo.tile.mapper.ContainerMapper;
 import com.mo.tile.service.ContainerService;
 import com.mo.tile.service.PacketService;
+import com.mo.tile.service.ProductAllService;
 import com.mo.tile.util.GeneralFunctions;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * (Container)表服务实现类
@@ -27,6 +30,8 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
 
     @Resource
     private PacketService packetService;
+    @Resource
+    private ProductAllService productAllService;
 
     @Resource
     private com.mo.tile.service.PacketStatisticsService packetStatisticsService;
@@ -110,11 +115,24 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
     }
 
     /**
-     * 两个盒子之间建立链接
+     * 简单添加两个盒子之间包含关系
      */
     @Override
     public Boolean createLink(Container container) {
         container.setId(GeneralFunctions.getRandomId());
         return containerMapper.insert(container) == 1;
+    }
+
+    /**
+     * 通过大盒子ID，找到关联的小盒子ID列表
+     */
+    @Override
+    public List<String> getSmallIdByBigId(String bigId) {
+        QueryWrapper<Container> wrapper = new QueryWrapper<>();
+        wrapper.eq("big_id", bigId);
+        //拿到所有关于大盒子的数据
+        List<Container> containerListByBigId = list(wrapper);
+        //找出小盒子ID
+        return containerListByBigId.stream().map(Container::getSmallId).collect(Collectors.toList());
     }
 }
