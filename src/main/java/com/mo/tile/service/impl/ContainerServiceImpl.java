@@ -8,7 +8,6 @@ import com.mo.tile.entity.Packet;
 import com.mo.tile.mapper.ContainerMapper;
 import com.mo.tile.service.ContainerService;
 import com.mo.tile.service.PacketService;
-import com.mo.tile.service.ProductAllService;
 import com.mo.tile.util.GeneralFunctions;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +29,6 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
 
     @Resource
     private PacketService packetService;
-    @Resource
-    private ProductAllService productAllService;
 
     @Resource
     private com.mo.tile.service.PacketStatisticsService packetStatisticsService;
@@ -47,39 +44,53 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
         if (count(wrapperSmall) > 0) {
             return false;
         }
-        //大盒子
+        //查询小盒子是否在产品表中， 是->拿到SIZE,否->size  = 1
+
+        //拿到小盒子容量
+        Packet packetSmall;
+        QueryWrapper<Packet> wrapperSmallPacket = new QueryWrapper<>();
+        wrapperSmallPacket.eq("id", container.getSmallId());
+        packetSmall = packetService.getOne(wrapperSmallPacket);
+        //packet表中有小盒子，就使flag = true
+        boolean flag = packetService.count(wrapperSmallPacket) > 0;
+
+        //拿到大盒子信息
         Packet packetBig;
         QueryWrapper<Packet> wrapper = new QueryWrapper<>();
         wrapper.eq("id", container.getBigId());
         packetBig = packetService.getOne(wrapper);
 
-        //如果该盒子已被使用且剩余容量大于1
-        if (packetBig.getUseFlag() == 1) {
-            if (packetBig.getSurplus() >= 1) {
+        int packetSize = 1;
+
+        if (flag) {
+            packetSize = packetSmall.getSize();
+        }
+        //如果剩余容量大于小盒子体积
+        if (packetBig.getSurplus() >= packetSize) {
+            //如果该大盒子已被使用
+            if (packetBig.getUseFlag() == 1) {
                 /**
-                 * √0. 进行分配
-                 * √1.更新大盒子剩余容量
+                 * √ 0. 进行分配
+                 * √ 1.更新大盒子剩余容量（减去小盒子容量）
                  */
-                packetBig.setSurplus(packetBig.getSurplus() - 1);
+                packetBig.setSurplus(packetBig.getSurplus() - packetSize);
                 //创建关系并更新剩余容量
                 return createLink(container) && packetService.update(packetBig);
+
             } else {
-                return false;
+                /**
+                 * √ 0. 进行分配
+                 * √ 1.更新大盒子剩余容量（减去小盒子容量）
+                 * √ 2.更新大盒子剩余库存
+                 * √ 3.更新大盒子标志位
+                 */
+                packetBig.setUseFlag(1);
+                packetBig.setSurplus(packetBig.getSurplus() - packetSize);
+                return packetStatisticsService.updateSurplusBySize(packetBig.getSize())
+                        && createLink(container) && packetService.update(packetBig);
             }
-        } else {
-            /**
-             * √0. 进行分配
-             * √1.更新大盒子剩余容量
-             * √2.更新大盒子剩余库存
-             * √3.更新大盒子标志位
-             */
-            packetBig.setUseFlag(1);
-            packetBig.setSurplus(packetBig.getSurplus() - 1);
-            return packetStatisticsService.updateSurplusBySize(packetBig.getSize())
-                    && createLink(container) && packetService.update(packetBig);
         }
-
-
+        return false;
     }
 
     /**

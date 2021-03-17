@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.entity.Trace;
 import com.mo.tile.mapper.TraceMapper;
 import com.mo.tile.service.ContainerService;
+import com.mo.tile.service.ProductAllService;
 import com.mo.tile.service.TraceService;
 import com.mo.tile.util.GeneralFunctions;
 import org.springframework.stereotype.Service;
@@ -27,12 +28,12 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
     private TraceMapper traceMapper;
     private static final String TYPE_LOGISTICS = "1";
     @Resource
-    ProductAllServiceImpl productAllService;
+    ProductAllService productAllService;
     @Resource
     ContainerService containerService;
 
     /**
-     * 添 加 操 作
+     * 创建追溯记录
      */
     @Override
     public Boolean add(Trace trace) {

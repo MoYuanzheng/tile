@@ -63,4 +63,15 @@ public interface ProductAllService extends IService<ProductAll> {
      * @date 2021/03/14 14:16
      */
     Boolean batchCreation(int num, String batch, Integer type);
+
+    /**
+     * 判单product_all表中是否存在
+     * 判断是商品还是大盒子
+     *
+     * @author Moyz
+     * @date 2021/03/17 20:03
+     * @param productId 商品主键
+     * @return  bool
+     */
+    Boolean isExist(String productId);
 }

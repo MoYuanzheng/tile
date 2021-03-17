@@ -60,7 +60,6 @@ public class TraceController {
             @RequestParam("id") @ApiParam("主键-对应商品追溯码") String id,
             @RequestParam("productId") @ApiParam("商品ID") String productId,
             @RequestParam("operationPerson") @ApiParam("操作员") String operationPerson,
-
             @RequestParam("content") @ApiParam("内容") String content,
             @RequestParam("type") @ApiParam("物流或者分销") String type,
             @RequestParam("remark") @ApiParam("备注") String remark

@@ -69,6 +69,7 @@ public class ProductAllServiceImpl extends ServiceImpl<ProductAllMapper, Product
      * 查询该产品是否存在（该ID是否为最小单位包装）
      * 是就返回 1
      */
+    @Override
     public Boolean isExist(String productId) {
         QueryWrapper<ProductAll> wrapper = new QueryWrapper<>();
         wrapper.eq("id", productId);
