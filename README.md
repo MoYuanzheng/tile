@@ -1,5 +1,8 @@
-# 3.17任务计划
-## 追溯功能完善   
+# 剩余容量更新
+
+- [x] 1. 简单的-1操作只能满足最小单位被装入盒子中，当n容量盒子装入m容量盒子中时，大着容量应为 m - n
+
+# 追溯功能完善
 
 - [x] 详情设计
 
@@ -22,6 +25,15 @@
 >    是： 则进行对Contrainer表查找（getSmallIdByBigId），返回的小盒子ID列表加入循环的List中
 >
 >    否：进行下一次循环
+
+找出表中符合条件的记录中的某个字段
+
+```java
+//拿到所有关于大盒子的数据
+List<Container> containerListByBigId = list(wrapper);
+//找出小盒子ID
+return containerListByBigId.stream().map(Container::getSmallId).collect(Collectors.toList());
+```
 ------
 # 3-16 任务计划
 
