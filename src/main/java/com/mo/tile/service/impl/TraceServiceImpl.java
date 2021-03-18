@@ -96,7 +96,8 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
                 .like("operation_person", key).or()
                 .like("content", key).or()
                 .like("type", key).or()
-                .like("remark", key);
+                .like("remark", key)
+                .orderByAsc("create_time");
         traceMapper.selectPage(page, wrapper);
         return page;
     }
