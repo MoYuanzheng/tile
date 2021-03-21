@@ -26,6 +26,9 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
 
     @Resource
     private TraceMapper traceMapper;
+    /**
+     * 物流类型为 1
+     */
     private static final String TYPE_LOGISTICS = "1";
     @Resource
     ProductAllService productAllService;

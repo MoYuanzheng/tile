@@ -3,6 +3,7 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Packet;
 import com.mo.tile.service.impl.PacketServiceImpl;
+import com.mo.tile.util.GeneralFunctions;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,12 +30,11 @@ public class PacketController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("id") @ApiParam("主键，包裹追溯码") String id,
             @RequestParam("size") @ApiParam("包裹容量") Integer size,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return packetService.add(new Packet(
-                id,
+                GeneralFunctions.getRandomId(),
                 size,
                 size,
                 remark

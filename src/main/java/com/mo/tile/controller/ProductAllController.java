@@ -3,6 +3,7 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.ProductAll;
 import com.mo.tile.service.impl.ProductAllServiceImpl;
+import com.mo.tile.util.GeneralFunctions;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,13 +30,12 @@ public class ProductAllController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("type") @ApiParam("产品类别") Integer type,
             @RequestParam("batch") @ApiParam("批次") String batch,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return productAllService.add(new ProductAll(
-                id,
+                GeneralFunctions.getRandomId(),
                 type,
                 batch,
                 remark

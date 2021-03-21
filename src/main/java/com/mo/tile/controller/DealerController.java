@@ -3,6 +3,7 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Dealer;
 import com.mo.tile.service.impl.DealerServiceImpl;
+import com.mo.tile.util.GeneralFunctions;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,7 +30,6 @@ public class DealerController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("alias") @ApiParam("别名") String alias,
             @RequestParam("fullName") @ApiParam("全称") String fullName,
             @RequestParam("grade") @ApiParam("经销商等级，1 === 一级经销商") Integer grade,
@@ -38,7 +38,7 @@ public class DealerController {
             @RequestParam("remark") String remark
     ) {
         return dealerService.add(new Dealer(
-                id,
+                GeneralFunctions.getRandomId(),
                 alias,
                 fullName,
                 grade,

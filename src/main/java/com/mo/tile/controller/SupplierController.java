@@ -3,6 +3,7 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Supplier;
 import com.mo.tile.service.impl.SupplierServiceImpl;
+import com.mo.tile.util.GeneralFunctions;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,7 +30,6 @@ public class SupplierController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("material") @ApiParam("所供应材料") String material,
             @RequestParam("fullName") @ApiParam("供应商全称") String fullName,
             @RequestParam("header") @ApiParam("负责人名字") String header,
@@ -38,7 +38,7 @@ public class SupplierController {
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return supplierService.add(new Supplier(
-                id,
+                GeneralFunctions.getRandomId(),
                 material,
                 fullName,
                 header,

@@ -33,7 +33,7 @@ public class BatchController {
             @RequestParam("operator") @ApiParam("创建人员工号") String operator,
             @RequestParam("productType") @ApiParam("产品型号") Integer productType,
             @RequestParam("total") @ApiParam("订单总数") Integer total,
-            @RequestParam("material") @ApiParam("备注") String material,
+            @RequestParam("material") @ApiParam("材料代号") String material,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return batchService.add(new Batch(

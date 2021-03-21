@@ -3,6 +3,7 @@ package com.mo.tile.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mo.tile.entity.Material;
 import com.mo.tile.service.impl.MaterialServiceImpl;
+import com.mo.tile.util.GeneralFunctions;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,7 +30,6 @@ public class MaterialController {
     @ApiOperation("添 加")
     @PostMapping("add")
     public Boolean add(
-            @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("alias") @ApiParam("商品代号，对应材料表主键") String alias,
             @RequestParam("supplier") @ApiParam("供货商") String supplier,
             @RequestParam("surplus") @ApiParam("剩余货物数量") Integer surplus,
@@ -38,7 +38,7 @@ public class MaterialController {
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
         return materialService.add(new Material(
-                id,
+                GeneralFunctions.getRandomId(),
                 alias,
                 supplier,
                 surplus,
