@@ -97,8 +97,15 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
      * 删 除 操 作
      */
     @Override
-    public Boolean del(String id) {
-        return containerMapper.deleteById(id) == 1;
+    public Boolean del(String bigId, String smallId) {
+        QueryWrapper<Container> wrapper = new QueryWrapper<>();
+        wrapper.
+                eq("small_id", bigId).
+                eq("big_id", smallId).
+                or().
+                eq("small_id", smallId).
+                eq("big_id", bigId);
+        return remove(wrapper);
     }
 
     /**

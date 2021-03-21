@@ -26,12 +26,13 @@ public interface ContainerService extends IService<Container> {
     /**
      * 删 除 操 作
      *
-     * @param id -> 主键
+     * @param bigId   -> 大盒子
+     * @param smallId -> 小盒子
      * @return bool
      * @author Moyz
      * @date 2021-03-15 15:56:24
      */
-    Boolean del(String id);
+    Boolean del(String bigId, String smallId);
 
     /**
      * 修 改 操 作

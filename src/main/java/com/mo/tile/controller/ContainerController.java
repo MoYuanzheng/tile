@@ -44,9 +44,10 @@ public class ContainerController {
     @ApiOperation("删 除")
     @DeleteMapping("del")
     public Boolean del(
-            @RequestParam("id") @ApiParam("主键") String id
+            @RequestParam("bigId") @ApiParam("A容器ID") String bigId,
+            @RequestParam("smallId") @ApiParam("B容器ID") String smallId
     ) {
-        return containerService.del(id);
+        return containerService.del(bigId, smallId);
     }
 
     @ApiOperation("修 改")
