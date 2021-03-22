@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -29,6 +31,7 @@ public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsSe
     @Resource
     private SmsMapper smsMapper;
 
+    Map<String, String> result = new HashMap<>();
     /**
      * 添 加 操 作
      */
@@ -117,18 +120,22 @@ public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsSe
      * 4. 成功则返回 true，失败返回 false
      */
     @Override
-    public String checkCode(String phoneNum, String userCode) {
+    public Map<String, String> checkCode(String phoneNum, String userCode) {
         Sms sms = smsMapper.selectById(phoneNum);
         if (sms.getDeadline().getTime() <= System.currentTimeMillis() || sms.getCode() == null) {
             //时间过期 或 未注册
-            return "ErrorCode 101";
+            result.put("status", "Error");
+            result.put("reason", "Time expired or not registered.[Please Reacquire Verification code]");
+            return result;
         } else {
             if (sms.getCode().equals(userCode)) {
-                return "success";
+                result.put("status", "Success");
             } else {
                 //验证码错误
-                return "ErrorCode 102";
+                result.put("status", "Error");
+                result.put("reason", "Verification code Error");
             }
+            return result;
         }
     }
 }

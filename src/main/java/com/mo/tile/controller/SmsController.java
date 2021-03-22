@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * 注 册 时 验 证 码
@@ -25,7 +26,6 @@ public class SmsController {
     /**
      * 核对验证码结果返回值
      */
-    static final String RESULT = "success";
 
     @Resource
     private SmsServiceImpl smsService;
@@ -71,15 +71,10 @@ public class SmsController {
      */
     @ApiOperation("核对验证码")
     @GetMapping("check")
-    public String check(
+    public Map<String, String> check(
             @RequestParam("phone") String phone,
             @RequestParam("userCode") String userCode
     ) {
-        if (RESULT.equals(smsService.checkCode(phone, userCode))) {
-            //设置权限
-            return RESULT;
-        } else {
-            return smsService.checkCode(phone, userCode);
-        }
+        return smsService.checkCode(phone, userCode);
     }
 }

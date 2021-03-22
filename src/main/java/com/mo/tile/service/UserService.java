@@ -93,7 +93,7 @@ public interface UserService extends IService<User> {
     String smsCode();
 
     /**
-     * 添 加 操 作
+     * 添加手机验证码
      *
      * @param phone -> 手机号
      * @param code  -> 验证码

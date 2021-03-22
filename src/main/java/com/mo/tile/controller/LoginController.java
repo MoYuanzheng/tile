@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,6 +24,13 @@ public class LoginController {
 
     @Resource
     SmsServiceImpl smsService;
+
+    /**
+     * 返回值
+     *
+     * @date 2021/03/22 10:31
+     */
+    Map<String, String> result = new HashMap<>();
 
     /**
      * 重 定 向 至 前 端 登 录 页 面
@@ -94,7 +102,7 @@ public class LoginController {
      */
     @ApiOperation("修 改 个 人 信 息")
     @ResponseBody
-    @PutMapping("getToken")
+    @PutMapping("updateInformation")
     public Boolean update(
             @RequestParam("id") @ApiParam("登录名") String id,
             @RequestParam("username") @ApiParam("用户名") String username,
@@ -148,14 +156,14 @@ public class LoginController {
     @ApiOperation("新增或更新验证码表")
     @GetMapping("sentSmsCode")
     @ResponseBody
-    public String sentSmsCode(@RequestParam("phone") String phone) {
-        /*
+    public Map<String, String> sentSmsCode(@RequestParam("phone") String phone) {
+        /**
          * 0. 先查询有无此手机号，无手机号则令其注册
          * 1. 去数据库查询是否已存在验证码(若验证码生成小于1分钟则不生成新的)
          * 2. 若存在则返回 false , 若成功则进行下一步
          * 3. 生成验证码并存到数据库，设置生效时间
          * 4. 调用 SendSmsImpl 进行发送
-         * */
+         */
 
         if (userService.isEmptyPhone(phone)) {
             //判断时间小于一分钟就更新
@@ -165,15 +173,20 @@ public class LoginController {
                 //发送校验码
                 Boolean flag2 = smsService.sendSmsCode(phone, userService.getUseByPhone(phone).getCode());
                 if (flag1 && flag2) {
-                    return "已成功发送效验码，请查收！";
+                    result.put("status", "Success");
+                    result.put("reason", "The verification code has been successfully sent, please check");
                 } else {
-                    return "未知错误！";
+                    result.put("status", "Error");
+                    result.put("reason", "Unknown Error, please try again");
                 }
             } else {
-                return "禁止频繁发送验证码！";
+                result.put("status", "Error");
+                result.put("reason", "Prohibit frequent sending of verification codes");
             }
         } else {
-            return "未查询到该用户，请注册后登录！";
+            result.put("status", "Error");
+            result.put("reason", "The user is not found, please log in after registering!");
         }
+        return result;
     }
 }

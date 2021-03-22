@@ -3,6 +3,8 @@ package com.mo.tile.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.Sms;
 
+import java.util.Map;
+
 /**
  * (Sms)表服务接口
  *
@@ -79,5 +81,5 @@ public interface SmsService extends IService<Sms> {
      * @author Moyz
      * @date 2021/02/15 20:38
      */
-    String checkCode(String phoneNum, String userCode);
+    Map<String, String> checkCode(String phoneNum, String userCode);
 }
