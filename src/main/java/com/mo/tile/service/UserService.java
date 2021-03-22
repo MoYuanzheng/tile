@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.entity.User;
 
+import java.util.Map;
+
 /**
  * (User)表服务接口
  *
@@ -19,7 +21,7 @@ public interface UserService extends IService<User> {
      * @author Moyz
      * @date 2021/02/07 15:59
      */
-    Boolean add(User user);
+    Map<String, String> add(User user);
 
     /**
      * 修 改 用 户 信 息

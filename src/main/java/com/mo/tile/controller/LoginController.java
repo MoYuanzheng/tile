@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @author MoYz
@@ -68,7 +69,7 @@ public class LoginController {
     })
     @ResponseBody
     @PostMapping("reg")
-    public Boolean add(
+    public Map<String, String> add(
             @RequestParam("id") String id,
             @RequestParam("username") String username,
             @RequestParam("pwd") String pwd,
@@ -120,7 +121,7 @@ public class LoginController {
     @ApiOperation("删 除 个 人 信 息")
     @ResponseBody
     @DeleteMapping("del")
-    public Boolean del(@RequestParam("id") String id) {
+    public Map<String, String> del(@RequestParam("id") String id) {
 
         return userService.del(id);
     }

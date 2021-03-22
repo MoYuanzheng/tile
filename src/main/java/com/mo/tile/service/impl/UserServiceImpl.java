@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -29,12 +31,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 添 加 用 户
      */
     @Override
-    public Boolean add(User user) {
+    public Map<String, String> add(User user) {
+        Map<String, String> result = new HashMap<String, String>();
+
+        //判断用户信息不为空
         if (user != null) {
             String id = user.getId();
-            return userMapper.selectById(id) == null && userMapper.insert(user) == 1;
+            //判断数据库有该用户名
+            if (userMapper.selectById(id) != null) {
+                result.put("status", "Error");
+                result.put("reason", "The username is already in use");
+                return result;
+                //若成功插入
+            } else {
+                if (userMapper.insert(user) == 1) {
+                    result.put("status", "Success");
+                    return result;
+                } else {
+                    result.put("status", "Success");
+                    result.put("reason", "Creation failed, please try again.[Deleted username is not available]");
+                    return result;
+                }
+            }
         } else {
-            return false;
+            result.put("status", "Error");
+            result.put("reason", "Information must not be empty");
+            return result;
         }
     }
 
