@@ -1,3 +1,8 @@
+# 3.22 更新部分函数返回值类型为Map<String, String>
+要求：返回错误原因
+1. UserService.add()
+2. SmsService.checkCode()
+3. SmsController.sentSmsCode()
 # 3.21 拆箱与ID
 - [x] 1. 增加拆箱功能，例如将B从A包装箱中取出
 - [x] 2. ID全部改为UUID自动生成
