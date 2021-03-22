@@ -121,8 +121,7 @@ public class LoginController {
     @ApiOperation("删 除 个 人 信 息")
     @ResponseBody
     @DeleteMapping("del")
-    public Map<String, String> del(@RequestParam("id") String id) {
-
+    public Boolean del(@RequestParam("id") String id) {
         return userService.del(id);
     }
 
