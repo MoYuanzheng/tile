@@ -38,7 +38,7 @@ public class LoginController {
     @ApiOperation("重 定 向 至 前 端 登 录 界 面")
     @GetMapping(value = {"toLogin"})
     public String toLogin() {
-        return "redirect:http://localhost:63343/1/index.html";
+        return "redirect:http://localhost:63342/X-admin-v2.2/X-admin/login.html";
     }
 
     /**

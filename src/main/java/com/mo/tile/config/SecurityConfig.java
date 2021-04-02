@@ -54,8 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/trace").permitAll()
                 .antMatchers("/batch").permitAll()
                 .antMatchers("/sentSmsCode").permitAll()
-                .antMatchers("/token/**").hasRole("admin")
-                .antMatchers("/profile").authenticated();
+                .antMatchers("/profile").permitAll();
 
         /**
          * 没 有 权 限 返 回 登 录 页
@@ -63,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/toLogin")
                 .loginProcessingUrl("/login")
+                .failureUrl("http://localhost:63342/X-admin-v2.2/X-admin/login.html?error=true")
                 .defaultSuccessUrl("/profile");
 
         /**

@@ -4,6 +4,8 @@ package com.mo.tile.util;/**
  * @data: 2021/3/17
  */
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -15,5 +17,10 @@ import java.util.UUID;
 public class GeneralFunctions {
     public static String getRandomId() {
         return UUID.randomUUID().toString().replace("-", "").substring(0, 18);
+    }
+
+    public static String myDataFormat(Date time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(time);
     }
 }

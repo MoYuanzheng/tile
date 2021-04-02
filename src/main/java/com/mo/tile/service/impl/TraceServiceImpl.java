@@ -91,7 +91,7 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
      */
     @Override
     public Page<Trace> query(Integer pages, String key) {
-        Page<Trace> page = new Page<>(pages, 10);
+        Page<Trace> page = new Page<>(pages, 100);
         QueryWrapper<Trace> wrapper = new QueryWrapper<>();
         wrapper
                 .like("id", key).or()
