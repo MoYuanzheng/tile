@@ -26,6 +26,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     User user;
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private UserService userService;
 
     /**
      * 添 加 用 户
@@ -71,14 +73,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return null;
         }
         Object principal = authentication.getPrincipal();
-        String id;
+        String username;
         if (principal instanceof UserDetails) {
-            id = ((UserDetails) principal).getUsername();
+            username = ((UserDetails) principal).getUsername();
         } else {
-            id = principal.toString();
+            username = principal.toString();
         }
 
-        user = userMapper.selectById(id);
+        user = userService.selectUserByUserName(username);
         return user;
     }
 
@@ -168,5 +170,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public Boolean isEmptyPhone(String phone) {
         return getUseByPhone(phone) != null;
+    }
+
+    /**
+     * 鉴权登录
+     */
+    @Override
+    public User selectUserByUserName(String username) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("username", username);
+        return userMapper.selectOne(wrapper);
     }
 }

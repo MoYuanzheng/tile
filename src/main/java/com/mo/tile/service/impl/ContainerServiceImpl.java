@@ -133,7 +133,7 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
     }
 
     /**
-     * 简单添加两个盒子之间包含关系
+     * 简单添加两个盒子之间包含关系(add 函数的子方法)
      */
     @Override
     public Boolean createLink(Container container) {
@@ -153,4 +153,8 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
         //找出小盒子ID
         return containerListByBigId.stream().map(Container::getSmallId).collect(Collectors.toList());
     }
+
+    /**
+     * 拆箱操作未写
+     */
 }

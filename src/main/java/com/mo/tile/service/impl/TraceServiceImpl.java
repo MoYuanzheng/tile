@@ -3,6 +3,7 @@ package com.mo.tile.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mo.tile.common.RestResult;
 import com.mo.tile.entity.Trace;
 import com.mo.tile.mapper.TraceMapper;
 import com.mo.tile.service.ContainerService;
@@ -24,22 +25,27 @@ import java.util.List;
 @Service("traceService")
 public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements TraceService {
 
-    @Resource
-    private TraceMapper traceMapper;
     /**
      * 物流类型为 1
+     * 装箱拆箱为 2
+     * 材料类型为 3
      */
     private static final String TYPE_LOGISTICS = "1";
+    private static final String TYPE_CONTAINER = "2";
+    private static final String TYPE_MATERIAL = "3";
     @Resource
     ProductAllService productAllService;
     @Resource
     ContainerService containerService;
+    @Resource
+    private TraceMapper traceMapper;
 
     /**
      * 创建追溯记录
      */
     @Override
-    public Boolean add(Trace trace) {
+    public RestResult add(Trace trace) {
+        RestResult result = RestResult.newInstance();
         if (trace.getType().equals(TYPE_LOGISTICS)) {
             String operator = trace.getOperationPerson();
             String content = trace.getContent();
@@ -66,31 +72,56 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
                     productId.addAll(containerService.getSmallIdByBigId(pdtId));
                 }
             }
+        } else if (trace.getType().equals(TYPE_MATERIAL)) {
+            //原材料追溯
+        } else if (trace.getType().equals(TYPE_CONTAINER)) {
+            //装箱追溯
         }
-        return true;
+        //此处应判断是否写入成功
+        result.setMsg("OK");
+        result.setCode(200);
+        result.setData("成功写入追溯表");
+        return result;
     }
 
     /**
      * 删 除 操 作
      */
     @Override
-    public Boolean del(String id) {
-        return traceMapper.deleteById(id) == 1;
+    public RestResult del(String id) {
+        RestResult result = RestResult.newInstance();
+        if (traceMapper.deleteById(id) == 1) {
+            result.setMsg("删除成功！");
+            result.setCode(200);
+        } else {
+            result.setMsg("删除失败！请重试");
+            result.setCode(404);
+        }
+        return result;
     }
 
     /**
      * 修 改 操 作
      */
     @Override
-    public Boolean update(Trace trace) {
-        return traceMapper.updateById(trace) == 1;
+    public RestResult update(Trace trace) {
+        RestResult result = RestResult.newInstance();
+        if (traceMapper.updateById(trace) == 1) {
+            result.setMsg("修改成功！");
+            result.setCode(200);
+        } else {
+            result.setMsg("修改失败！请重试");
+            result.setCode(404);
+        }
+        return result;
     }
 
     /**
      * 模 糊 查 询 及 分 页
      */
     @Override
-    public Page<Trace> query(Integer pages, String key) {
+    public RestResult query(Integer pages, String key) {
+        RestResult result = RestResult.newInstance();
         Page<Trace> page = new Page<>(pages, 100);
         QueryWrapper<Trace> wrapper = new QueryWrapper<>();
         wrapper
@@ -101,15 +132,17 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
                 .like("type", key).or()
                 .like("remark", key)
                 .orderByAsc("create_time");
-        traceMapper.selectPage(page, wrapper);
-        return page;
+        result.setData(traceMapper.selectPage(page, wrapper));
+        result.setMsg("OK");
+        result.setCode(200);
+        return result;
     }
 
     /**
      * 订单与原材料建立联系
      */
     @Override
-    public Boolean batchMaterial(String batchId, String materialId, String operator) {
+    public RestResult batchMaterial(String batchId, String materialId, String operator) {
         return add(new Trace(
                 GeneralFunctions.getRandomId(),
                 batchId,

@@ -27,3 +27,12 @@ mybatis-plus:
       logic-delete-field: delFlag  # 全局逻辑删除的实体字段名
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+#  token配置
+token:
+  #  令牌自定义标识
+  header: Authorization
+  #  令牌秘钥
+  #	secret:  abcdefghijklmnopqrstuvwxyz  任意字符
+  secret: askdhfkjahskjdfhkalsjhdf^112asdfasdf44^%$_@+asdfasdfaskjdhfkjashdfljkahsdklsfjasgdkjfgjahs(IS:)_@@+asdfasdfaskjdhfkjashdfljkahsdklsfja@+asdfasdfaskjdhfkjashdfljkahsdklsfjasgdkjfgjahssgdkjfgjahsdgfjhgsdfsadf+-asdfasdas+as++_sdfsdsasdfasdf
+  #   令牌有效期（默认30分钟）
+  expireTime: 3600000

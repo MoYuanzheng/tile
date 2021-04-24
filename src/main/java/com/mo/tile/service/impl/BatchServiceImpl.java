@@ -40,7 +40,7 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
         if (batchMapper.insert(batch) == 1) {
             System.out.println(batch);
             return productAllService.batchCreation(batch.getTotal(), batch.getId(), batch.getProductType())
-                    && traceService.batchMaterial(batch.getId(), material, batch.getOperator());
+                    && "OK".equals(traceService.batchMaterial(batch.getId(), material, batch.getOperator()).getMsg());
         } else {
             return false;
         }

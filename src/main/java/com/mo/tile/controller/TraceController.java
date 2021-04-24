@@ -1,6 +1,6 @@
 package com.mo.tile.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mo.tile.common.RestResult;
 import com.mo.tile.entity.Trace;
 import com.mo.tile.service.impl.TraceServiceImpl;
 import com.mo.tile.util.GeneralFunctions;
@@ -29,7 +29,7 @@ public class TraceController {
 
     @ApiOperation("添 加")
     @PostMapping("add")
-    public Boolean add(
+    public RestResult add(
             @RequestParam("productId") @ApiParam("商品ID") String productId,
             @RequestParam("operationPerson") @ApiParam("操作员") String operationPerson,
             @RequestParam("content") @ApiParam("内容") String content,
@@ -48,7 +48,7 @@ public class TraceController {
 
     @ApiOperation("删 除")
     @DeleteMapping("del")
-    public Boolean del(
+    public RestResult del(
             @RequestParam("id") @ApiParam("登录账号") String id
     ) {
         return traceService.del(id);
@@ -56,7 +56,7 @@ public class TraceController {
 
     @ApiOperation("修 改")
     @PutMapping("update")
-    public Boolean update(
+    public RestResult update(
             @RequestParam("id") @ApiParam("主键-对应商品追溯码") String id,
             @RequestParam("productId") @ApiParam("商品ID") String productId,
             @RequestParam("operationPerson") @ApiParam("操作员") String operationPerson,
@@ -78,7 +78,7 @@ public class TraceController {
      * 模 糊 查 询 并 分 页
      */
     @GetMapping("query")
-    public Page<Trace> query(
+    public RestResult query(
             @RequestParam("pages") @ApiParam("页数") Integer pages,
             @RequestParam("key") @ApiParam("关键词") String key
     ) {

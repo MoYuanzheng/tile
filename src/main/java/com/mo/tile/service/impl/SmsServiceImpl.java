@@ -28,10 +28,10 @@ import java.util.UUID;
 @Service("smsService")
 public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsService {
 
+    Map<String, String> result = new HashMap<>();
     @Resource
     private SmsMapper smsMapper;
 
-    Map<String, String> result = new HashMap<>();
     /**
      * 添 加 操 作
      */

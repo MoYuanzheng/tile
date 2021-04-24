@@ -1,7 +1,7 @@
 package com.mo.tile.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.mo.tile.common.RestResult;
 import com.mo.tile.entity.Trace;
 
 /**
@@ -19,7 +19,7 @@ public interface TraceService extends IService<Trace> {
      * @author Moyz
      * @date 2021-03-13 17:07:34
      */
-    Boolean add(Trace trace);
+    RestResult add(Trace trace);
 
     /**
      * 删 除 操 作
@@ -29,7 +29,7 @@ public interface TraceService extends IService<Trace> {
      * @author Moyz
      * @date 2021-03-13 17:07:34
      */
-    Boolean del(String id);
+    RestResult del(String id);
 
     /**
      * 修 改 操 作
@@ -39,7 +39,7 @@ public interface TraceService extends IService<Trace> {
      * @author Moyz
      * @date 2021-03-13 17:07:34
      */
-    Boolean update(Trace trace);
+    RestResult update(Trace trace);
 
     /**
      * 模 糊 查 询 及 分 页
@@ -50,7 +50,7 @@ public interface TraceService extends IService<Trace> {
      * @author Moyz
      * @date 2021-03-13 17:07:34
      */
-    Page<Trace> query(Integer pages, String key);
+    RestResult query(Integer pages, String key);
 
     /**
      * 关联订单与使用的原材料
@@ -62,5 +62,5 @@ public interface TraceService extends IService<Trace> {
      * @author Moyz
      * @date 2021/03/17 10:12
      */
-    Boolean batchMaterial(String batchId, String materialId, String operator);
+    RestResult batchMaterial(String batchId, String materialId, String operator);
 }

@@ -113,4 +113,8 @@ public interface UserService extends IService<User> {
      */
     Boolean isEmptyPhone(String phone);
 
+    /**
+     * 鉴权登录用
+     */
+    User selectUserByUserName(String username);
 }

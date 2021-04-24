@@ -68,10 +68,10 @@ public interface ProductAllService extends IService<ProductAll> {
      * 判单product_all表中是否存在
      * 判断是商品还是大盒子
      *
+     * @param productId 商品主键
+     * @return bool
      * @author Moyz
      * @date 2021/03/17 20:03
-     * @param productId 商品主键
-     * @return  bool
      */
     Boolean isExist(String productId);
 }
