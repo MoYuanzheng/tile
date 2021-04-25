@@ -125,8 +125,8 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
         QueryWrapper<Container> wrapper = new QueryWrapper<>();
         wrapper
                 .like("id", key).or()
-                .like("big_size", key).or()
-                .like("small_size", key).or()
+                .like("big_id", key).or()
+                .like("small_id", key).or()
                 .like("remark", key);
         containerMapper.selectPage(page, wrapper);
         return page;

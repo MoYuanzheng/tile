@@ -1,10 +1,8 @@
 package com.mo.tile.config;
 
-import com.mo.tile.interceptor.IndexInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
@@ -31,16 +29,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .maxAge(3600);
     }
 
-    /**
-     * 拦 截 器 设 置
-     */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new IndexInterceptor())
-                //被拦截的  拦截所有 /**
-                .addPathPatterns("")
-                //放行的
-                .excludePathPatterns("/", "/login", "/css/**", "/fonts/**", "/images/**", "/js/**");
-    }
 
 }

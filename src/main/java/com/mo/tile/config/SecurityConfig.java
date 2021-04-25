@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/trace").permitAll()
                 .antMatchers("/batch").permitAll()
                 .antMatchers("/sentSmsCode").permitAll()
+                .antMatchers("/container/**").hasRole("ADMIN")
                 .antMatchers("/profile").hasRole("ADMIN");
 
         /**
