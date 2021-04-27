@@ -20,7 +20,7 @@ public interface BatchService extends IService<Batch> {
      * @author Moyz
      * @date 2021-03-09 22:43:17
      */
-    Boolean add(Batch batch, String material);
+    Boolean add(Batch batch);
 
     /**
      * 删 除 操 作

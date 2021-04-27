@@ -40,9 +40,10 @@ public class BatchController {
                 GeneralFunctions.getRandomId(),
                 operator,
                 productType,
+                material,
                 total,
                 remark
-        ), material);
+        ));
     }
 
     @ApiOperation("删 除")
@@ -60,6 +61,7 @@ public class BatchController {
             @RequestParam("operator") @ApiParam("创建人员工号") String operator,
             @RequestParam("completeTime") @ApiParam("订单完成时间") String completeTime,
             @RequestParam("productType") @ApiParam("产品型号") Integer productType,
+            @RequestParam("material") @ApiParam("材料代号") String material,
             @RequestParam("total") @ApiParam("订单总数") Integer total,
             @RequestParam("remark") @ApiParam("备注") String remark
     ) {
@@ -67,6 +69,7 @@ public class BatchController {
                 id,
                 operator,
                 productType,
+                material,
                 total,
                 completeTime,
                 remark

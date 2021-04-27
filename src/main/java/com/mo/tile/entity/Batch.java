@@ -14,7 +14,7 @@ import java.util.Date;
  * 订单批次表(Batch)实体类
  *
  * @author MoYz
- * @since 2021-03-15 10:51:30
+ * @since 2021-04-27 19:35:12
  */
 @Data
 @AllArgsConstructor
@@ -27,6 +27,8 @@ public class Batch implements Serializable {
     private String id;
     @ApiModelProperty(value = "创建该订单人员", required = true)
     private String operator;
+    @ApiModelProperty(value = "所用材料批次", required = true)
+    private String material;
     @ApiModelProperty(value = "产品型号", required = true)
     private Integer productType;
     @ApiModelProperty(value = "订单总数", required = true)
@@ -51,6 +53,7 @@ public class Batch implements Serializable {
             String id,
             String operator,
             Integer productType,
+            String material,
             Integer total,
             String completeTime,
             String remark
@@ -58,6 +61,7 @@ public class Batch implements Serializable {
         this.id = id;
         this.operator = operator;
         this.productType = productType;
+        this.material = material;
         this.total = total;
         this.completeTime = completeTime;
         this.remark = remark;
@@ -67,12 +71,14 @@ public class Batch implements Serializable {
             String id,
             String operator,
             Integer productType,
+            String material,
             Integer total,
             String remark
     ) {
         this.id = id;
         this.operator = operator;
         this.productType = productType;
+        this.material = material;
         this.total = total;
         this.remark = remark;
     }

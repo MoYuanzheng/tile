@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 追溯(Trace)表服务实现类
@@ -42,6 +44,10 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
     private HistoryService historyService;
     @Resource
     private UserService userService;
+    @Resource
+    MaterialService materialService;
+    @Resource
+    private BatchService batchService;
 
     /**
      * 创建追溯记录
@@ -75,10 +81,6 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
                     productId.addAll(containerService.getSmallIdByBigId(pdtId));
                 }
             }
-        } else if (trace.getType().equals(TYPE_MATERIAL)) {
-            //原材料追溯
-        } else if (trace.getType().equals(TYPE_CONTAINER)) {
-            //装箱追溯
         }
         //此处应判断是否写入成功
         result.setMsg("OK");
@@ -123,42 +125,41 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
      * 模 糊 查 询 及 分 页
      */
     @Override
-    public RestResult query(Integer pages, String key) {
+    public RestResult query(Integer pages, String productId) {
         RestResult result = RestResult.newInstance();
         Page<Trace> page = new Page<>(pages, 100);
         QueryWrapper<Trace> wrapper = new QueryWrapper<>();
         wrapper.
-                eq("product_id", key)
+                eq("product_id", productId)
                 .orderByAsc("update_time");
-        Object res = traceMapper.selectPage(page, wrapper);
+        Object trace = traceMapper.selectPage(page, wrapper);
         Object resFirst = traceMapper.selectPage(page, wrapper).getRecords().get(0);
+        //写入用户追溯历史
         if (resFirst != null) {
             historyService.add(
                     new History(
                             GeneralFunctions.getRandomId(),
                             userService.getLoggedUserInfo().getId(),
-                            key,
+                            productId,
                             "By trace"
                     ));
         }
-        result.setData(res);
+        //追溯原材料
+        String batchId = productAllService.getById(productId).getBatch();
+        String materialId = batchService.getById(batchId).getMaterial();
+        Map<String, Object> materialMap = new HashMap<>();
+        for (String materialIdSingle : materialId.split(",")) {
+            //依次查询原材料
+            materialService.getById(materialIdSingle);
+            materialMap.put(materialService.getById(materialIdSingle).getAlias(),
+                    materialService.getById(materialIdSingle));
+        }
+
+        result.put("trace", trace);
+        result.put("material", materialMap);
         result.setMsg("OK");
         result.setCode(200);
         return result;
     }
 
-    /**
-     * 订单与原材料建立联系
-     */
-    @Override
-    public RestResult batchMaterial(String batchId, String materialId, String operator) {
-        return add(new Trace(
-                GeneralFunctions.getRandomId(),
-                batchId,
-                operator,
-                materialId,
-                "3",
-                null
-        ));
-    }
 }

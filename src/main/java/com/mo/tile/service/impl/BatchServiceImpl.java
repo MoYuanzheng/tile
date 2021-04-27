@@ -36,11 +36,10 @@ public class BatchServiceImpl extends ServiceImpl<BatchMapper, Batch> implements
      * 添 加 操 作
      */
     @Override
-    public Boolean add(Batch batch, String material) {
+    public Boolean add(Batch batch) {
         if (batchMapper.insert(batch) == 1) {
             System.out.println(batch);
-            return productAllService.batchCreation(batch.getTotal(), batch.getId(), batch.getProductType())
-                    && "OK".equals(traceService.batchMaterial(batch.getId(), material, batch.getOperator()).getMsg());
+            return productAllService.batchCreation(batch.getTotal(), batch.getId(), batch.getProductType());
         } else {
             return false;
         }
