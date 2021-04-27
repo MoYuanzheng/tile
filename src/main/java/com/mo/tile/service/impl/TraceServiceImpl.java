@@ -132,7 +132,7 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
         wrapper.
                 eq("product_id", productId)
                 .orderByAsc("update_time");
-        Object trace = traceMapper.selectPage(page, wrapper);
+        Object logistics = traceMapper.selectPage(page, wrapper);
         Object resFirst = traceMapper.selectPage(page, wrapper).getRecords().get(0);
         //写入用户追溯历史
         if (resFirst != null) {
@@ -154,8 +154,7 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
             materialMap.put(materialService.getById(materialIdSingle).getAlias(),
                     materialService.getById(materialIdSingle));
         }
-
-        result.put("trace", trace);
+        result.put("logistics", logistics);
         result.put("material", materialMap);
         result.setMsg("OK");
         result.setCode(200);
