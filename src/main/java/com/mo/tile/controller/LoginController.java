@@ -1,9 +1,11 @@
 package com.mo.tile.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mo.tile.common.RestResult;
 import com.mo.tile.entity.User;
 import com.mo.tile.service.impl.SmsServiceImpl;
 import com.mo.tile.service.impl.UserServiceImpl;
+import com.mo.tile.util.GeneralFunctions;
 import io.swagger.annotations.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -77,8 +79,7 @@ public class LoginController {
     })
     @ResponseBody
     @PostMapping("reg")
-    public Map<String, String> add(
-            @RequestParam("id") String id,
+    public RestResult add(
             @RequestParam("username") String username,
             @RequestParam("nickname") String nickname,
             @RequestParam("pwd") String pwd,
@@ -88,8 +89,9 @@ public class LoginController {
             @RequestParam("remark") String remark
     ) {
         return userService.add(new User(
-                id,
+                GeneralFunctions.getRandomId(),
                 username,
+                nickname,
                 pwd,
                 roles,
                 phone,
@@ -173,7 +175,7 @@ public class LoginController {
                 //更新校验码
                 Boolean flag1 = userService.updateSms(phone, userService.smsCode());
                 //发送校验码
-                Boolean flag2 = smsService.sendSmsCode(phone, userService.getUseByPhone(phone).getCode());
+                Boolean flag2 = smsService.sendSmsCode(phone, userService.getUserByPhone(phone).getCode());
                 if (flag1 && flag2) {
                     result.put("status", "Success");
                     result.put("reason", "The verification code has been successfully sent, please check");

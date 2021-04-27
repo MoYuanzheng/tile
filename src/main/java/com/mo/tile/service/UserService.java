@@ -2,9 +2,8 @@ package com.mo.tile.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.mo.tile.common.RestResult;
 import com.mo.tile.entity.User;
-
-import java.util.Map;
 
 /**
  * (User)表服务接口
@@ -21,7 +20,7 @@ public interface UserService extends IService<User> {
      * @author Moyz
      * @date 2021/02/07 15:59
      */
-    Map<String, String> add(User user);
+    RestResult add(User user);
 
     /**
      * 修 改 用 户 信 息
@@ -45,6 +44,7 @@ public interface UserService extends IService<User> {
 
     /**
      * 拿 到 已 登 录 用 户 信 息
+     * 通过 authentication.getPrincipal()
      *
      * @return User
      * @author Moyz
@@ -71,7 +71,7 @@ public interface UserService extends IService<User> {
      * @author Moyz
      * @date 2021/02/16 00:29
      */
-    User getUseByPhone(String phone);
+    User getUserByPhone(String phone);
 
     /**
      * 检查时间是否小于一分钟
@@ -114,7 +114,13 @@ public interface UserService extends IService<User> {
     Boolean isEmptyPhone(String phone);
 
     /**
-     * 鉴权登录用
+     * JWT鉴权专用
+     * 通过登录名获取用户信息
+     *
+     * @param username ->用户名
+     * @return User
+     * @author Moyz
+     * @date 2021/04/25 22:57
      */
     User selectUserByUserName(String username);
 }

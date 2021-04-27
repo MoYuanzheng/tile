@@ -3,18 +3,18 @@ package com.mo.tile.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mo.tile.common.RestResult;
 import com.mo.tile.entity.User;
 import com.mo.tile.mapper.UserMapper;
 import com.mo.tile.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -33,33 +33,39 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 添 加 用 户
      */
     @Override
-    public Map<String, String> add(User user) {
-        Map<String, String> result = new HashMap<String, String>();
-
+    public RestResult add(User user) {
+        RestResult result = RestResult.newInstance();
         //判断用户信息不为空
         if (user != null) {
-            String id = user.getId();
-            //判断数据库有该用户名
-            if (userMapper.selectById(id) != null) {
-                result.put("status", "Error");
-                result.put("reason", "The username is already in use");
-                return result;
-                //若成功插入
+            //加密
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            user.setPwd(passwordEncoder.encode(user.getPassword()));
+            //判断数据库有该用户名以及手机号
+            if (selectUserByUserName(user.getUsername()) != null) {
+                result.setMsg("FAIL");
+                result.setCode(400);
+                result.setData("该用户名已被使用");
+            } else if (getUserByPhone(user.getPhone()) != null) {
+                result.setMsg("FAIL");
+                result.setCode(400);
+                result.setData("该手机号已被使用");
             } else {
+                //若成功插入
                 if (userMapper.insert(user) == 1) {
-                    result.put("status", "Success");
-                    return result;
+                    result.setCode(200);
+                    result.setMsg("OK");
                 } else {
-                    result.put("status", "Success");
-                    result.put("reason", "Creation failed, please try again.[Deleted username is not available]");
-                    return result;
+                    result.setCode(400);
+                    result.setMsg("FAIL");
+                    result.setMsg("Creation failed, please try again.[Deleted username is not available]");
                 }
             }
         } else {
-            result.put("status", "Error");
-            result.put("reason", "Information must not be empty");
-            return result;
+            result.setMsg("FAIL");
+            result.setCode(400);
+            result.setData("必填字段不得为空");
         }
+        return result;
     }
 
     /**
@@ -122,7 +128,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 通 过 手 机 号 找 人
      */
     @Override
-    public User getUseByPhone(String phoneNum) {
+    public User getUserByPhone(String phoneNum) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("phone", phoneNum);
         user = userMapper.selectOne(wrapper);
@@ -138,7 +144,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Date time = new Date();
         //截至时间 <= 现在时间 + 60
         System.out.println(time);
-        User user = getUseByPhone(phone);
+        User user = getUserByPhone(phone);
         return user.getDeadline().getTime() <= new Date(time.getTime() + 60 * 1000).getTime();
     }
 
@@ -148,7 +154,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public Boolean updateSms(String phone, String code) {
         Date time = new Date();
-        User user = getUseByPhone(phone);
+        User user = getUserByPhone(phone);
         user.setDeadline(new Date(time.getTime() + 5 * 60 * 1000));
         user.setCode(code);
         return userMapper.updateById(user) == 1;
@@ -169,11 +175,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     @Override
     public Boolean isEmptyPhone(String phone) {
-        return getUseByPhone(phone) != null;
+        return getUserByPhone(phone) != null;
     }
 
     /**
-     * 鉴权登录
+     * JWT鉴权专用
+     * 通过登录名获取用户信息
      */
     @Override
     public User selectUserByUserName(String username) {
