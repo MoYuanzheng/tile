@@ -1,7 +1,6 @@
 package com.mo.tile.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.common.RestResult;
 import com.mo.tile.entity.History;
@@ -122,20 +121,17 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
     }
 
     /**
-     * 模 糊 查 询 及 分 页
+     * 物 流 追 溯
      */
     @Override
-    public RestResult query(Integer pages, String productId) {
-        RestResult result = RestResult.newInstance();
-        Page<Trace> page = new Page<>(pages, 100);
+    public List<Trace> queryLogistics(String productId) {
         QueryWrapper<Trace> wrapper = new QueryWrapper<>();
         wrapper.
                 eq("product_id", productId)
                 .orderByAsc("update_time");
-        Object logistics = traceMapper.selectPage(page, wrapper);
-        Object resFirst = traceMapper.selectPage(page, wrapper).getRecords().get(0);
+        List<Trace> logistics = traceMapper.selectList(wrapper);
         //写入用户追溯历史
-        if (resFirst != null) {
+        if (logistics.get(0) != null) {
             historyService.add(
                     new History(
                             GeneralFunctions.getRandomId(),
@@ -144,7 +140,14 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
                             "By trace"
                     ));
         }
-        //追溯原材料
+        return logistics;
+    }
+
+    /**
+     * 追 溯 原 材 料
+     */
+    @Override
+    public Map<String, Object> queryMaterial(String productId) {
         String batchId = productAllService.getById(productId).getBatch();
         String materialId = batchService.getById(batchId).getMaterial();
         Map<String, Object> materialMap = new HashMap<>();
@@ -154,11 +157,6 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
             materialMap.put(materialService.getById(materialIdSingle).getAlias(),
                     materialService.getById(materialIdSingle));
         }
-        result.put("logistics", logistics);
-        result.put("material", materialMap);
-        result.setMsg("OK");
-        result.setCode(200);
-        return result;
+        return materialMap;
     }
-
 }

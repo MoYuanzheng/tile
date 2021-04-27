@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.mo.tile.common.RestResult;
 import com.mo.tile.entity.Trace;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 追溯(Trace)表服务接口
  *
@@ -42,15 +45,23 @@ public interface TraceService extends IService<Trace> {
     RestResult update(Trace trace);
 
     /**
-     * 模 糊 查 询 及 分 页
+     * 物 流 追 溯
      *
-     * @param pages -> 页数
-     * @param key   -> 关键字
+     * @param productId -> 关键字
      * @return page
      * @author Moyz
      * @date 2021-03-13 17:07:34
      */
-    RestResult query(Integer pages, String key);
+    List<Trace> queryLogistics(String productId);
 
+    /**
+     * 原 材 料 追 溯
+     *
+     * @param productId -> 关键字
+     * @return page
+     * @author Moyz
+     * @date 2021-03-13 17:07:34
+     */
+    Map<String, Object> queryMaterial(String productId);
 
 }

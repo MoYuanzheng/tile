@@ -79,9 +79,11 @@ public class TraceController {
      */
     @GetMapping("query")
     public RestResult query(
-            @RequestParam("pages") @ApiParam("页数") Integer pages,
-            @RequestParam("key") @ApiParam("关键词") String key
+            @RequestParam("productId") @ApiParam("关键词") String productId
     ) {
-        return traceService.query(pages, key);
+        RestResult result = RestResult.newInstance();
+        result.put("material", traceService.queryMaterial(productId));
+        result.put("logistics", traceService.queryLogistics(productId));
+        return result;
     }
 }
