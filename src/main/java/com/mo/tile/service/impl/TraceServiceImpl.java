@@ -4,11 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mo.tile.common.RestResult;
+import com.mo.tile.entity.History;
 import com.mo.tile.entity.Trace;
 import com.mo.tile.mapper.TraceMapper;
-import com.mo.tile.service.ContainerService;
-import com.mo.tile.service.ProductAllService;
-import com.mo.tile.service.TraceService;
+import com.mo.tile.service.*;
 import com.mo.tile.util.GeneralFunctions;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +38,10 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
     ContainerService containerService;
     @Resource
     private TraceMapper traceMapper;
+    @Resource
+    private HistoryService historyService;
+    @Resource
+    private UserService userService;
 
     /**
      * 创建追溯记录
@@ -124,15 +127,21 @@ public class TraceServiceImpl extends ServiceImpl<TraceMapper, Trace> implements
         RestResult result = RestResult.newInstance();
         Page<Trace> page = new Page<>(pages, 100);
         QueryWrapper<Trace> wrapper = new QueryWrapper<>();
-        wrapper
-                .like("id", key).or()
-                .like("product_id", key).or()
-                .like("operation_person", key).or()
-                .like("content", key).or()
-                .like("type", key).or()
-                .like("remark", key)
-                .orderByAsc("create_time");
-        result.setData(traceMapper.selectPage(page, wrapper));
+        wrapper.
+                eq("product_id", key)
+                .orderByAsc("update_time");
+        Object res = traceMapper.selectPage(page, wrapper);
+        Object resFirst = traceMapper.selectPage(page, wrapper).getRecords().get(0);
+        if (resFirst != null) {
+            historyService.add(
+                    new History(
+                            GeneralFunctions.getRandomId(),
+                            userService.getLoggedUserInfo().getId(),
+                            key,
+                            "By trace"
+                    ));
+        }
+        result.setData(res);
         result.setMsg("OK");
         result.setCode(200);
         return result;
