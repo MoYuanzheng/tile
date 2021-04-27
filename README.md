@@ -1,3 +1,7 @@
+# 4.28 追溯更新原材料溯源
+1. 发起追溯后首先追溯物流
+2. 其次追溯原材料
+> 先去product_all中找到对应的batchId,再去batch中找到对应的materialId，再去material中找到对应的名称、生产日期、供应商等属性
 # 4.27 历史记录与Token
 - [x] 1. 重写部分返回结果的方法，全面改为RestResult类
 - [x] 2. 整合JWT
