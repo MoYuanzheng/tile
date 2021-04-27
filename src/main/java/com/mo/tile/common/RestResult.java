@@ -6,9 +6,12 @@ package com.mo.tile.common;
  * @date 2021/04/23 13:01
  */
 
+import lombok.Data;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Data
 public class RestResult {
     private String msg;
     private int code;
@@ -35,28 +38,5 @@ public class RestResult {
         ((Map) this.data).put(key, data);
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
 }
 

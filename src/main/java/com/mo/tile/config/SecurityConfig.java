@@ -94,14 +94,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtAuthTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-    /**
-     * 认 证 规 则
-     * <p>
-     * protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-     * auth.userDetailsService(myUserDetailsService).passwordEncoder(bCryptPasswordEncoder());
-     * }
-     */
-
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //调用DetailsService完成用户身份验证              设置密码加密方式

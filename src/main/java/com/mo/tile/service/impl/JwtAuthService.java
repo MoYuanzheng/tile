@@ -2,14 +2,15 @@ package com.mo.tile.service.impl;
 
 import com.mo.tile.entity.User;
 import com.mo.tile.util.JwtTokenUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
- * asd
+ * JWT Service
  *
  * @author Moyz
  * @date 2021/04/23 17:05
@@ -18,18 +19,18 @@ import org.springframework.stereotype.Service;
 public class JwtAuthService {
 
     // 此处注入的bean在SpringConfig中产生, 如果不在其中声明则注入AuthenticationManager报错
-    @Autowired
+    @Resource
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    @Resource
     private JwtTokenUtils jwtTokenUtils;
 
     /**
      * 登录认证换取JWT令牌
      *
-     * @param username
-     * @param password
-     * @return
+     * @param username -> 用户名
+     * @param password -> 密码
+     * @return Token
      */
     public String login(String username, String password) {
         //用户验证
