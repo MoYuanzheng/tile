@@ -60,6 +60,7 @@ public class ProductAllServiceImpl extends ServiceImpl<ProductAllMapper, Product
                 .like("batch", key).or()
                 .like("manufacture_date", key).or()
                 .like("inspection_date", key).or()
+                .like("inspection_person", key).or()
                 .like("remark", key);
         productAllMapper.selectPage(page, wrapper);
         return page;

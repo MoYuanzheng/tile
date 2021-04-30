@@ -27,6 +27,8 @@ public class ProductAll implements Serializable {
     private String manufactureDate;
     @ApiModelProperty(value = "质检日期", required = true)
     private String inspectionDate;
+    @ApiModelProperty(value = "质检员", required = true)
+    private String inspectionPerson;
 
 
     @ApiModelProperty(value = "主键", required = true)
@@ -57,6 +59,7 @@ public class ProductAll implements Serializable {
             String batch,
             String manufactureDate,
             String inspectionDate,
+            String inspectionPerson,
             String remark
     ) {
         this.id = id;
@@ -64,6 +67,7 @@ public class ProductAll implements Serializable {
         this.batch = batch;
         this.manufactureDate = manufactureDate;
         this.inspectionDate = inspectionDate;
+        this.inspectionPerson = inspectionPerson;
         this.remark = remark;
     }
 

@@ -56,6 +56,7 @@ public class ProductAllController {
             @RequestParam("id") @ApiParam("主键") String id,
             @RequestParam("type") @ApiParam("产品类别") Integer type,
             @RequestParam("batch") @ApiParam("批次") String batch,
+            @RequestParam("inspectionPerson") @ApiParam("质检员") String inspectionPerson,
             @RequestParam("manufactureDate") @ApiParam("生产日期") String manufactureDate,
             @RequestParam("inspectionDate") @ApiParam("质检日期") String inspectionDate,
             @RequestParam("remark") @ApiParam("备注") String remark
@@ -66,6 +67,7 @@ public class ProductAllController {
                 batch,
                 manufactureDate,
                 inspectionDate,
+                inspectionPerson,
                 remark
         ));
     }

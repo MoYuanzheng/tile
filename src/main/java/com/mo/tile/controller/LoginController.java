@@ -109,7 +109,7 @@ public class LoginController {
     public Boolean update(
             @RequestParam("id") @ApiParam("登录名") String id,
             @RequestParam("username") @ApiParam("用户名") String username,
-            @RequestParam("nickname") @ApiParam("用户名") String nickname,
+            @RequestParam("nickname") @ApiParam("昵称") String nickname,
             @RequestParam("pwd") @ApiParam("密码") String pwd,
             @RequestParam("roles") @ApiParam("权限") String roles,
             @RequestParam("phone") @ApiParam("电话号码") String phone,
@@ -119,6 +119,7 @@ public class LoginController {
         return userService.update(new User(
                 id,
                 username,
+                nickname,
                 pwd,
                 roles,
                 phone,

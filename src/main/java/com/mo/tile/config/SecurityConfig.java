@@ -57,11 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/toLogin").permitAll()
                 .antMatchers("/login").anonymous()
                 .antMatchers("/reg").permitAll()
-                .antMatchers("/trace").permitAll()
+                .antMatchers("/trace").hasRole("admin")
                 .antMatchers("/batch").permitAll()
                 .antMatchers("/sentSmsCode").permitAll()
-                .antMatchers("/container/**").hasRole("ADMIN")
-                .antMatchers("/profile").hasRole("ADMIN");
+                .antMatchers("/container/**").hasRole("admin")
+                .antMatchers("/profile").hasRole("admin");
 
         /**
          * 没 有 权 限 返 回 登 录 页
